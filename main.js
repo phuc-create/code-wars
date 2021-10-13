@@ -264,3 +264,200 @@ const isSquare = (arr) => {
 const isSquare = (arr) => {
   return arr.length ? arr.every((x) => Math.sqrt(x) % 1 === 0) : undefined;
 };
+
+// CODE WAR KYU 7
+// Challenge:
+
+// Given a two-dimensional array of integers, return the flattened version of the array with all the integers in the sorted (ascending) order.
+
+// Example:
+
+// Given [[3, 2, 1], [4, 6, 5], [], [9, 7, 8]], your function should return [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+// Addendum:
+
+// Please, keep in mind, that JavaScript is by default sorting objects alphabetically. For more information, please consult:
+const flattenAndSort = (arr) => {
+  let temp = [];
+  arr.forEach((a) => {
+    for (let i = 0; i < a.length; i++) {
+      temp.push(a[i]);
+    }
+  });
+  temp.sort((a, b) => {
+    return a - b;
+  });
+  return temp;
+};
+//ANOTHER SOLUTIONS
+const flattenAndSort = (arr) => {
+  return [].concat(...arr).sort((a, b) => a - b);
+};
+function flattenAndSort(array) {
+  return [].concat(...array).sort((a, b) => a - b);
+}
+
+// CODE WAR KYU 7
+// King Arthur and his knights are having a New Years party. Last year Lancelot was jealous of Arthur, because Arthur had a date and Lancelot did not, and they started a duel.
+
+// To prevent this from happening again, Arthur wants to make sure that there are at least as many women as men at this year's party. He gave you a list of integers of all the party goers.
+
+// Arthur needs you to return true if he needs to invite more women or false if he is all set.
+
+// Input/Output
+// [input] integer array L ($a in PHP)
+// An array (guaranteed non-associative in PHP) representing the genders of the attendees, where -1 represents women and 1 represents men.
+
+// 2 <= L.length <= 50
+
+// [output] a boolean value
+
+// true if Arthur need to invite more women, false otherwise.
+const inviteMoreWomen = (l) => {
+  const wm = l.filter((s) => s === -1).length;
+  const m = l.filter((s) => s === 1).length;
+  return wm >= m ? false : true;
+};
+//ANOTHER SOLUTIONS
+function inviteMoreWomen(L) {
+  return L.reduce((a, b) => a + b) > 0;
+}
+
+// CODE WAR KYU 7
+// The town sheriff dislikes odd numbers and wants all odd numbered families out of town! In town crowds can form and individuals are often mixed with other people and families. However you can distinguish the family they belong to by the number on the shirts they wear. As the sheriff's assistant it's your job to find all the odd numbered families and remove them from the town!
+
+// Challenge: You are given a list of numbers. The numbers each repeat a certain number of times. Remove all numbers that repeat an odd number of times while keeping everything else the same.
+
+// oddOnesOut([1, 2, 3, 1, 3, 3]) = [1, 1]
+// In the above example:
+
+// the number 1 appears twice
+// the number 2 appears once
+// the number 3 appears three times
+// 2 and 3 both appear an odd number of times, so they are removed from the list. The final result is: [1,1]
+
+// Here are more examples:
+
+// oddOnesOut([1, 1, 2, 2, 3, 3, 3]) = [1, 1, 2, 2]
+// oddOnesOut([26, 23, 24, 17, 23, 24, 23, 26]) = [26, 24, 24, 26]
+// oddOnesOut([1, 2, 3]) = []
+// oddOnesOut([1]) = []
+
+const oddOnesOut = (arr) => {
+  return arr.filter((v) => arr.filter((s) => s === v).length % 2 === 0);
+};
+
+// CODE WAR KYU 7
+// Given a list of integers, determine whether the sum of its elements is odd or even.
+
+// Give your answer as a string matching "odd" or "even".
+
+// If the input array is empty consider it as: [0] (array with a zero).
+
+// Examples:
+// Input: [0]
+// Output: "even"
+
+// Input: [0, 1, 4]
+// Output: "odd"
+
+// Input: [0, -1, -5]
+// Output: "even"
+function oddOrEven(arr) {
+  return arr.length === 0
+    ? "even"
+    : arr.reduce((a, b) => a + b) % 2 === 0
+    ? "even"
+    : "odd";
+}
+//ANOTHER SOLUTION (I just forgot to put second arg in reduce method)
+function oddOrEven(arr) {
+  return arr.reduce((a, b) => a + b, 0) % 2 ? "odd" : "even";
+}
+
+// CODE WAR KYU 7
+// Write a function that takes a positive integer n, sums all the cubed values from 1 to n, and returns that sum.
+
+// Assume that the input n will always be a positive integer.
+
+// Examples: (Input --> output)
+
+// 2 --> 9 (sum of the cubes of 1 and 2 is 1 + 8)
+// 3 --> 36 (sum of the cubes of 1, 2, and 3 is 1 + 8 + 27)
+
+function sumCubes(n) {
+  let temp = [];
+  for (let i = 1; i <= n; i++) {
+    temp.push(i * i * i);
+  }
+  return temp.reduce((a, b) => a + b);
+}
+//ANOTHER SOLUTIONS (clever)
+function sumCubes(n) {
+  if (n == 1) {
+    return n ** 3;
+  } else {
+    return n ** 3 + sumCubes(n - 1);
+  }
+}
+function sumCubes(n) {
+  return ((n * (n + 1)) / 2) ** 2;
+}
+
+// CODE WAR KYU 7
+// We want to generate a function that computes the series starting from 0 and ending until the given number.
+
+// Example:
+// Input:
+// > 6
+// Output:
+// 0+1+2+3+4+5+6 = 21
+// Input:
+// > -15
+// Output:
+// -15<0
+// Input:
+// > 0
+// Output:
+// 0=0
+const SequenceSum = (function () {
+  function SequenceSum() {}
+
+  SequenceSum.showSequence = function (count) {
+    let temp = [];
+    if (count === 0) {
+      return count + "=" + count;
+    } else if (count < 0) {
+      return count + "<0";
+    }
+    for (let i = 0; i <= count; i++) {
+      temp.push(i);
+    }
+    return temp.join("+") + " = " + temp.reduce((a, b) => a + b, 0);
+  };
+
+  return SequenceSum;
+})();
+//ANOTHER SOLUTIONS
+let SequenceSum = {
+  showSequence: function (count) {
+    if (count < 0) return count + "<0";
+    if (count == 0) return "0=0";
+
+    let nums = [...Array(count + 1).keys()];
+    return nums.join("+") + " = " + nums.reduce((a, b) => a + b);
+  },
+};
+var SequenceSum = (function () {
+  function SequenceSum() {}
+
+  SequenceSum.showSequence = function (count) {
+    console.log(count);
+    if (count === 0) return "0=0";
+    if (count < 0) return `${count}<0`;
+    let arr = Array.from({ length: count + 1 }, (_, i) => i);
+    return `${arr.join("+")} = ${arr.reduce((x, y) => x + y)}`;
+  };
+
+  return SequenceSum;
+})();
