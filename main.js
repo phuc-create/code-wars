@@ -461,3 +461,94 @@ var SequenceSum = (function () {
 
   return SequenceSum;
 })();
+
+// CODE WAR KYU 7
+// Beaches are filled with sand, water, fish, and sun. Given a string, calculate how many times the words "Sand", "Water", "Fish", and "Sun" appear without overlapping (regardless of the case).
+
+// Examples
+// sumOfABeach("WAtErSlIde")                    ==>  1
+// sumOfABeach("GolDeNSanDyWateRyBeaChSuNN")    ==>  3
+// sumOfABeach("gOfIshsunesunFiSh")             ==>  4
+// sumOfABeach("cItYTowNcARShoW")               ==>  0
+
+const sumOfABeach = (str) => {
+  let beach = str.toLowerCase().match(/(sand|water|fish|sun)/gi);
+  return beach ? beach.length : 0;
+};
+//ANOTHER SOLUTIONS
+const sumOfABeach = (beach) => beach.split(/sand|water|fish|sun/gi).length - 1;
+
+const sumOfABeach = (beach) =>
+  (beach.match(/sand|water|fish|sun/gi) || []).length;
+
+// CODE WAR KYU 7
+// You are given an odd-length array of integers, in which all of them are the same, except for one single number.
+
+// Complete the method which accepts such an array, and returns that single different number.
+
+// The input array will always be valid! (odd-length >= 3)
+
+// Examples
+// [1, 1, 2] ==> 2
+// [17, 17, 3, 17, 17, 17, 17] ==> 3
+
+const stray = (arr) => {
+  for (var i = 0, temp = []; i < arr.length; i++) {
+    if (arr.indexOf(arr[i], arr.indexOf(arr[i]) + 1) == -1) temp.push(arr[i]);
+  }
+  return temp[0];
+};
+
+//ANOTHER SOLUTIONS (CLEVER)
+const stray = (nums) => nums.reduce((a, b) => a ^ b);
+const stray = (numbers) => {
+  var a = numbers.sort();
+
+  if (a[0] != a[1]) {
+    return a[0];
+  }
+  return a[a.length - 1];
+};
+
+// CODE WAR KYU 7
+// Your task is to add up letters to one letter.
+
+// The function will be given a variable amount of arguments, each one being a letter to add.
+
+// Notes:
+// Letters will always be lowercase.
+// Letters can overflow (see second to last example of the description)
+// If no letters are given, the function should return 'z'
+// Examples:
+// addLetters('a', 'b', 'c') = 'f'
+// addLetters('a', 'b') = 'c'
+// addLetters('z') = 'z'
+// addLetters('z', 'a') = 'a'
+// addLetters('y', 'c', 'b') = 'd' // notice the letters overflowing
+// addLetters() = 'z'
+function addLetters(...letters) {
+  if (letters.length) {
+    total = 0;
+    for (let i = 0; i < letters.length; i++) {
+      total += letters[i].charCodeAt(letters[i]) - 96;
+    }
+    if (total + 96 > "z".charCodeAt()) {
+      return String.fromCharCode(calcTotal(total));
+    }
+    return String.fromCharCode(total + 96);
+  }
+  return "z";
+}
+function calcTotal(num) {
+  if (num + 96 - "z".charCodeAt() + 96 > 122) {
+    return calcTotal(num + 96 - "z".charCodeAt());
+  }
+  return num + 96 - "z".charCodeAt() + 96;
+}
+
+//ANOTHER SOLUTIONS (clever)
+function addLetters(...letters) {
+  return String.fromCharCode(
+    ((letters.reduce((a, b) => a + b.charCodeAt(0) - 96, 0) + 25) % 26) + 97
+  );
+}
