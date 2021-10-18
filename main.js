@@ -1,12 +1,12 @@
 // CODE WAR KYU 6
-// #1
+//Find number devide by 3 & 5 in array
 solution = (n) =>
   n <= 0
     ? 0
     : Array.from({ length: n }, (_, i) =>
         i % 3 == 0 || i % 5 == 0 ? i : 0
       ).reduce((x, y) => x + y);
-// #2
+//ANOTHER SOLUTIONS
 const solution = (n) => {
   let tt = 0;
   for (let i = 0; i < n; i++) {
@@ -530,7 +530,7 @@ function addLetters(...letters) {
   if (letters.length) {
     total = 0;
     for (let i = 0; i < letters.length; i++) {
-      total += letters[i].charCodeAt(letters[i]) - 96;
+      total += letters[i].charCodeAt() - 96;
     }
     if (total + 96 > "z".charCodeAt()) {
       return String.fromCharCode(calcTotal(total));
@@ -540,10 +540,11 @@ function addLetters(...letters) {
   return "z";
 }
 function calcTotal(num) {
-  if (num + 96 - "z".charCodeAt() + 96 > 122) {
-    return calcTotal(num + 96 - "z".charCodeAt());
+  let base = num + 96 - "z".charCodeAt();
+  if (base + 96 > 122) {
+    return calcTotal(base);
   }
-  return num + 96 - "z".charCodeAt() + 96;
+  return base + 96;
 }
 
 //ANOTHER SOLUTIONS (clever)
@@ -551,4 +552,193 @@ function addLetters(...letters) {
   return String.fromCharCode(
     ((letters.reduce((a, b) => a + b.charCodeAt(0) - 96, 0) + 25) % 26) + 97
   );
+}
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+function addLetters(...letters) {
+  var sum = 25;
+  for (var letter of letters) sum += alphabet.indexOf(letter) + 1;
+  return alphabet[sum % 26];
+}
+
+// CODE WAR KYU 7
+// Strong number is the number that the sum of the factorial of its digits is equal to number itself.
+
+// For example: 145, since
+// 1! + 4! + 5! = 1 + 24 + 120 = 145
+// So, 145 is a Strong number.
+
+// Task
+// Given a number, Find if it is Strong or not.
+
+const fac = (x) => {
+  return x < 1 ? 1 : fac(x - 1) * x;
+};
+const strong = (n) => {
+  let arr = n.toString().split("");
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += fac(Number(arr[i]));
+  }
+  return total == n ? "STRONG!!!!" : "Not Strong !!";
+};
+//ANOTHER SOLUTIONS
+const strong = (n) => {
+  let arr = String(n).split("");
+  let sum = 0;
+  function factorial(fnNum) {
+    if (fnNum <= 1) {
+      return 1;
+    } else {
+      return fnNum * factorial(fnNum - 1);
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    sum += factorial(arr[i]);
+  }
+
+  return n == sum ? "STRONG!!!!" : "Not Strong !!";
+};
+
+// CODE WAR KYU 7
+// Given an input of an array of digits num , return the array with each digit incremented by its position in the array. For example, the first digit will be incremented by 1, the second digit by 2 etc. Make sure to start counting your positions from 1 and not 0.
+
+// incrementer({1,2,3}) => {2,4,6}
+// Your result can only contain single digit numbers, so if adding a digit with it's position gives you a multiple-digit number, only the last digit of the number should be returned
+
+// incrementer({4,6,9,1,3}) => {5,8,2,5,8}
+
+//   - 9 + 3 (position of 9 in array) = 12
+//   - Only its last digit 2 should be returned
+// Lastly, return {} if your array is empty! Arrays will only contain numbers so don't worry about checking that.
+
+function incrementer(nums) {
+  let temp = [];
+  for (let i = 1; i <= nums.length; i++) {
+    temp.push((nums[i - 1] + i) % 10);
+  }
+  return temp;
+}
+// ANOTHER SOLUTIONS (CLEVER)
+function incrementer(num) {
+  return num.map((a, i) => (a + i + 1) % 10);
+}
+const incrementer = (a) => a.map((a, i) => +(a + i + 1 + "").slice(-1));
+
+// CODE WAR KYU 6
+// The President's phone is broken
+// He is not very happy.
+
+// The only letters still working are uppercase E, F, I, R, U, Y.
+
+// An angry tweet is sent to the department responsible for presidential phone maintenance.
+
+// Kata Task
+// Decipher the tweet by looking for words with known meanings.
+
+// FIRE = "You are fired!"
+// FURY = "I am furious."
+// If no known words are found, or unexpected letters are encountered, then it must be a "Fake tweet."
+
+// Notes
+// The tweet reads left-to-right.
+// Any letters not spelling words FIRE or FURY are just ignored
+// If multiple of the same words are found in a row then plural rules apply -
+// FIRE x 1 = "You are fired!"
+// FIRE x 2 = "You and you are fired!"
+// FIRE x 3 = "You and you and you are fired!"
+// etc...
+// FURY x 1 = "I am furious."
+// FURY x 2 = "I am really furious."
+// FURY x 3 = "I am really really furious."
+// etc...
+// Examples
+// ex1. FURYYYFIREYYFIRE = "I am furious. You and you are fired!"
+// ex2. FIREYYFURYYFURYYFURRYFIRE = "You are fired! I am really furious. You are fired!"
+// ex3. FYRYFIRUFIRUFURE = "Fake tweet."
+const fireAndFury = function (tweet) {
+  let matches = tweet.match(/(FURY|FIRE)/g);
+  if (/[^EFIRUY]/.test(tweet) || !matches) return "Fake tweet.";
+  return matches
+    .join("")
+    .match(/(FURY|FIRE)\1*/g)
+    .map((match) => {
+      let terms = match.length / 4 - 1;
+
+      return match[1] === "I"
+        ? "You " + "and you ".repeat(terms) + "are fired!"
+        : "I am " + "really ".repeat(terms) + "furious.";
+    })
+    .join(" ");
+};
+// I'm not proud of this, but I put about as much effort into it as
+// the angry tweeter himself.
+const fireAndFury = (t) => {
+  if (t.replace(/[FIREUY]/g, "").length > 0) return "Fake tweet.";
+  t = t.replace(/FIRE/g, "-").replace(/FURY/g, "=").replace(/[^-=]/g, "");
+  if (!t.length) return "Fake tweet.";
+  t = t.split("");
+  let last,
+    ans = "";
+  for (let i = 0; i < t.length; i++) {
+    if (t[i] == "=" && last != "=") ans += "I am ";
+    if (t[i] == "=" && last == "=") ans += "really ";
+    if (t[i] == "=" && t[i + 1] != "=") ans += "furious. ";
+    if (t[i] == "-" && last != "-") ans += "You ";
+    if (t[i] == "-" && last == "-") ans += "and you ";
+    if (t[i] == "-" && t[i + 1] != "-") ans += "are fired! ";
+    last = t[i];
+  }
+  return ans.trim();
+};
+function fireAndFury(s) {
+  if (!/FIRE|FURY/.test(s) || /[^EFIRUY]/.test(s)) return "Fake tweet.";
+  var result = s.match(/FIRE|FURY/g).join``.match(/(FIRE)+|(FURY)+/g);
+  return result.map((s) =>
+    /FIRE/.test(s)
+      ? `You ${"and you ".repeat(s.length / 4 - 1)}are fired!`
+      : `I am ${"really ".repeat(s.length / 4 - 1)}furious.`
+  ).join` `;
+}
+
+const fireAndFury = function (tweet) {
+  if (/[^FIREUY]/.test(tweet)) return "Fake tweet.";
+  tweet = tweet.match(/FURY|FIRE/g);
+  return !tweet
+    ? "Fake tweet."
+    : tweet
+        .join("")
+        .replace(/(FURY)+|(FIRE)+/g, (m) =>
+          /FURY/.test(m)
+            ? `I am ${"really ".repeat(m.length / 4 - 1)}furious. `
+            : `You ${"and you ".repeat(m.length / 4 - 1)}are fired! `
+        )
+        .trim();
+};
+
+// CODE WAR KYU 7
+// Description:
+// Introduction and Warm-up (Highly recommended)
+// Playing With Lists/Arrays Series
+// Task
+// Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
+
+// Notes
+// Array/list size is at least 2 .
+
+// Array/list's numbers Will be only Positives
+
+// Repetition of numbers in the array/list could occur.
+
+// Input >> Output Examples
+// productArray ({12,20}) ==>  return {20,12}
+// Explanation:
+// The first element in prod [] array 12 is the product of all array's elements except the first element
+
+// The second element 20 is the product of all array's elements except the second element .
+const productArray = (arr) => {
+  return arr.map((v, idx) => arr.reduce((a, b) => a * b) / arr[idx]);
+};
+function productArray(numbers) {
+  return numbers.map((x) => numbers.reduce((a, b) => a * b) / x);
 }
