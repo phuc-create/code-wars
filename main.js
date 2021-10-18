@@ -742,3 +742,130 @@ const productArray = (arr) => {
 function productArray(numbers) {
   return numbers.map((x) => numbers.reduce((a, b) => a * b) / x);
 }
+
+// CODE WAR KYU 7
+// Given an array of N integers, you have to find how many times you have to add up the smallest numbers in the array until their Sum becomes greater or equal to K.
+
+// Notes:
+// List size is at least 3.
+
+// All numbers will be positive.
+
+// Numbers could occur more than once , (Duplications may exist).
+
+// Threshold K will always be reachable.
+
+// Input >> Output Examples
+// minimumSteps({1, 10, 12, 9, 2, 3}, 6)  ==>  return (2)
+// Explanation:
+// We add two smallest elements (1 + 2), their sum is 3 .
+
+// Then we add the next smallest number to it (3 + 3) , so the sum becomes 6 .
+
+// Now the result is greater or equal to 6 , Hence the output is (2) i.e (2) operations are required to do this .
+
+const minimumSteps = (numbers, value) => {
+  numbers.sort((a, b) => a - b);
+  let sum = 0;
+  let count = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+    count++;
+    if (sum >= value) {
+      return i;
+    }
+  }
+};
+
+//ANOTHER SOLUTIONS
+function minimumSteps(numbers, value) {
+  return numbers.sort((a, b) => a - b).filter((e, i) => (value = value - e) > 0)
+    .length;
+}
+
+const minimumSteps = (numbers, value) => {
+  let sum = 0;
+  return numbers
+    .sort((a, b) => a - b)
+    .findIndex((number) => (sum += number) >= value);
+};
+
+// CODE WAR KYU 7 Jumping Number (Special Numbers Series #4)
+// Jumping number is the number that All adjacent digits in it differ by 1.
+
+// Task
+// Given a number, Find if it is Jumping or not .
+
+// Warm-up (Highly recommended)
+// Playing With Numbers Series
+// Notes
+// Number passed is always Positive .
+// Return the result as String .
+// The difference between ‘9’ and ‘0’ is not considered as 1 .
+// All single digit numbers are considered as Jumping numbers.
+
+// Input >> Output Examples
+// jumpingNumber(9) ==> return "Jumping!!"
+// Explanation:
+// It's single-digit number
+// jumpingNumber(79) ==> return "Not!!"
+// Explanation:
+// Adjacent digits don't differ by 1
+function jumpingNumber(n) {
+  const arr = n.toString().split("");
+  let str = "";
+  if (arr.length === 1) {
+    return "Jumping!!";
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (
+      Number(arr[i]) === Number(arr[i + 1]) + 1 ||
+      Number(arr[i]) === Number(arr[i - 1]) + 1 ||
+      Number(arr[i]) === Number(arr[i + 1]) - 1 ||
+      Number(arr[i]) === Number(arr[i - 1]) - 1
+    ) {
+      str += arr[i];
+    }
+  }
+  return Number(str) === n ? "Jumping!!" : "Not!!";
+}
+function jumpingNumber(n) {
+  const arr = n.toString().split("");
+  let str = "";
+  if (arr.length === 1) {
+    return "Jumping!!";
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (Math.abs(arr[i] - arr[i + 1]) !== 1) {
+      return "Not!!";
+    }
+  }
+  return "Jumping!!";
+}
+//ANOTHER SOLUTIONS
+function jumpingNumber(n) {
+  let arr = n.toString().split("");
+  for (i = 0; i < arr.length - 1; i++) {
+    if (Math.abs(arr[i] - arr[i + 1]) !== 1) {
+      return "Not!!";
+    }
+  }
+  return "Jumping!!";
+}
+
+function makeMatrix(m, n) {
+  let result = Array(n)
+    .fill()
+    .map(() => Array(n).fill(0));
+  result[0][0] =
+    result[0][4] =
+    result[1][1] =
+    result[1][3] =
+    result[2][2] =
+    result[3][1] =
+    result[3][3] =
+    result[4][0] =
+      result[4][4];
+
+  console.log(result);
+}
