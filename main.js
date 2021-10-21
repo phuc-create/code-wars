@@ -852,20 +852,240 @@ function jumpingNumber(n) {
   }
   return "Jumping!!";
 }
+// CODE WAR KYU 6 (REALLY DIFFICUL)
+// Give you two number m(a positive integer with 5 digits) and n(a positive odd integer >= 3), make a n*n matrix pattern using the digits of m:
+
+// Main diagonal and Vice diagonal fill in the first digit
+// At this time the matrix is divided into four triangular areas
+
+// The top area fill in the second digit
+// The bottom area fill in the third digit
+// The left area fill in the fourth digit
+// The right area fill in the fifth digit
+// like this:
+
+//  When m = 12345 and n = 5, the matrix is:
+// 1 2 2 2 1
+// 4 1 2 1 5
+// 4 4 1 5 5
+// 4 1 3 1 5
+// 1 3 3 3 1
+// Note: The result is a multiline string; Each row separated by "\n"; Each digit separated by a space; All inputs are valid.
+function makeMatrix(m, n) {
+  const n1 = n - 1;
+  const digits = m.toString(10);
+  const digit = (x, y) =>
+    x === y || x === n1 - y
+      ? 0
+      : x > y && x < n1 - y
+      ? 1
+      : x < y && x > n1 - y
+      ? 2
+      : x < y && x < n1 - y
+      ? 3
+      : 4;
+
+  return Array(n)
+    .fill("")
+    .map((_, y) =>
+      Array(n)
+        .fill("")
+        .map((_, x) => digits[digit(x, y)])
+        .join(" ")
+    )
+    .join("\n");
+}
 
 function makeMatrix(m, n) {
-  let result = Array(n)
+  var arr = [];
+  for (let i = 0; i < n; i++) {
+    var brr = [];
+    for (let j = 0; j < n; j++) {
+      if (i == j) brr.push(parseInt(m / 10000));
+      else if (i + j == n - 1) brr.push(parseInt(m / 10000));
+      else if (i > j) {
+        if (i + j < n) brr.push(parseInt((m / 10) % 10));
+        //LEFT
+        else brr.push(parseInt((m / 100) % 10)); //BOTTOM
+      } else {
+        if (i + j < n) brr.push(parseInt((m / 1000) % 10));
+        // TOP
+        else brr.push(parseInt(m % 10)); //RIGHT
+      }
+    }
+    arr.push(brr);
+  }
+  var s = "";
+  arr.map((x) => {
+    s = s + "\n" + String(x).replace(/,/g, " ");
+  });
+  s = s.substring(1);
+  return s;
+}
+
+makeMatrix = (m, n) =>
+  [...Array(n)].map(
+    (_, i, a) =>
+      a.map(
+        (_, j) =>
+          (m + a)[
+            j - i && j - n ? (j < n ? (j < i ? 3 : 1) : j < i ? 2 : 4) : 0
+          ],
+        --n
+      ).join` `
+  ).join`\n`;
+
+function makeMatrix(m, n) {
+  const nums = m.toString().split("");
+  const line = [n];
+  let outstr = "";
+
+  for (i = 0; i < n; i++) {
+    line.fill(nums[3], 0, i);
+    line.fill(nums[4], n - i);
+    line[i] = nums[0];
+    line[n - 1 - i] = nums[0];
+    line.fill(nums[1], i + 1, n - 1 - i);
+    line.fill(nums[2], n - i, i);
+    outstr += line.join(" ") + "\n";
+  }
+
+  return outstr.trim();
+}
+
+// CODE WAR KYU 6
+// Digital root is the recursive sum of all the digits in a number.
+
+// Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer.
+
+// Examples
+//     16  -->  1 + 6 = 7
+//    942  -->  9 + 4 + 2 = 15  -->  1 + 5 = 6
+// 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
+// 493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
+
+function digital_root(n) {
+  let sum = n
+    .toString()
+    .split("")
+    .reduce((a, b) => Number(a) + Number(b), 0);
+  if (sum < 10) {
+    return sum;
+  }
+  return digital_root(sum);
+}
+
+//ANOTHER SOLUTIONS
+function digital_root(n) {
+  return ((n - 1) % 9) + 1;
+}
+
+function digital_root(n) {
+  return n > 0 ? 1 + ((parseInt(n) - 1) % 9) : 0;
+}
+
+// CODE WAR KYU 6
+// An array is called zero-plentiful if it contains at least one 0 and every sequence of 0s is of length at least 4. Your task is to return the number of zero sequences if the given array is zero-plentiful else 0.
+
+function zeroPlentiful(arr) {
+  if (arr.length > 1) {
+    let total = 0;
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i - 1] !== 0 && arr[i] === 0 && arr[i + 1] !== 0) {
+        return 0;
+      } else {
+        if (arr[i] === 0) {
+          count++;
+        } else {
+          if (count >= 4) {
+            total++;
+            count = 0;
+          }
+        }
+      }
+    }
+    if (count >= 4) {
+      total++;
+    }
+    return total;
+  }
+  return 0;
+}
+//ANOTHER SOLUTIONS
+zeroPlentiful = (a) =>
+  ((a) => (a.every((a) => a.length > 3) ? a.length : 0))(
+    a.join``.match(/0+/g) || []
+  );
+
+function zeroPlentiful(arr) {
+  var sequences = arr
+    .map((x) => (!x ? x : ","))
+    .join("")
+    .split(",")
+    .filter((str) => str);
+  return sequences.every((str) => str.length >= 4) ? sequences.length : 0;
+}
+
+function zeroPlentiful(arr) {
+  let count = 0;
+  let total = 0;
+  for (const x of arr) {
+    if (x === 0) {
+      if (count++ === 3) {
+        total++;
+      }
+    } else {
+      if (count > 3) {
+        count = 0;
+      } else if (count > 0) {
+        count = 0;
+        total = 0;
+        break;
+      }
+    }
+  }
+  return count > 0 && count < 4 ? 0 : total;
+}
+
+const getPrimes = (num) =>
+  Array(num - 1)
     .fill()
-    .map(() => Array(n).fill(0));
-  result[0][0] =
-    result[0][4] =
-    result[1][1] =
-    result[1][3] =
-    result[2][2] =
-    result[3][1] =
-    result[3][3] =
-    result[4][0] =
-      result[4][4];
+    .map((e, i) => 2 + i)
+    .filter((e, i, a) => a.slice(0, i).every((x) => e % x !== 0));
+
+function gap(g, m, n) {
+  let prime = [],
+    result = [];
+  for (let i = m; i <= n; i++) {
+    let checker = isPrime(i);
+    if (checker) {
+      prime.push(i);
+    }
+  }
+  console.log(prime);
+  for (let i = 0; i < prime.length; i++) {
+    if (prime[i] === prime[i + 1] + g) {
+      result.push([prime[i], prime[i] + g]);
+    }
+  }
 
   console.log(result);
 }
+console.log(gap(4, 100, 110));
+
+function isPrime(num) {
+  if (num < 2) return false;
+  for (var i = 2; i < num; i++) {
+    if (num % i == 0) return false;
+  }
+  return true;
+}
+//CODE WAR KYU UNDEFINED
+//get prime and check prime
+
+const getPrimes = (num) =>
+  Array(num - 1)
+    .fill()
+    .map((e, i) => 2 + i)
+    .filter((e, i, a) => a.slice(0, i).every((x) => e % x !== 0));
