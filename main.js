@@ -1156,3 +1156,98 @@ function gap(g, m, n) {
   }
   return null;
 }
+
+// CODE WAR KYU 6
+// The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+
+// Examples
+// "din"      =>  "((("
+// "recede"   =>  "()()()"
+// "Success"  =>  ")())())"
+// "(( @"     =>  "))(("
+
+function duplicateEncode(word) {
+  let temp = [];
+  word = word.toLowerCase().split("");
+  word.map((v, i) => {
+    temp[i] = word.filter((e) => e === v).length > 1 ? ")" : "(";
+  });
+  return temp.join("");
+}
+
+//ANOTHER SOLUTIONS
+function duplicateEncode(word) {
+  return word
+    .toLowerCase()
+    .split("")
+    .map(function (a, i, w) {
+      return w.indexOf(a) == w.lastIndexOf(a) ? "(" : ")";
+    })
+    .join("");
+}
+
+function duplicateEncode(word) {
+  return word
+    .toLowerCase()
+    .split("")
+    .map((v, i, arr) => {
+      return arr.filter((e) => e === v).length > 1 ? ")" : "(";
+    })
+    .join("");
+}
+//CODE WAR KYU 7
+// The odd and even numbers are fighting against each other!
+
+// You are given a list of positive integers. The odd numbers from the list will fight using their 1 bits from their binary representation, while the even numbers will fight using their 0 bits. If present in the list, number 0 will be neutral, hence not fight for either side.
+
+// You should return:
+
+// odds win if number of 1s from odd numbers is larger than 0s from even numbers
+// evens win if number of 1s from odd numbers is smaller than 0s from even numbers
+// tie if equal, including if list is empty
+// Please note that any prefix that might appear in the binary representation, e.g. 0b, should not be counted towards the battle.
+
+// Example:
+// For an input list of [5, 3, 14]:
+
+// odds: 5 and 3 => 101 and 11 => four 1s
+// evens: 14 => 1110 => one 0
+// Result: odds win the battle with 4-1
+
+function bitsBattle(n) {
+  let odd = [],
+    even = [];
+  n.forEach((v, i) => {
+    v % 2 === 0 ? even.push(v) : odd.push(v);
+  });
+  let cOdd = (
+    odd
+      .map((v) => v.toString(2))
+      .join("")
+      .match(/1/g) || []
+  ).length;
+  let cEven = (
+    even
+      .map((v) => v.toString(2))
+      .join("")
+      .match(/0/g) || []
+  ).length;
+  console.log(cOdd, cEven);
+  return cOdd > cEven ? "odds win" : cOdd < cEven ? "evens win" : "tie";
+}
+
+//ANOTHER SOLUTIONS
+function bitsBattle(numbers) {
+  var r = [0, 0];
+  for (var n of numbers) r[n % 2] += n.toString(2).split(n % 2).length - 1;
+  return r[0] > r[1] ? "evens win" : r[1] > r[0] ? "odds win" : "tie";
+}
+
+const bitsBattle = (arr) => {
+  var score = arr.reduce(
+    (a, x) =>
+      a + (x & 1 ? +1 : -1) * (x && x.toString(2).split(x & 1).length - 1),
+    0
+  );
+  return score > 0 ? "odds win" : score < 0 ? "evens win" : "tie";
+};
