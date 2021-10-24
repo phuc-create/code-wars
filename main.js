@@ -1157,6 +1157,47 @@ function gap(g, m, n) {
   return null;
 }
 
+function primeSol(n) {
+  if (n === 2) {
+    return true;
+  } else if (n < 2 || n % 2 === 0) {
+    return false;
+  } else {
+    for (let i = 3; i <= Math.sqrt(n); i += 2) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+}
+
+function gapSol(g, m, n) {
+  let res = [];
+  let i = m;
+  while (i < n + 1) {
+    if (primeSol(i)) {
+      res.push(i);
+      break;
+    }
+    i++;
+  }
+  while (true) {
+    let j = i + 1;
+    while (j < n + 1) {
+      if (primeSol(j)) {
+        if (j - i === g) {
+          res.push(j);
+          return res;
+        } else {
+          res[0] = j;
+          i = j;
+        }
+      }
+      j++;
+    }
+    return null;
+  }
+}
+
 // CODE WAR KYU 6
 // The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
 
@@ -1218,25 +1259,14 @@ function bitsBattle(n) {
   let odd = [],
     even = [];
   n.forEach((v, i) => {
-    v % 2 === 0 ? even.push(v) : odd.push(v);
+    v % 2 === 0 ? even.push(v.toString(2)) : odd.push(v.toString(2));
   });
-  let cOdd = (
-    odd
-      .map((v) => v.toString(2))
-      .join("")
-      .match(/1/g) || []
-  ).length;
-  let cEven = (
-    even
-      .map((v) => v.toString(2))
-      .join("")
-      .match(/0/g) || []
-  ).length;
-  console.log(cOdd, cEven);
+  let cOdd = (odd.join("").match(/1/g) || []).length;
+  let cEven = (even.join("").match(/0/g) || []).length;
   return cOdd > cEven ? "odds win" : cOdd < cEven ? "evens win" : "tie";
 }
 
-//ANOTHER SOLUTIONS
+//ANOTHER SOLUTIONS (clever)
 function bitsBattle(numbers) {
   var r = [0, 0];
   for (var n of numbers) r[n % 2] += n.toString(2).split(n % 2).length - 1;
@@ -1251,3 +1281,150 @@ const bitsBattle = (arr) => {
   );
   return score > 0 ? "odds win" : score < 0 ? "evens win" : "tie";
 };
+
+// CODE WAR KYU 6 (World Bits War)
+// A number's strength is determined by the number of set bits (1s) in its binary representation. Negative integers work against their own side so their strength is negative. For example -5 = -101 has strength -2 and +5 = +101 has strength +2.
+
+// The side with the largest cumulated strength wins.
+
+// Again, three possible outcomes: odds win, evens win and tie.
+
+// Examples:
+function bitsWar(n) {
+  let arrs = [[], []];
+  n.forEach((v) => {
+    v % 2 === 0 ? arrs[0].push(v.toString(2)) : arrs[1].push(v.toString(2));
+  });
+  arrs.forEach((arr, i) => {
+    arrs[i] = arr
+      .map((v) => {
+        return v.replace(/[0]/g, "");
+      })
+      .map((v) => {
+        return Number(v) < 0
+          ? -(v.match(/1/g) || []).length
+          : (v.match(/1/g) || []).length;
+      })
+      .reduce((a, b) => a + b, 0);
+  });
+  return arrs[0] > arrs[1]
+    ? "evens win"
+    : arrs[0] < arrs[1]
+    ? "odds win"
+    : "tie";
+}
+
+//ANOTHER SOLUTIONS
+function bitsWar(numbers) {
+  const countSetBits = (int) =>
+    int
+      .toString(2)
+      .split("")
+      .reduce((count, elem) => (count += elem === "1"), 0);
+  const result = numbers.reduce(
+    (score, elem) =>
+      score + countSetBits(elem) * Math.sign(elem) * (elem % 2 === 0 ? 1 : -1),
+    0
+  );
+  if (result > 0) return "evens win";
+  else if (result === 0) return "tie";
+  else return "odds win";
+}
+
+function bitsWar(numbers) {
+  let count = (n) => n.toString(2).split("1").length - 1;
+  let score = [0, 0];
+
+  for (var n of numbers)
+    if (n > 0) score[n % 2] += count(n);
+    else score[-n % 2] -= count(-n);
+
+  if (score[0] < score[1]) return "odds win";
+
+  if (score[1] < score[0]) return "evens win";
+
+  return "tie";
+}
+
+function bitsWar(num) {
+  let [odd, even] = [num.filter((i) => i & 1), num.filter((i) => !(i & 1))].map(
+    (i) =>
+      i
+        .map((i) =>
+          i.toString`2`.replace(/0/g, "").replace(/1+/g, (i) => i.length)
+        )
+        .reduce((sum, i) => sum + +i, 0)
+  );
+  return odd == even ? "tie" : `${odd > even ? "odds" : "evens"} win`;
+}
+
+function findMult_3(num) {
+  let temp = [];
+  for (let i = 3; i <= num; i++) {
+    if (i % 3 === 0) {
+      temp.push(i);
+    }
+  }
+  temp.map((v) => {
+    return num
+      .toString()
+      .split("")
+      .filter((e) => {
+        v.toString().includes(e);
+      });
+  });
+  console.log(temp);
+  return [temp.length, temp[temp.length - 1]];
+}
+
+//CODE WAR KYU 7
+// Balanced number is the number that * The sum of all digits to the left of the middle digit(s) and the sum of all digits to the right of the middle digit(s) are equal*.
+
+// Task
+// Given a number, Find if it is Balanced or not .
+
+// Warm-up (Highly recommended)
+// Playing With Numbers Series
+// Notes
+// If the number has an odd number of digits then there is only one middle digit, e.g. 92645 has middle digit 6; otherwise, there are two middle digits , e.g. 1301 has middle digits 3 and 0
+
+// The middle digit(s) should not be considered when determining whether a number is balanced or not, e.g 413023 is a balanced number because the left sum and right sum are both 5.
+
+// Number passed is always Positive .
+
+// Return the result as String
+function balancedNum(number) {
+  if (number.toString().length <= 2) return "Balanced";
+  let length = number.toString().length;
+  let left = number
+    .toString()
+    .slice(0, length % 2 === 0 ? length / 2 - 1 : (length + 1) / 2 - 1)
+    .split("")
+    .reduce((a, b) => a + Number(b), 0);
+  let right = number
+    .toString()
+    .slice(length % 2 === 0 ? -(length / 2 - 1) : -(length + 1) / 2 + 1)
+    .split("")
+    .reduce((a, b) => a + Number(b), 0);
+  return left === right ? "Balanced" : "Not Balanced";
+}
+//ANOTHER SOLUTIONS
+function balancedNum(number) {
+  let str = `${number}`,
+    len = (str.length - (str.length % 2 ? -1 : -2)) / 2,
+    sum = (digits) => [...digits].reduce((a, b) => a + +b, 0);
+
+  return sum(str.slice(0, len)) === sum(str.slice(-len))
+    ? "Balanced"
+    : "Not Balanced";
+}
+
+function balancedNum(number) {
+  let i,
+    result = 0;
+  number = number + "";
+  for (i = 0; i < number.length / 2 - 1; i++) {
+    result += +number[i] - +number[number.length - 1 - i];
+  }
+  return result === 0 ? "Balanced" : "Not Balanced";
+}
