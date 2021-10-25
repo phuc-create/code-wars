@@ -1394,16 +1394,15 @@ function findMult_3(num) {
 
 // Return the result as String
 function balancedNum(number) {
-  if (number.toString().length <= 2) return "Balanced";
-  let length = number.toString().length;
-  let left = number
-    .toString()
-    .slice(0, length % 2 === 0 ? length / 2 - 1 : (length + 1) / 2 - 1)
+  let length = `${number}`.length;
+  if (length <= 2) return "Balanced";
+  let slice = length % 2 === 0 ? length / 2 - 1 : (length + 1) / 2 - 1;
+  let left = `${number}`
+    .slice(0, slice)
     .split("")
     .reduce((a, b) => a + Number(b), 0);
-  let right = number
-    .toString()
-    .slice(length % 2 === 0 ? -(length / 2 - 1) : -(length + 1) / 2 + 1)
+  let right = `${number}`
+    .slice(-slice)
     .split("")
     .reduce((a, b) => a + Number(b), 0);
   return left === right ? "Balanced" : "Not Balanced";
@@ -1428,3 +1427,53 @@ function balancedNum(number) {
   }
   return result === 0 ? "Balanced" : "Not Balanced";
 }
+//CODE WAR KYU 7
+// You have to write a function f which takes in an octal number in string format and output its decimal representation in less than 15 characters.
+const f = (str) => {
+  let arr = str.toString().split("").reverse(),
+    total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += Number(arr[i]) * 8 ** i;
+  }
+  return total;
+};
+
+const f = (s) => {
+  let a = s.split("").reverse(),
+    t = 0;
+  for (let i = 0; i < a.length; i++) {
+    t += Number(a[i]) * 8 ** i;
+  }
+  return t;
+};
+
+//ANOTHER SOLUTIONS
+f = (s) => "0o" + s - 0;
+f = (_) => +("0o" + _);
+
+//CODE WAR KYU 8
+// Build a function that returns an array of integers from n to 1 where n>0.
+// Example : n=5 --> [5,4,3,2,1]
+
+const reverseSeq = (n) => {
+  let a = [];
+  for (let i = n; i > 0; i--) {
+    a.push(i);
+  }
+  return a;
+};
+
+//ANOTHER SOLUTIONS
+const reverseSeq = (n) => {
+  return Array(n)
+    .fill(0)
+    .map((e, i) => n - i);
+};
+const reverseSeq = (length) => Array.from({ length }, () => length--);
+const reverseSeq = (num) => {
+  return new Array(num)
+    .fill()
+    .map((d, i) => i + 1)
+    .reverse();
+};
+const reverseSeq = (n) => [...Array(n)].map((_, i) => n - i);
