@@ -1477,3 +1477,54 @@ const reverseSeq = (num) => {
     .reverse();
 };
 const reverseSeq = (n) => [...Array(n)].map((_, i) => n - i);
+
+// CODE WAR KYU 7
+// Your task is to determine how many files of the copy queue you will be able to save into your Hard Disk Drive. The files must be saved in the order they appear in the queue.
+
+// Input:
+// Array of file sizes (0 <= s <= 100)
+// Capacity of the HD (0 <= c <= 500)
+// Output:
+// Number of files that can be fully saved in the HD.
+// Examples:
+// save([4,4,4,3,3], 12) -> 3
+// # 4+4+4 <= 12, but 4+4+4+3 > 12
+// save([4,4,4,3,3], 11) -> 2
+// # 4+4 <= 11, but 4+4+4 > 11
+
+function save(sizes, hd) {
+  let total = 0,
+    count = 0;
+  for (let i = 0; i < sizes.length; i++) {
+    total += sizes[i];
+    if (total > hd) {
+      return count;
+    } else {
+      count++;
+    }
+  }
+  return count;
+}
+
+//ANOTHER SOLUTIONS
+function save(sizes, hd) {
+  let i = -1;
+  while (hd >= 0) {
+    hd -= sizes.shift();
+    i++;
+  }
+  return i;
+}
+
+// CODE WAR KYU 8
+// Your function takes two arguments:
+
+// current father's age (years)
+// current age of his son (years)
+// Сalculate how many years ago the father was twice as old as his son (or in how many years he will be twice as old).
+function twiceAsOld(dadYearsOld, sonYearsOld) {
+  return Math.abs(dadYearsOld - 2 * sonYearsOld);
+}
+function twiceAsOld(d, s) {
+  return Math.abs(d - 2 * s);
+}
