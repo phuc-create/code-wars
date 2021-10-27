@@ -1528,3 +1528,148 @@ function twiceAsOld(dadYearsOld, sonYearsOld) {
 function twiceAsOld(d, s) {
   return Math.abs(d - 2 * s);
 }
+//CODE WAR KYU 6
+// Kingdoms Ep4: The Dancing Witch
+function figureOut(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      let c = arr[i][j];
+      if (c === " ") continue;
+      if (
+        arr[i + 1].indexOf(c) - arr[i].indexOf(c) >= 2 ||
+        arr[i].indexOf(c) - arr[i + 1].indexOf(c) >= 2 ||
+        c === arr[i + 1][j + 2 > arr[i].length - 1 ? j - 2 : j + 2] ||
+        c === arr[i + 1][j - 2 < 0 ? j + 2 : j - 2]
+      ) {
+        return c;
+      }
+    }
+  }
+  return null;
+}
+//REFACTOR
+function figureOut(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      let c = arr[i][j];
+      if (c === " ") continue;
+      if (Math.abs(arr[i + 1].indexOf(c) - arr[i].indexOf(c)) > 1) {
+        return c;
+      }
+    }
+  }
+  return null;
+}
+//ANOTHER SOLUTIONS
+function figureOut(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    const [a, b] = [arr[i], arr[i + 1]];
+    for (const l of [...a]) {
+      if (l == " ") continue;
+      if (Math.abs(a.indexOf(l) - b.indexOf(l)) > 1) return l;
+    }
+  }
+  return null;
+}
+function figureOut(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    const w = [...arr[i]].find(
+      (x, j) => x !== " " && Math.abs(arr[i - 1].indexOf(x) - j) > 1
+    );
+    if (w) return w;
+  }
+  return null;
+}
+// CODE WAR KYU 7
+// In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
+
+// Example:
+
+// highAndLow("1 2 3 4 5");  // return "5 1"
+// highAndLow("1 2 -3 4 5"); // return "5 -3"
+// highAndLow("1 9 3 4 -5"); // return "9 -5"
+function highAndLow(n) {
+  let arr = n.split(" ").map(Number);
+  return [Math.max(...arr), Math.min(...arr)].join(" ");
+}
+
+// CODE WAR KYU 7
+// Simple, given a string of words, return the length of the shortest word(s).
+
+// String will never be empty and you do not need to account for different data types.
+const findShort = (s) => {
+  return Math.min(...s.split(" ").map((v) => v.length));
+};
+
+//ANOTHER SOLUTIONS
+function findShort(s) {
+  return Math.min.apply(
+    null,
+    s.split(" ").map((w) => w.length)
+  );
+}
+function findShort(s) {
+  return Math.min(...s.split(" ").map((s) => s.length));
+}
+// CODE WAR KYU 8
+// Given three integers a ,b ,c, return the largest number obtained after inserting the following operators and brackets: +, *, ()
+// In other words , try every combination of a,b,c with [*+()] , and return the Maximum Obtained
+// Consider an Example :
+// With the numbers are 1, 2 and 3 , here are some ways of placing signs and brackets:
+
+// 1 * (2 + 3) = 5
+// 1 * 2 * 3 = 6
+// 1 + 2 * 3 = 7
+// (1 + 2) * 3 = 9
+// So the maximum value that you can obtain is 9.
+function expressionMatter(a, b, c) {
+  let arr = [];
+  arr[0] = a * b * c;
+  arr[1] = (a + b) * c;
+  arr[2] = a * (b + c);
+  arr[3] = a + b + c;
+  return Math.max(...arr);
+}
+//ANOTHER SOLUTIONS
+function expressionMatter(a, b, c) {
+  return Math.max(a + b + c, a * b * c, (a + b) * c, a * (b + c));
+}
+//CODE WAR KYU 6
+// Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities. "Same" means, here, that the elements in b are the elements in a squared, regardless of the order.
+
+// Examples
+// Valid arrays
+// a = [121, 144, 19, 161, 19, 144, 19, 11]
+// b = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
+// comp(a, b) returns true because in b 121 is the square of 11, 14641 is the square of 121, 20736 the square of 144, 361 the square of 19, 25921 the square of 161, and so on. It gets obvious if we write b's elements in terms of squares:
+
+// a = [121, 144, 19, 161, 19, 144, 19, 11]
+// b = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
+// Invalid arrays
+
+function comp(a1, a2) {
+  if (a1 && a2) {
+    a2 = a2.map((v) => Math.sqrt(v)).sort();
+    return a1.sort().join() === a2.join();
+  }
+  return false;
+}
+
+//CODE WAR KYU 6
+// Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+
+// Example
+// createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
+function createPhoneNumber(n) {
+  n = n.join("");
+  return `(${n.slice(0, 3)}) ${n.slice(3, 6)}-${n.slice(6, n.length)}`;
+}
+
+//ANOTHER SOLUTIONS
+function createPhoneNumber(numbers) {
+  let format = "(xxx) xxx-xxxx";
+  for (let i = 0; i < numbers.length; i++) {
+    format = format.replace("x", numbers[i]);
+  }
+  return format;
+}
