@@ -1044,7 +1044,8 @@ const getPrimes = (num) =>
 
 function gap(g, m, n) {
   let prime = [],
-    result = [];
+    f;
+  result = [];
   for (let i = m; i <= n; i++) {
     let checker = isPrime(i);
     if (checker) {
@@ -1672,4 +1673,111 @@ function createPhoneNumber(numbers) {
     format = format.replace("x", numbers[i]);
   }
   return format;
+}
+//CODE WAR KYU 6
+// Dear Coder,
+
+// We at [SomeLargeCompany] have decided to expand on the functionality of our online text editor.
+
+// We have written a new function that accepts a phrase, a word and an array of indexes. We want this function to return the phrase, with the word inserted at each of the indexes given by the array.
+
+// However, our current function only gets the first insertion right, but all of the following ones are out of place!
+
+// Please fix this for us, and you will be showered with money.
+
+// Yours Sincerely, [SomeLargeCompany]
+
+// Note :
+
+// the indicies are always in range and passed as a sorted array
+// note if the index array is empty, just return the initial phrase
+function insertAtIndexes(p, w, idxs) {
+  if (!p && !w && !idxs) return p;
+  p = p.split("");
+  for (let i = 0; i < idxs.length; i++) {
+    p.splice(i > 0 ? idxs[i] + i : idxs[i], 0, w);
+  }
+  return p.join("");
+}
+//ANOTHER SOLUTIONS
+function insertAtIndexes(phrase, word, indexes) {
+  var c = 0;
+  for (var i = 0; i < indexes.length; i++) {
+    phrase =
+      phrase.slice(0, indexes[i] + c) + word + phrase.slice(indexes[i] + c);
+    c += word.length;
+  }
+  return phrase;
+}
+//CODE WAR KYU 7
+// Given an array of digitals numbers, return a new array of length number containing the last even numbers from the original array (in the same order). The original array will be not empty and will contain at least "number" even numbers.
+
+// For example:
+
+// ([1, 2, 3, 4, 5, 6, 7, 8, 9], 3) => [4, 6, 8]
+// ([-22, 5, 3, 11, 26, -6, -7, -8, -9, -8, 26], 2) => [-8, 26]
+// ([6, -25, 3, 7, 5, 5, 7, -3, 23], 1) => [6]
+
+function evenNumbers(array, number) {
+  let temp = [];
+  array = array.reverse();
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] % 2 === 0) {
+      temp.push(array[i]);
+      if (temp.length === number) return temp.reverse();
+    }
+  }
+}
+
+//ANOTHER SOLUTIONS
+const evenNumbers = (array, number) =>
+  array.filter((item) => item % 2 === 0).slice(-number);
+
+//CODE WAR KYU 6
+// You're working in a number zoo, and it seems that one of the numbers has gone missing!
+// Zoo workers have no idea what number is missing, and are too incompetent to figure it out, so they're hiring you to do it for them.
+// In case the zoo loses another number, they want your program to work regardless of how many numbers there are in total.
+// Task:
+// Write a function that takes a shuffled list of unique numbers from 1 to n with one element missing (which can be any number including n). Return this missing number.
+// Note: huge lists will be tested.
+// Examples:
+// [1, 3, 4]  =>  2
+// [1, 2, 3]  =>  4
+// [4, 2, 3]  =>  1
+const findNumber = (arr) => {
+  if (arr.indexOf(1) === -1) return 1;
+  for (let i = 1; i <= arr.length + 1; i++) {
+    if (arr.indexOf(i) === -1) {
+      return i;
+    }
+  }
+  return arr[0] + 1;
+};
+
+let findNumber = (a) => {
+  let arr = a
+    .map((n, i) => (a.indexOf(i + 1) < 0 ? i + 1 : null))
+    .filter((f) => f !== null);
+  console.log(arr);
+  return arr[0] ? arr[0] : a.length + 1;
+};
+
+function findNumber(a) {
+  let l = a.length,
+    total = Math.floor(((l + 1) * (l + 2)) / 2);
+  for (let i = 0; i < l; i++) total -= a[i];
+  return total;
+}
+//ANOTHER SOLUTIONS
+function findNumber(array) {
+  return (
+    ((array.length + 2) * (array.length + 1)) / 2 -
+    array.reduce(function (l, r) {
+      return l + r;
+    }, 0)
+  );
+}
+function findNumber(array) {
+  const n = array.length;
+  return ((n + 2) * (n + 1)) / 2 - array.reduce((a, b) => a + b);
 }
