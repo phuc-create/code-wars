@@ -1781,3 +1781,171 @@ function findNumber(array) {
   const n = array.length;
   return ((n + 2) * (n + 1)) / 2 - array.reduce((a, b) => a + b);
 }
+//CODE WAR KYU 5
+// Given a certain number, how many multiples of three could you obtain with its digits?
+
+// Suposse that you have the number 362. The numbers that can be generated from it are:
+
+// 362 ----> 3, 6, 2, 36, 63, 62, 26, 32, 23, 236, 263, 326, 362, 623, 632
+// But only:
+
+// 3, 6, 36, 63 are multiple of three.
+
+// We need a function that can receive a number ann may output in the following order:
+
+// the amount of multiples
+
+// the maximum multiple
+
+// Let's see a case the number has a the digit 0 and repeated digits:
+
+// 6063 ----> 0, 3, 6, 30, 36, 60, 63, 66, 306, 360, 366, 603, 606, 630, 636, 660, 663, 3066, 3606, 3660, 6036, 6063, 6306, 6360, 6603, 6630
+// In this case the multiples of three will be all except 0
+
+// 6063 ----> 3, 6, 30, 36, 60, 63, 66, 306, 360, 366, 603, 606, 630, 636, 660, 663, 3066, 3606, 3660, 6036, 6063, 6306, 6360, 6603, 6630
+// The cases above for the function:
+
+// find_mult_3(362) == [4, 63]
+
+// find_mult_3(6063) == [25, 6630]
+// In Javascript findMult_3(). The function will receive only positive integers (num > 0), and you don't have to worry for validating the entries.
+function findMult_3(num) {
+  let s = new Set();
+  (function f(r, v) {
+    if (v && v != 0 && +v % 3 === 0) s.add(+v);
+    for (var i = 0; i < r.length; i++) {
+      f(r.slice(0, i) + r.slice(i + 1), v + r[i]);
+    }
+  })(num.toString(), "");
+  return [s.size, Math.max(...s)];
+}
+function getAllPermutations(str) {
+  if (str.length === 1) return [str];
+
+  let results = [];
+  for (let i = 0; i < str.length; i++) {
+    const firstChar = str[i];
+    const charsLeft = str.substring(0, i) + str.substring(i + 1);
+    const innerPermutations = getAllPermutations(charsLeft);
+    for (let j = 0; j < innerPermutations.length; j++) {
+      results.push(firstChar + innerPermutations[j]);
+    }
+    results = [...results, ...innerPermutations];
+  }
+  return [...new Set(results)];
+}
+
+const findMult_3 = (num) => {
+  const m = getAllPermutations(num.toString())
+    .map(Number)
+    .filter((n) => !(n % 3) && n)
+    .sort((a, b) => a - b);
+  const n = [...new Set(m)];
+  console.log(n);
+  return [n.length, n[n.length - 1]];
+};
+
+W = (Q, S, L, R) =>
+  L
+    ? Q.map((V, F) => W(Q.slice(0, F).concat(Q.slice(++F)), S + V, L - 1, R))
+    : S % 3 || R.add(+S);
+findMult_3 = (Q, R) => (
+  (Q = [...("" + Q)]),
+  (R = new Set()),
+  Q.map((V, F) => W(Q, "", ++F, R)),
+  R.delete(0),
+  [R.size, Math.max(...R)]
+);
+
+function gen(prefix, arr, set) {
+  if (arr.length == 0) return;
+
+  let n;
+  for (let i = 0; i < arr.length; ++i) {
+    set.add(+(prefix + arr[i]));
+    gen(prefix + arr[i], arr.slice(0, i).concat(arr.slice(i + 1)), set);
+  }
+}
+
+function findMult_3(num) {
+  let numbers = new Set();
+  gen("", ("" + num).split(""), numbers);
+  let count = 0,
+    max = 0;
+  numbers.forEach((el) => {
+    if (el % 3 == 0 && el != 0) {
+      max = el > max ? el : max;
+      ++count;
+    }
+  });
+  return [count, max];
+}
+//CODE WAR KYU 8
+// I'm new to coding and now I want to get the sum of two arrays...actually the sum of all their elements. I'll appreciate for your help.
+
+// P.S. Each array includes only integer numbers. Output is a number too.
+const total = (arr) => arr.reduce((a, b) => a + b);
+const arrayPlusArray = (a1, a2) => total(a1) + total(a2);
+//ANOTHER SOLUTIONS
+function arrayPlusArray(arr1, arr2) {
+  return arr1.concat(arr2).reduce((acc, cur) => acc + cur);
+}
+//CODE WAR KYU 7
+// In this Kata, we will check if a string contains consecutive letters as they appear in the English alphabet and if each letter occurs only once.
+
+// Rules are: (1) the letters are adjacent in the English alphabet, and (2) each letter occurs only once.
+
+// For example:
+// solve("abc") = True, because it contains a,b,c
+// solve("abd") = False, because a, b, d are not consecutive/adjacent in the alphabet, and c is missing.
+// solve("dabc") = True, because it contains a, b, c, d
+// solve("abbc") = False, because b does not occur once.
+// solve("v") = True
+const check = (s) =>
+  "abcdefghijklmnopqrstuvwxyz".includes([...s].sort().join(""));
+
+//ANOTHER SOLUTIONS
+function solve(s) {
+  let apb = "abcdefghijklmnopqrstuvwxyz";
+  s = s.split("").sort().join("");
+  return s.length === 1
+    ? true
+    : s === apb.slice(apb.indexOf(s[0]), apb.indexOf(s[0]) + s.length);
+}
+//CODE WAR KYU 7
+// Your team is writing a fancy new text editor and you've been tasked with implementing the line numbering.
+
+// Write a function which takes a list of strings and returns each line prepended by the correct number.
+
+// The numbering starts at 1. The format is n: string. Notice the colon and space in between.
+
+// Examples:
+
+// number([]) // => []
+// number(["a", "b", "c"]) // => ["1: a", "2: b", "3: c"]
+var number = function (array) {
+  return array.map((v, i) => `${i + 1}: ${v}`);
+};
+
+var number = function (array) {
+  return array.map(function (line, index) {
+    return index + 1 + ": " + line;
+  });
+};
+//CODE WAR KYU 6
+// Given an array of integers, find the one that appears an odd number of times.
+
+// There will always be only one integer that appears an odd number of times.
+
+// Examples
+// [7] should return 7, because it occurs 1 time (which is odd).
+// [0] should return 0, because it occurs 1 time (which is odd).
+// [1,1,2] should return 2, because it occurs 1 time (which is odd).
+// [0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
+// [1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
+function findOdd(A) {
+  A = A.filter((v, i, arr) => arr.filter((s) => v === s).length % 2 !== 0);
+  return A[0];
+}
+//ANOTHER SOLUTIONS
+const findOdd = (xs) => xs.reduce((a, b) => a ^ b);
