@@ -1985,3 +1985,63 @@ function solve(s){
   }
   return lowerC >= upperC ? s.toLowerCase() : s.toUpperCase()
 }
+
+//CODE WAR KYU 6
+// Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
+
+// Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"
+function spinWords(string){
+  string = string.split(" ");
+  return string.map(v=>{
+    return v.length >= 5 ? [...v].reverse().join("") : v
+  }).join(" ");
+}
+
+//ANOTHER SOLUTIONS
+function spinWords(words){
+  return words.split(' ').map(w => w.length < 5 ? w : w.split('').reverse().join('')).join(' ');
+}
+
+function spinWords(str){
+  return str.replace(/\w{5,}/g, function(w) {
+    return w.split('').reverse().join('');
+  });
+}
+
+//CODE WAR KYU 6
+// Description:
+// For a given nonempty string s find a minimum substring t and the maximum number k, such that the entire string s is equal to t repeated k times. The input string consists of lowercase latin letters. Your function should return a tuple (in Python) (t, k) or an array (in Ruby and JavaScript) [t, k]
+
+// Example #1:
+
+// for string
+
+// s = "ababab";
+// the answer is
+
+// ["ab", 3]
+// Example #2:
+
+// for string
+
+// s = "abcde";
+// the answer is
+
+// ["abcde", 1]
+// because for this string "abcde" the minimum substring t, such that s is t repeated k times, is itself.
+
+// ALGORITHMS
+function f(s) {
+  for(let i = 1;i < s.length;i++){
+  if(s.substring(0,i).repeat(s.length / i) === s){
+    return [s.substring(0,i),s.length / i]
+  }
+  }
+  return [s, 1]
+}
+
+//ANOTHER SOLUTIONS
+const f = (s)=>  {
+  var m = s.match(/^(.*?)\1+$/);
+  return m ? [m[1], s.length / m[1].length] : [s, 1];
+}
