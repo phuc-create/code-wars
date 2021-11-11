@@ -2085,3 +2085,182 @@ function persistence(num) {
   }
   return i;
 }
+//CODE WAR KYU 8
+// Your task is to create functionisDivideBy (or is_divide_by) to check if an integer number is divisible by each out of two arguments.
+// A few cases:
+// (-12, 2, -6)  ->  true
+// (-12, 2, -5)  ->  false
+
+// (45, 1, 6)    ->  false
+// (45, 5, 15)   ->  true
+
+// (4, 1, 4)     ->  true
+// (15, -5, 3)   ->  true
+
+const isDivideBy = (number, a, b) => number % a === 0 && number % b === 0
+//ANOTHER SOLUTIONS
+function isDivideBy(number, a, b) {
+  return [a, b].every(i => number % i === 0)
+}
+
+function isDivideBy(number, a, b) {
+  return (number%a + number%b) === 0
+}
+
+//CODE WAR KYU 6
+// The prime numbers are not regularly spaced. For example from 2 to 3 the step is 1. From 3 to 5 the step is 2. From 7 to 11 it is 4. Between 2 and 50 we have the following pairs of 2-steps primes:
+// 3, 5 - 5, 7, - 11, 13, - 17, 19, - 29, 31, - 41, 43
+// We will write a function step with parameters:
+// g (integer >= 2) which indicates the step we are looking for,
+// m (integer >= 2) which gives the start of the search (m inclusive),
+// n (integer >= m) which gives the end of the search (n inclusive)
+// In the example above step(2, 2, 50) will return [3, 5] which is the first pair between 2 and 50 with a 2-steps.
+// So this function should return the first pair of the two prime numbers spaced with a step of g between the limits m, n if these g-steps prime numbers exist otherwise nil or null or None or Nothing or [] or "0, 0" or {0, 0} or 0 0 or "" (depending on the language).
+
+// Examples:
+// step(2, 5, 7) --> [5, 7] or (5, 7) or {5, 7} or "5 7"
+// step(2, 5, 5) --> nil or ... or [] in Ocaml or {0, 0} in C++
+// step(4, 130, 200) --> [163, 167] or (163, 167) or {163, 167}
+// See more examples for your language in "TESTS"
+// Remarks:
+// ([193, 197] is also such a 4-steps primes between 130 and 200 but it's not the first pair).
+// step(6, 100, 110) --> [101, 107] though there is a prime between 101 and 107 which is 103; the pair 101-103 is a 2-step.
+// Notes:
+// The idea of "step" is close to that of "gap" but it is not exactly the same. For those interested they can have a look at http://mathworld.wolfram.com/PrimeGaps.html.
+// A "gap" is more restrictive: there must be no primes in between (101-107 is a "step" but not a "gap". Next kata will be about "gaps":-).
+
+const isPrime = (num) =>{
+  if(num === 2) return true
+    for (let i = 2; i * i <= num; i++) {
+      if (num % i == 0) return false;
+    }
+    return true;
+  };
+const step =(g, m, n) => {
+  let temp = [];
+  for (let i = m; i <= n; i++){
+    if (isPrime(i)) {
+      if (temp.includes(i - g)) return [i - g, i];
+      else temp.push(i);
+    }
+  }
+  return null;
+}
+//ANOTHER SOLUTIONS
+function isPrime(n) {
+  var r = Math.sqrt(n) | 0;
+  for (var i = 2; i <= r && n % i; i++);
+  return i > r;
+}
+
+function step(g, m, n) {
+  for (var i = m; i <= n - g; i++) {
+    if (isPrime(i) && isPrime(i + g)) {
+      return [i, i + g];
+    };
+  }
+  
+  return null;
+}
+//CODE WAR KYU 7
+// You are going to be given a word. Your job will be to make sure that each character in that word has the exact same number of occurrences. You will return true if it is valid, or false if it is not.
+
+// For this kata, capitals are considered the same as lowercase letters. Therefore: "A" == "a"
+
+// The input is a string (with no spaces) containing [a-z],[A-Z],[0-9] and common symbols. The length will be 0 < length < 100.
+
+// Examples
+// "abcabc" is a valid word because "a" appears twice, "b" appears twice, and"c" appears twice.
+// "abcabcd" is NOT a valid word because "a" appears twice, "b" appears twice, "c" appears twice, but "d" only appears once!
+// "123abc!" is a valid word because all of the characters only appear once in the word.
+function validateWord(s){
+  s = s.toLowerCase().split("");
+  let arr = [];
+  for(let i = 0;i<s.length;i++){
+    let l = s.filter(v => v === s[i]).length;
+    if(arr.includes(l)) continue;   
+       arr.push(l);
+  }
+  return arr.length === 1
+}
+O(N2)
+//ANOTHER SOLUTIONS
+function validateWord(s) {
+  var freq = {}
+  s.toLowerCase().split('').forEach(function(s) {
+    freq[s] ? freq[s]++ : freq[s] = 1
+  })
+  return new Set(Object.values(freq)).size == 1
+}
+
+function validateWord(s, c = s.toLowerCase())
+{
+  return c.length % new Set(c).size == 0
+}
+
+function validateWord(s){
+  var counts = {};
+  for(var c of s.toLowerCase()){
+    if(counts[c] === undefined){counts[c] = 0;}
+    counts[c]++;
+  }
+  return Math.max(...Object.values(counts)) === Math.min(...Object.values(counts));
+}
+//CODE WAR KYU 7
+// You also notice that each letter is paired with the letter that it coincides with when the alphabet is reversed.
+
+// For example: "a" is encoded with "z", "b" with "y", "c" with "x", etc
+
+// You read the first sentence:
+
+// "r slkv mlylwb wvxlwvh gsrh nvhhztv"
+// After a few minutes you manage to decode it:
+
+// "i hope nobody decodes this message"
+// Create a function that will instantly decode any of these messages
+
+// You can assume no punctuation or capitals, only lower case letters, but remember spaces!
+function decode(message){
+  let a = 'abcdefghijklmnopqrstuvwxyz';
+  let b = a.split("").reverse().join("");
+  message = [...message]
+    .map((item)=> item = item === " " ? item : a[b.indexOf(item)]);
+  return message.join("")
+}
+
+//ANOTHER SOLUTIONS
+const decode = m => [...m].map(x=>x==" " ? x : String.fromCharCode(219-x.charCodeAt())).join("");
+
+const decode = message =>  message.replace(/[a-z]/g, val => String.fromCharCode(219 - val.charCodeAt()));
+
+//CODE WAR KYU 7
+// Examples:
+
+// [a, b, c, d, e], [1, 2, 3, 4, 5] becomes  [a, 1, b, 2, c, 3, d, 4, e, 5]
+
+// [1, 2, 3], [a, b, c, d, e, f] becomes [1, a, 2, b, 3, c, d, e, f]
+
+function mergeArrays(a, b) {
+  let arr = [];
+  let l = Math.max(a.length,b.length);
+  for(let i = 0;i< l ;i++){
+    arr.push(a[i],b[i])
+  }
+  return arr.filter(v => v !== undefined)
+}
+
+//ANOTHER SOLUTIONS
+function mergeArrays(a, b) {
+  var res = [];
+  let i=0; 
+  while ((i<a.length) || (i<b.length) ) {
+    if (i<a.length) res.push(a[i]); 
+    if (i<b.length) res.push(b[i]); 
+    i++;
+  }
+  return res;
+}
+
+const mergeArrays = (a, b) => a
+  .reduce((arr, el, idx) => (b[idx] ? arr.push(el, b[idx]) : arr.push(el), arr), [])
+  .concat(b.slice(a.length));
