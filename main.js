@@ -2264,3 +2264,82 @@ function mergeArrays(a, b) {
 const mergeArrays = (a, b) => a
   .reduce((arr, el, idx) => (b[idx] ? arr.push(el, b[idx]) : arr.push(el), arr), [])
   .concat(b.slice(a.length));
+//OOP class object
+class Character {
+  constructor(name, weapon) {
+    this.name = name;
+    this.weapon = weapon;
+  }
+  attack() {
+    return 'atack with ' + this.weapon
+  }
+}
+
+class Queen extends Character { 
+  constructor(name, weapon, kind) {
+    super(name, weapon) 
+    this.kind = kind;
+  }
+  attack() {
+    console.log(super.attack());
+    return `I am the ${this.name} of ${this.kind}, now bow down to me! `
+  }
+}
+
+const victoria = new Queen('Victoria', 'army', 'hearts');
+victoria.attack()
+//CODE WAR KYU 7
+// Your task is to return the sum of Triangular Numbers up-to-and-including the nth Triangular Number.
+
+// Triangular Number: "any of the series of numbers (1, 3, 6, 10, 15, etc.) obtained by continued summation of the natural numbers 1, 2, 3, 4, 5, etc."
+
+// [01]
+// 02 [03]
+// 04 05 [06]
+// 07 08 09 [10]
+// 11 12 13 14 [15]
+// 16 17 18 19 20 [21]
+// e.g. If 4 is given: 1 + 3 + 6 + 10 = 20.
+
+// Triangular Numbers cannot be negative so return 0 if a negative number is given.
+function sumTriangularNumbers(n) {
+  if(n < 0) return 0;
+  let step = 1,
+      last = 2,
+      sum = 1,total = 1;
+  while(step < n){
+    sum += last;
+    total += sum;
+    last++;
+    step++;
+  }
+  return total;
+}
+//ANOTHER SOLUTIONS
+function sumTriangularNumbers(n) {
+  return n < 0 ? 0 : n * (n + 1) * (n + 2) / 6;
+}
+
+function sumTriangularNumbers(n) {
+  var sum = 0;  
+  for(var i = 1; i <= n; i++)
+  {
+  sum += (i*(i+1))/2;
+  }
+  return sum;
+  }
+function sumTriangularNumbers(n) {
+    if  (n < 0){
+    return 0;
+    }
+    else  {
+      return n*(n+1)/2 + sumTriangularNumbers(n-1);
+    }
+  }
+function sumTriangularNumbers(n) {
+    let sum = 0
+    for (let i=0, j=1; i<n; i++, j += i+1) {
+      sum += j
+    }
+    return sum
+  }
