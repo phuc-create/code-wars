@@ -2343,3 +2343,18 @@ function sumTriangularNumbers(n) {
     }
     return sum
   }
+//CODE WAR KYU 7
+// Description:
+// Very simple, given a number, find its opposite.
+
+// Examples:
+
+// 1: -1
+// 14: -14
+// -34: 34
+function opposite(n) {
+  return n <= 0 ? Math.abs(n) : -n
+}
+function opposite(number) {
+  return -number;
+}
