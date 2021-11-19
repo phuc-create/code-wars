@@ -2358,3 +2358,133 @@ function opposite(n) {
 function opposite(number) {
   return -number;
 }
+
+//CODE WAR KYU 6
+// Yesterday you found some shoes in your room. Each shoe is described by two values:
+
+// type indicates if it's a left or a right shoe;
+// size is the size of the shoe.
+// Your task is to check whether it is possible to pair the shoes you found in such a way that each pair consists of a right and a left shoe of an equal size.
+
+// Example
+// For:
+
+// shoes = [[0, 21], 
+//          [1, 23], 
+//          [1, 21], 
+//          [0, 23]]
+//          ```
+// the output should be `true;`
+
+//  For:
+// shoes = [[0, 21], [1, 23], [1, 21], [1, 23]] ``` the output should be false.
+function pairOfShoes(shoes) {
+  let copy = shoes.map(e=> `${e}`)
+  return shoes.every(s => copy.indexOf(`${[s[0] > 0 ? 0 : 1,s[1]]}`) >= 0)
+}
+
+//ANOTHER SOLUTIONS
+const pairOfShoes = shoes =>
+  Object.values(shoes.reduce((pre, val) => (pre[val[1]] = (pre[val[1]] || 0) + (val[0] || -1), pre), {})).every(val => !val);
+
+function pairOfShoes(shoes) {
+    var lefts = 0, rights = 0
+    for (var shoe of shoes)
+      shoe[0] === 0 ? lefts += shoe[1] : rights += shoe[1]
+    return lefts === rights
+  }//©
+
+function pairOfShoes(shoes) {
+    return shoes.every(([a, b]) => shoes.some(([x, y]) => x == Math.abs(a - 1) && y == b))
+  }
+
+//CODE WAR KYU 6
+// Johnny is a farmer and he annually holds a beet farmers convention "Drop the beet".
+
+// Every year he takes photos of farmers handshaking. Johnny knows that no two farmers handshake more than once. He also knows that some of the possible handshake combinations may not happen.
+
+// However, Johnny would like to know the minimal amount of people that participated this year just by counting all the handshakes.
+
+// Help Johnny by writing a function, that takes the amount of handshakes and returns the minimal amount of people needed to perform these handshakes (a pair of farmers handshake only once).
+function getParticipants(handshakes){
+  if(handshakes === 0) return 1
+  let oldTarget = 1,
+      target = 2,
+      step = 0,
+      count = 1,
+      n = 1;
+  while(n < handshakes+1){
+    n++;
+    if(  n < target && n > oldTarget) continue;
+    else{
+      count++;
+      step++;
+      oldTarget = target;
+      target += step;
+    }
+  }
+  return count
+}
+
+//ANOTHER SOLUTIONS (CLEVER)
+function getParticipants(h){
+  return Math.ceil((1+Math.sqrt(1+8*h))/2)}
+  const allHandshakes = number => (number * (number - 1)) / 2;
+
+const getParticipants = (numberOfHandshakes) => {
+    let minimumParticipants = 1;
+    while (allHandshakes(minimumParticipants) < numberOfHandshakes) ++minimumParticipants;
+  
+    return minimumParticipants;
+  };
+
+function getParticipants(h){
+    for(var i=0,k=1;i<h;i+=k++){}
+    return k;
+  }
+function getParticipants(handshakes){
+    let p = 1;
+    let maxH = 0;
+    while (maxH < handshakes){
+      p++;
+      maxH += p-1;
+    }
+    return p;
+  }
+//CODE WAR KYU 6
+// Define a function that takes one integer argument and returns logical value true or false depending on if the integer is a prime.
+
+// Per Wikipedia, a prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+// Requirements
+// You can assume you will be given an integer input.
+// You can not assume that the integer will be only positive. You may be given negative numbers as well (or 0).
+// NOTE on performance: There are no fancy optimizations required, but still the most trivial solutions might time out. Numbers go up to 2^31 (or similar, depends on language version). Looping all the way up to n, or n/2, will be too slow.
+
+function isPrime(num) {
+  if(num < 2) return false
+    for (var i = 2; i * i <= num; i++) {
+      if (num % i == 0) return false;
+    }
+    return true;
+  };
+//O(n) O(1)
+//ANOTHER SOLUTIONS
+function isPrime(num) {
+  if (num < 2) return false;
+  const limit = Math.sqrt(num);
+  for (let i = 2; i <= limit; ++i) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+function isPrime(num) {
+  for(let i = 2; i <= Math.sqrt(num); i++) {
+    if(num % i === 0) {
+      return false;
+    }
+  }
+  return num > 1
+}
