@@ -1,56 +1,82 @@
+/* eslint-disable no-mixed-operators */
+/* eslint-disable no-unreachable-loop */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable array-callback-return */
+/* eslint-disable no-lonely-if */
+/* eslint-disable radix */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-eval */
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-use-before-define */
+/* eslint-disable consistent-return */
+/* eslint-disable prefer-const */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-const-assign */
+/* eslint-disable no-bitwise */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-sequences */
+/* eslint-disable eqeqeq */
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-empty */
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
+/* eslint-disable no-shadow */
+/* eslint-disable no-continue */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable max-len */
 // CODE WAR KYU 6
-//Find number devide by 3 & 5 in array
-solution = (n) =>
-  n <= 0
+// Find number devide by 3 & 5 in array
+solution = (n) => (n <= 0
     ? 0
-    : Array.from({ length: n }, (_, i) =>
-        i % 3 == 0 || i % 5 == 0 ? i : 0
-      ).reduce((x, y) => x + y);
-//ANOTHER SOLUTIONS
+    : Array.from({ length: n }, (_, i) => (i % 3 == 0 || i % 5 == 0 ? i : 0)).reduce((x, y) => x + y))
+// ANOTHER SOLUTIONS
 const solution = (n) => {
-  let tt = 0;
+  let tt = 0
   for (let i = 0; i < n; i++) {
     if (i % 3 == 0 || i % 5 == 0) {
-      tt += i;
+      tt += i
     }
   }
-  return tt;
-};
-//CODE WAR KYU 8
-//This kata is about multiplying a given number by eight if it is an even number and by nine otherwise.
-function simpleMultiplication(n) {
-  return n * (n % 2 ? 9 : 8);
+  return tt
 }
-//CODE WAR KYU 7
+// CODE WAR KYU 8
+// This kata is about multiplying a given number by eight if it is an even number and by nine otherwise.
+function simpleMultiplication(n) {
+  return n * (n % 2 ? 9 : 8)
+}
+// CODE WAR KYU 7
 // You will be given a string with sets of characters, (i.e. words), seperated by between one and three spaces (inclusive).
 
 // Looking at the first letter of each word (case insensitive-"A" and "a" should be treated the same), you need to determine whether it falls into the positive/first half of the alphabet ("a"-"m") or the negative/second half ("n"-"z").
 
 // Return True/true if there are more (or equal) positive words than negative words, False/false otherwise.
-function connotation(str) {
-  const p = "abcdefghijklm".split("");
-  const n = "nopqrstuvwxyz".split("");
-  let neg = [],
-    pos = [];
-  let arr = str.split(" ").map((s) => s.slice(0, 1).toLowerCase());
+let connotation = (str) => {
+  const p = 'abcdefghijklm'.split('')
+  const n = 'nopqrstuvwxyz'.split('')
+  const neg = [],
+    pos = []
+  const arr = str.split(' ').map((s) => s.slice(0, 1).toLowerCase())
 
   for (let i = 0; i < arr.length; i++) {
     if (p.indexOf(arr[i]) >= 0) {
-      pos.push(arr[i]);
+      pos.push(arr[i])
     }
   }
   for (let j = 0; j < arr.length; j++) {
     if (n.indexOf(arr[j]) >= 0) {
-      neg.push(arr[j]);
+      neg.push(arr[j])
     }
   }
-  return pos.length >= neg.length;
+  return pos.length >= neg.length
 }
-//ANOTHER SOLUTION
-function connotation(str) {
-  let positiveMatches = str.match(/\b[a-m]/gi) || [];
-  let negativeMatches = str.match(/\b[n-z]/gi) || [];
-  return positiveMatches.length >= negativeMatches.length;
+// ANOTHER SOLUTION
+connotation = (str) => {
+  const positiveMatches = str.match(/\b[a-m]/gi) || []
+  const negativeMatches = str.match(/\b[n-z]/gi) || []
+  return positiveMatches.length >= negativeMatches.length
 }
 // CODE WAR KYU 7
 // Description:
@@ -69,14 +95,10 @@ function connotation(str) {
 // removeChars('1 + 1 = 2')    ==> '    ' (string with 4 spaces)
 
 // removeChars("0123456789(.)+,|[]{}=@/~;^$'<>?-!*&:#%_")  ==> '' (empty string)
-const removeChars = (s) => {
-  return s.replace(/['&_#!@"=.[\]'+;:*-><$^~`{\}'|(\)',?%0-9]/g, "");
-};
-//ANOTHER SOLUTION
-function removeChars(s) {
-  return s.replace(/[^a-z ]/gi, "");
-}
-//CODE WAR KYU 7
+let removeChars = (s) => s.replace(/['&_#!@"=.[\]'+;:*-><$^~`{\}'|(\)',?%0-9]/g, '')
+// ANOTHER SOLUTION
+removeChars = (s) => s.replace(/[^a-z ]/gi, '')
+// CODE WAR KYU 7
 // Scenario
 // Several people are standing in a row divided into two teams.
 // The first person goes into team 1, the second goes into team 2, the third goes into team 1, and so on.
@@ -89,29 +111,29 @@ function removeChars(s) {
 // All numbers will be positive.
 // Input >> Output Examples
 // rowWeights([13, 27, 49])  ==>  return (62, 27)
-const rowWeights = (arr) => {
-  let t1 = [];
-  let t2 = [];
+let rowWeights = (arr) => {
+  const t1 = []
+  const t2 = []
   if (arr.length === 1) {
-    return [arr[0], 0];
+    return [arr[0], 0]
   }
   for (let i = 0; i < arr.length; i++) {
     if (i % 2 === 0) {
-      t1.push(arr[i]);
+      t1.push(arr[i])
     } else {
-      t2.push(arr[i]);
+      t2.push(arr[i])
     }
   }
-  return [eval(t1.join("+")), eval(t2.join("+"))];
-};
-// ANOTHER SOLUTION
-function rowWeights(array) {
-  let t1 = array.filter((x, i) => i % 2 == 0).reduce((a, item) => a + item, 0);
-  let t2 = array.filter((x, i) => i % 2 != 0).reduce((a, item) => a + item, 0);
-
-  return [t1, t2];
+  return [eval(t1.join('+')), eval(t2.join('+'))]
 }
-//CODE WAR KYU 8
+// ANOTHER SOLUTION
+rowWeights = (array) => {
+  const t1 = array.filter((x, i) => i % 2 == 0).reduce((a, item) => a + item, 0)
+  const t2 = array.filter((x, i) => i % 2 != 0).reduce((a, item) => a + item, 0)
+
+  return [t1, t2]
+}
+// CODE WAR KYU 8
 // You're writing code to control your town's traffic lights. You need a function to handle each change from green, to yellow, to red, and then to green again.
 
 // Complete the function that takes a string as an argument representing the current state of the light and returns a string representing the state the light should change to.
@@ -119,13 +141,11 @@ function rowWeights(array) {
 // For example, update_light('green') should return 'yellow'.
 
 // Note: Use "" instead of '' in C++.
-const updateLight = (current) => {
-  return current === "green"
-    ? "yellow"
-    : current === "yellow"
-    ? "red"
-    : "green";
-};
+const updateLight = (current) => (current === 'green'
+    ? 'yellow'
+    : current === 'yellow'
+    ? 'red'
+    : 'green')
 // CODE WAR KYU 7
 // A Nice array is defined to be an array where for every value n in the array, there is also an element n-1 or n+1 in the array.
 
@@ -138,38 +158,33 @@ const updateLight = (current) => {
 // 3=2+1
 // 9=10-1
 // Write a function named isNice/IsNice that returns true if its array argument is a Nice array, else false. You should also return false if input array has no elements.
-const isNice = (arr) => {
+ isNice = (arr) => {
   if (arr && arr.length > 0) {
-    let arrTemp = Array(arr.length).fill(Math.random());
+    const arrTemp = Array(arr.length).fill(Math.random())
     arr.forEach((el, idx) => {
-      let i = 0;
+      let i = 0
       while (i <= arr.length) {
         if (el === arr[i] + 1 || el === arr[i] - 1) {
-          arrTemp[idx] = el;
+          arrTemp[idx] = el
         }
-        i++;
+        i++
       }
-    });
-    return eval(arrTemp.join("+")) === eval(arr.join("+")) ? true : false;
-  } else {
-    return false;
+    })
+    return eval(arrTemp.join('+')) === eval(arr.join('+'))
   }
-};
-// ANOTHER SOLUTION
-function isNice(arr) {
-  return (
-    !!arr.length &&
-    arr.every((x) => arr.some((y) => y === x - 1 || y === x + 1))
-  );
+    return false
 }
+// ANOTHER SOLUTION
+ isNice = (arr) => (
+    !!arr.length
+    && arr.every((x) => arr.some((y) => y === x - 1 || y === x + 1))
+  )
 
-const isNice = (arr) =>
-  !!arr.length &&
-  arr.every((val) => arr.includes(val + 1) || arr.includes(val - 1));
+isNice = (arr) => !!arr.length
+  && arr.every((val) => arr.includes(val + 1) || arr.includes(val - 1))
 
-const isNice = (arr) =>
-  Boolean(arr.length) &&
-  arr.every((e) => arr.includes(e - 1) || arr.includes(e + 1));
+const isNice = (arr) => Boolean(arr.length)
+  && arr.every((e) => arr.includes(e - 1) || arr.includes(e + 1))
 // CODE WAR KYU 7
 // Do you remember the old mobile display keyboards? Do you also remember how inconvenient it was to write on it?
 // Well, here you have to calculate how much keystrokes you have to do for a specific word.
@@ -183,42 +198,42 @@ const isNice = (arr) =>
 // mobileKeyboard("123") => 3 (1+1+1)
 // mobileKeyboard("abc") => 9 (2+3+4)
 // mobileKeyboard("codewars") => 26 (4+4+2+3+2+2+4+5)
-const mobileKeyboard = (str) => {
+let mobileKeyboard = (str) => {
   const Case = [
-    "1",
-    "2abc",
-    "3def",
-    "4ghi",
-    "5jkl",
-    "6mno",
-    "7pqrs",
-    "8tuv",
-    "9wxyz",
-    "*",
-    "0",
-    "#",
-  ];
-  const arrStr = str.split("");
-  let total = 0;
+    '1',
+    '2abc',
+    '3def',
+    '4ghi',
+    '5jkl',
+    '6mno',
+    '7pqrs',
+    '8tuv',
+    '9wxyz',
+    '*',
+    '0',
+    '#',
+  ]
+  const arrStr = str.split('')
+  let total = 0
   Case.forEach((c, idx) => {
     for (let i = 0; i <= arrStr.length; i++) {
       if (c.indexOf(arrStr[i]) >= 0) {
-        total += c.indexOf(arrStr[i]) + 1;
+        total += c.indexOf(arrStr[i]) + 1
       }
     }
-  });
-  return total;
-};
-//ANOTHER SOLUTIONS
-function mobileKeyboard(str) {
-  console.log(str);
-  var values = str
-    .replace(/[\d\*#]/g, "1")
-    .replace(/[adgjmptw]/g, "2")
-    .replace(/[behknqux]/g, "3")
-    .replace(/[cfilorvy]/g, "4")
-    .replace(/[sz]/g, "5");
-  return [...values].reduce((sum, v) => sum + parseInt(v), 0);
+  })
+  return total
+}
+// ANOTHER SOLUTIONS
+ mobileKeyboard = (str) => {
+  console.log(str)
+  const values = str
+    .replace(/[\d\*#]/g, '1')
+    .replace(/[adgjmptw]/g, '2')
+    .replace(/[behknqux]/g, '3')
+    .replace(/[cfilorvy]/g, '4')
+    .replace(/[sz]/g, '5')
+  return [...values].reduce((sum, v) => sum + parseInt(v), 0)
 }
 // CODE WAR KYU 7
 // Return an output string that translates an input string s/$s by replacing each character in s/$s with a number representing the number of times that character occurs in s/$s and separating each number with the character(s) sep/$sep.
@@ -226,20 +241,18 @@ function mobileKeyboard(str) {
 // freq_seq("hello world", "-"); // => "1-1-3-3-2-1-1-2-1-3-1"
 // freq_seq("19999999", ":"); // => "1:7:7:7:7:7:7:7"
 // freq_seq("^^^**$", "x"); // => "3x3x3x2x2x1"
-function freqSeq(str, sep) {
-  let temp = Array(str.length).fill(null);
+let freqSeq = (str, sep) => {
+  const temp = Array(str.length).fill(null)
   for (let i = 0; i < str.length; i++) {
-    temp[i] = arr.filter((x) => x === str[i]).length;
+    temp[i] = arr.filter((x) => x === str[i]).length
   }
-  return temp.join(sep);
+  return temp.join(sep)
 }
-//ANOTHER SOLUTIONS
-function freqSeq(str, sep) {
-  return str
-    .split("")
+// ANOTHER SOLUTIONS
+ freqSeq = (str, sep) => str
+    .split('')
     .map((v, i, arr) => arr.filter((vi) => vi === v).length)
-    .join(sep);
-}
+    .join(sep)
 // CODE WAR KYU 7
 // Write a function that checks whether all elements in an array are square numbers. The function should be able to take any number of array elements.
 
@@ -254,16 +267,14 @@ function freqSeq(str, sep) {
 // is_square([3, 4, 7, 9]) --> False
 
 // is_square([]) --> None
-const isSquare = (arr) => {
+let isSquare = (arr) => {
   if (arr.length > 0) {
-    return arr.every((el) => arr.includes(Math.sqrt(el) * Math.sqrt(el)));
+    return arr.every((el) => arr.includes(Math.sqrt(el) * Math.sqrt(el)))
   }
-  return undefined;
-};
-//ANOTHER SOLUTIONS
-const isSquare = (arr) => {
-  return arr.length ? arr.every((x) => Math.sqrt(x) % 1 === 0) : undefined;
-};
+  return undefined
+}
+// ANOTHER SOLUTIONS
+ isSquare = (arr) => (arr.length ? arr.every((x) => Math.sqrt(x) % 1 === 0) : undefined)
 
 // CODE WAR KYU 7
 // Challenge:
@@ -277,25 +288,19 @@ const isSquare = (arr) => {
 // Addendum:
 
 // Please, keep in mind, that JavaScript is by default sorting objects alphabetically. For more information, please consult:
-const flattenAndSort = (arr) => {
-  let temp = [];
+let flattenAndSort = (arr) => {
+  const temp = []
   arr.forEach((a) => {
     for (let i = 0; i < a.length; i++) {
-      temp.push(a[i]);
+      temp.push(a[i])
     }
-  });
-  temp.sort((a, b) => {
-    return a - b;
-  });
-  return temp;
-};
-//ANOTHER SOLUTIONS
-const flattenAndSort = (arr) => {
-  return [].concat(...arr).sort((a, b) => a - b);
-};
-function flattenAndSort(array) {
-  return [].concat(...array).sort((a, b) => a - b);
+  })
+  temp.sort((a, b) => a - b)
+  return temp
 }
+// ANOTHER SOLUTIONS
+ flattenAndSort = (arr) => [].concat(...arr).sort((a, b) => a - b)
+ flattenAndSort = (array) => [].concat(...array).sort((a, b) => a - b)
 
 // CODE WAR KYU 7
 // King Arthur and his knights are having a New Years party. Last year Lancelot was jealous of Arthur, because Arthur had a date and Lancelot did not, and they started a duel.
@@ -313,15 +318,13 @@ function flattenAndSort(array) {
 // [output] a boolean value
 
 // true if Arthur need to invite more women, false otherwise.
-const inviteMoreWomen = (l) => {
-  const wm = l.filter((s) => s === -1).length;
-  const m = l.filter((s) => s === 1).length;
-  return wm >= m ? false : true;
-};
-//ANOTHER SOLUTIONS
-function inviteMoreWomen(L) {
-  return L.reduce((a, b) => a + b) > 0;
+let inviteMoreWomen = (l) => {
+  const wm = l.filter((s) => s === -1).length
+  const m = l.filter((s) => s === 1).length
+  return !(wm >= m)
 }
+// ANOTHER SOLUTIONS
+ inviteMoreWomen = (L) => L.reduce((a, b) => a + b) > 0
 
 // CODE WAR KYU 7
 // The town sheriff dislikes odd numbers and wants all odd numbered families out of town! In town crowds can form and individuals are often mixed with other people and families. However you can distinguish the family they belong to by the number on the shirts they wear. As the sheriff's assistant it's your job to find all the odd numbered families and remove them from the town!
@@ -343,9 +346,7 @@ function inviteMoreWomen(L) {
 // oddOnesOut([1, 2, 3]) = []
 // oddOnesOut([1]) = []
 
-const oddOnesOut = (arr) => {
-  return arr.filter((v) => arr.filter((s) => s === v).length % 2 === 0);
-};
+const oddOnesOut = (arr) => arr.filter((v) => arr.filter((s) => s === v).length % 2 === 0)
 
 // CODE WAR KYU 7
 // Given a list of integers, determine whether the sum of its elements is odd or even.
@@ -363,17 +364,13 @@ const oddOnesOut = (arr) => {
 
 // Input: [0, -1, -5]
 // Output: "even"
-function oddOrEven(arr) {
-  return arr.length === 0
-    ? "even"
+ oddOrEven = (arr) => (arr.length === 0
+    ? 'even'
     : arr.reduce((a, b) => a + b) % 2 === 0
-    ? "even"
-    : "odd";
-}
-//ANOTHER SOLUTION (I just forgot to put second arg in reduce method)
-function oddOrEven(arr) {
-  return arr.reduce((a, b) => a + b, 0) % 2 ? "odd" : "even";
-}
+    ? 'even'
+    : 'odd')
+// ANOTHER SOLUTION (I just forgot to put second arg in reduce method)
+ oddOrEven = (arr) => (arr.reduce((a, b) => a + b, 0) % 2 ? 'odd' : 'even')
 
 // CODE WAR KYU 7
 // Write a function that takes a positive integer n, sums all the cubed values from 1 to n, and returns that sum.
@@ -385,24 +382,21 @@ function oddOrEven(arr) {
 // 2 --> 9 (sum of the cubes of 1 and 2 is 1 + 8)
 // 3 --> 36 (sum of the cubes of 1, 2, and 3 is 1 + 8 + 27)
 
-function sumCubes(n) {
-  let temp = [];
+let sumCubes = (n) => {
+  const temp = []
   for (let i = 1; i <= n; i++) {
-    temp.push(i * i * i);
+    temp.push(i * i * i)
   }
-  return temp.reduce((a, b) => a + b);
+  return temp.reduce((a, b) => a + b)
 }
-//ANOTHER SOLUTIONS (clever)
-function sumCubes(n) {
+// ANOTHER SOLUTIONS (clever)
+sumCubes = (n) => {
   if (n == 1) {
-    return n ** 3;
-  } else {
-    return n ** 3 + sumCubes(n - 1);
+    return n ** 3
   }
+    return n ** 3 + sumCubes(n - 1)
 }
-function sumCubes(n) {
-  return ((n * (n + 1)) / 2) ** 2;
-}
+ sumCubes = (n) => ((n * (n + 1)) / 2) ** 2
 
 // CODE WAR KYU 7
 // We want to generate a function that computes the series starting from 0 and ending until the given number.
@@ -420,47 +414,47 @@ function sumCubes(n) {
 // > 0
 // Output:
 // 0=0
-const SequenceSum = (function () {
-  function SequenceSum() {}
+let SequenceSum = (function () {
+   SequenceSum = () => {}
 
   SequenceSum.showSequence = function (count) {
-    let temp = [];
+    const temp = []
     if (count === 0) {
-      return count + "=" + count;
-    } else if (count < 0) {
-      return count + "<0";
+      return `${count }=${ count}`
+    } if (count < 0) {
+      return `${count }<0`
     }
     for (let i = 0; i <= count; i++) {
-      temp.push(i);
+      temp.push(i)
     }
-    return temp.join("+") + " = " + temp.reduce((a, b) => a + b, 0);
-  };
+    return `${temp.join('+') } = ${ temp.reduce((a, b) => a + b, 0)}`
+  }
 
-  return SequenceSum;
-})();
-//ANOTHER SOLUTIONS
-let SequenceSum = {
-  showSequence: function (count) {
-    if (count < 0) return count + "<0";
-    if (count == 0) return "0=0";
+  return SequenceSum
+}())
+// ANOTHER SOLUTIONS
+SequenceSum = {
+  showSequence(count) {
+    if (count < 0) return `${count }<0`
+    if (count == 0) return '0=0'
 
-    let nums = [...Array(count + 1).keys()];
-    return nums.join("+") + " = " + nums.reduce((a, b) => a + b);
+    const nums = [...Array(count + 1).keys()]
+    return `${nums.join('+') } = ${ nums.reduce((a, b) => a + b)}`
   },
-};
-var SequenceSum = (function () {
+}
+ SequenceSum = (function () {
   function SequenceSum() {}
 
   SequenceSum.showSequence = function (count) {
-    console.log(count);
-    if (count === 0) return "0=0";
-    if (count < 0) return `${count}<0`;
-    let arr = Array.from({ length: count + 1 }, (_, i) => i);
-    return `${arr.join("+")} = ${arr.reduce((x, y) => x + y)}`;
-  };
+    console.log(count)
+    if (count === 0) return '0=0'
+    if (count < 0) return `${count}<0`
+    const arr = Array.from({ length: count + 1 }, (_, i) => i)
+    return `${arr.join('+')} = ${arr.reduce((x, y) => x + y)}`
+  }
 
-  return SequenceSum;
-})();
+  return SequenceSum
+}())
 
 // CODE WAR KYU 7
 // Beaches are filled with sand, water, fish, and sun. Given a string, calculate how many times the words "Sand", "Water", "Fish", and "Sun" appear without overlapping (regardless of the case).
@@ -471,15 +465,14 @@ var SequenceSum = (function () {
 // sumOfABeach("gOfIshsunesunFiSh")             ==>  4
 // sumOfABeach("cItYTowNcARShoW")               ==>  0
 
-const sumOfABeach = (str) => {
-  let beach = str.toLowerCase().match(/(sand|water|fish|sun)/gi);
-  return beach ? beach.length : 0;
-};
-//ANOTHER SOLUTIONS
-const sumOfABeach = (beach) => beach.split(/sand|water|fish|sun/gi).length - 1;
+let sumOfABeach = (str) => {
+  const beach = str.toLowerCase().match(/(sand|water|fish|sun)/gi)
+  return beach ? beach.length : 0
+}
+// ANOTHER SOLUTIONS
+ sumOfABeach = (beach) => beach.split(/sand|water|fish|sun/gi).length - 1
 
-const sumOfABeach = (beach) =>
-  (beach.match(/sand|water|fish|sun/gi) || []).length;
+ sumOfABeach = (beach) => (beach.match(/sand|water|fish|sun/gi) || []).length
 
 // CODE WAR KYU 7
 // You are given an odd-length array of integers, in which all of them are the same, except for one single number.
@@ -492,23 +485,23 @@ const sumOfABeach = (beach) =>
 // [1, 1, 2] ==> 2
 // [17, 17, 3, 17, 17, 17, 17] ==> 3
 
-const stray = (arr) => {
+let stray = (arr) => {
   for (var i = 0, temp = []; i < arr.length; i++) {
-    if (arr.indexOf(arr[i], arr.indexOf(arr[i]) + 1) == -1) temp.push(arr[i]);
+    if (arr.indexOf(arr[i], arr.indexOf(arr[i]) + 1) == -1) temp.push(arr[i])
   }
-  return temp[0];
-};
+  return temp[0]
+}
 
-//ANOTHER SOLUTIONS (CLEVER)
-const stray = (nums) => nums.reduce((a, b) => a ^ b);
-const stray = (numbers) => {
-  var a = numbers.sort();
+// ANOTHER SOLUTIONS (CLEVER)
+ stray = (nums) => nums.reduce((a, b) => a ^ b)
+ stray = (numbers) => {
+  const a = numbers.sort()
 
   if (a[0] != a[1]) {
-    return a[0];
+    return a[0]
   }
-  return a[a.length - 1];
-};
+  return a[a.length - 1]
+}
 
 // CODE WAR KYU 7
 // Your task is to add up letters to one letter.
@@ -526,38 +519,36 @@ const stray = (numbers) => {
 // addLetters('z', 'a') = 'a'
 // addLetters('y', 'c', 'b') = 'd' // notice the letters overflowing
 // addLetters() = 'z'
-function addLetters(...letters) {
+let addLetters = (...letters) => {
   if (letters.length) {
-    total = 0;
+    total = 0
     for (let i = 0; i < letters.length; i++) {
-      total += letters[i].charCodeAt() - 96;
+      total += letters[i].charCodeAt() - 96
     }
-    if (total + 96 > "z".charCodeAt()) {
-      return String.fromCharCode(calcTotal(total));
+    if (total + 96 > 'z'.charCodeAt()) {
+      return String.fromCharCode(calcTotal(total))
     }
-    return String.fromCharCode(total + 96);
+    return String.fromCharCode(total + 96)
   }
-  return "z";
+  return 'z'
 }
 function calcTotal(num) {
-  let base = num + 96 - "z".charCodeAt();
+  const base = num + 96 - 'z'.charCodeAt()
   if (base + 96 > 122) {
-    return calcTotal(base);
+    return calcTotal(base)
   }
-  return base + 96;
+  return base + 96
 }
 
-//ANOTHER SOLUTIONS (clever)
-function addLetters(...letters) {
-  return String.fromCharCode(
-    ((letters.reduce((a, b) => a + b.charCodeAt(0) - 96, 0) + 25) % 26) + 97
-  );
-}
-const alphabet = "abcdefghijklmnopqrstuvwxyz";
-function addLetters(...letters) {
-  var sum = 25;
-  for (var letter of letters) sum += alphabet.indexOf(letter) + 1;
-  return alphabet[sum % 26];
+// ANOTHER SOLUTIONS (clever)
+ addLetters = (...letters) => String.fromCharCode(
+    ((letters.reduce((a, b) => a + b.charCodeAt(0) - 96, 0) + 25) % 26) + 97,
+  )
+const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+addLetters = (...letters) => {
+  let sum = 25
+  for (const letter of letters) sum += alphabet.indexOf(letter) + 1
+  return alphabet[sum % 26]
 }
 
 // CODE WAR KYU 7
@@ -570,35 +561,32 @@ function addLetters(...letters) {
 // Task
 // Given a number, Find if it is Strong or not.
 
-const fac = (x) => {
-  return x < 1 ? 1 : fac(x - 1) * x;
-};
-const strong = (n) => {
-  let arr = n.toString().split("");
-  let total = 0;
+const fac = (x) => (x < 1 ? 1 : fac(x - 1) * x)
+let strong = (n) => {
+  const arr = n.toString().split('')
+  let total = 0
   for (let i = 0; i < arr.length; i++) {
-    total += fac(Number(arr[i]));
+    total += fac(Number(arr[i]))
   }
-  return total == n ? "STRONG!!!!" : "Not Strong !!";
-};
-//ANOTHER SOLUTIONS
-const strong = (n) => {
-  let arr = String(n).split("");
-  let sum = 0;
+  return total == n ? 'STRONG!!!!' : 'Not Strong !!'
+}
+// ANOTHER SOLUTIONS
+ strong = (n) => {
+  const arr = String(n).split('')
+  let sum = 0
   function factorial(fnNum) {
     if (fnNum <= 1) {
-      return 1;
-    } else {
-      return fnNum * factorial(fnNum - 1);
+      return 1
     }
+      return fnNum * factorial(fnNum - 1)
   }
 
   for (let i = 0; i < arr.length; i++) {
-    sum += factorial(arr[i]);
+    sum += factorial(arr[i])
   }
 
-  return n == sum ? "STRONG!!!!" : "Not Strong !!";
-};
+  return n == sum ? 'STRONG!!!!' : 'Not Strong !!'
+}
 
 // CODE WAR KYU 7
 // Given an input of an array of digits num , return the array with each digit incremented by its position in the array. For example, the first digit will be incremented by 1, the second digit by 2 etc. Make sure to start counting your positions from 1 and not 0.
@@ -612,18 +600,16 @@ const strong = (n) => {
 //   - Only its last digit 2 should be returned
 // Lastly, return {} if your array is empty! Arrays will only contain numbers so don't worry about checking that.
 
-function incrementer(nums) {
-  let temp = [];
+let incrementer = (nums) => {
+  const temp = []
   for (let i = 1; i <= nums.length; i++) {
-    temp.push((nums[i - 1] + i) % 10);
+    temp.push((nums[i - 1] + i) % 10)
   }
-  return temp;
+  return temp
 }
 // ANOTHER SOLUTIONS (CLEVER)
-function incrementer(num) {
-  return num.map((a, i) => (a + i + 1) % 10);
-}
-const incrementer = (a) => a.map((a, i) => +(a + i + 1 + "").slice(-1));
+incrementer = (num) => num.map((a, i) => (a + i + 1) % 10)
+ incrementer = (a) => a.map((a, i) => +(`${a + i + 1 }`).slice(-1))
 
 // CODE WAR KYU 6
 // The President's phone is broken
@@ -656,65 +642,61 @@ const incrementer = (a) => a.map((a, i) => +(a + i + 1 + "").slice(-1));
 // ex1. FURYYYFIREYYFIRE = "I am furious. You and you are fired!"
 // ex2. FIREYYFURYYFURYYFURRYFIRE = "You are fired! I am really furious. You are fired!"
 // ex3. FYRYFIRUFIRUFURE = "Fake tweet."
-const fireAndFury = function (tweet) {
-  let matches = tweet.match(/(FURY|FIRE)/g);
-  if (/[^EFIRUY]/.test(tweet) || !matches) return "Fake tweet.";
+let fireAndFury = function (tweet) {
+  const matches = tweet.match(/(FURY|FIRE)/g)
+  if (/[^EFIRUY]/.test(tweet) || !matches) return 'Fake tweet.'
   return matches
-    .join("")
+    .join('')
     .match(/(FURY|FIRE)\1*/g)
     .map((match) => {
-      let terms = match.length / 4 - 1;
+      const terms = match.length / 4 - 1
 
-      return match[1] === "I"
-        ? "You " + "and you ".repeat(terms) + "are fired!"
-        : "I am " + "really ".repeat(terms) + "furious.";
+      return match[1] === 'I'
+        ? `You ${ 'and you '.repeat(terms) }are fired!`
+        : `I am ${ 'really '.repeat(terms) }furious.`
     })
-    .join(" ");
-};
+    .join(' ')
+}
 // I'm not proud of this, but I put about as much effort into it as
 // the angry tweeter himself.
-const fireAndFury = (t) => {
-  if (t.replace(/[FIREUY]/g, "").length > 0) return "Fake tweet.";
-  t = t.replace(/FIRE/g, "-").replace(/FURY/g, "=").replace(/[^-=]/g, "");
-  if (!t.length) return "Fake tweet.";
-  t = t.split("");
+fireAndFury = (t) => {
+  if (t.replace(/[FIREUY]/g, '').length > 0) return 'Fake tweet.'
+  t = t.replace(/FIRE/g, '-').replace(/FURY/g, '=').replace(/[^-=]/g, '')
+  if (!t.length) return 'Fake tweet.'
+  t = t.split('')
   let last,
-    ans = "";
+    ans = ''
   for (let i = 0; i < t.length; i++) {
-    if (t[i] == "=" && last != "=") ans += "I am ";
-    if (t[i] == "=" && last == "=") ans += "really ";
-    if (t[i] == "=" && t[i + 1] != "=") ans += "furious. ";
-    if (t[i] == "-" && last != "-") ans += "You ";
-    if (t[i] == "-" && last == "-") ans += "and you ";
-    if (t[i] == "-" && t[i + 1] != "-") ans += "are fired! ";
-    last = t[i];
+    if (t[i] == '=' && last != '=') ans += 'I am '
+    if (t[i] == '=' && last == '=') ans += 'really '
+    if (t[i] == '=' && t[i + 1] != '=') ans += 'furious. '
+    if (t[i] == '-' && last != '-') ans += 'You '
+    if (t[i] == '-' && last == '-') ans += 'and you '
+    if (t[i] == '-' && t[i + 1] != '-') ans += 'are fired! '
+    last = t[i]
   }
-  return ans.trim();
-};
-function fireAndFury(s) {
-  if (!/FIRE|FURY/.test(s) || /[^EFIRUY]/.test(s)) return "Fake tweet.";
-  var result = s.match(/FIRE|FURY/g).join``.match(/(FIRE)+|(FURY)+/g);
-  return result.map((s) =>
-    /FIRE/.test(s)
-      ? `You ${"and you ".repeat(s.length / 4 - 1)}are fired!`
-      : `I am ${"really ".repeat(s.length / 4 - 1)}furious.`
-  ).join` `;
+  return ans.trim()
+}
+fireAndFury = (s) => {
+  if (!/FIRE|FURY/.test(s) || /[^EFIRUY]/.test(s)) return 'Fake tweet.'
+  const result = s.match(/FIRE|FURY/g).join``.match(/(FIRE)+|(FURY)+/g)
+  return result.map((s) => (/FIRE/.test(s)
+      ? `You ${'and you '.repeat(s.length / 4 - 1)}are fired!`
+      : `I am ${'really '.repeat(s.length / 4 - 1)}furious.`)).join` `
 }
 
-const fireAndFury = function (tweet) {
-  if (/[^FIREUY]/.test(tweet)) return "Fake tweet.";
-  tweet = tweet.match(/FURY|FIRE/g);
+ fireAndFury = function (tweet) {
+  if (/[^FIREUY]/.test(tweet)) return 'Fake tweet.'
+  tweet = tweet.match(/FURY|FIRE/g)
   return !tweet
-    ? "Fake tweet."
+    ? 'Fake tweet.'
     : tweet
-        .join("")
-        .replace(/(FURY)+|(FIRE)+/g, (m) =>
-          /FURY/.test(m)
-            ? `I am ${"really ".repeat(m.length / 4 - 1)}furious. `
-            : `You ${"and you ".repeat(m.length / 4 - 1)}are fired! `
-        )
-        .trim();
-};
+        .join('')
+        .replace(/(FURY)+|(FIRE)+/g, (m) => (/FURY/.test(m)
+            ? `I am ${'really '.repeat(m.length / 4 - 1)}furious. `
+            : `You ${'and you '.repeat(m.length / 4 - 1)}are fired! `))
+        .trim()
+}
 
 // CODE WAR KYU 7
 // Description:
@@ -731,12 +713,8 @@ const fireAndFury = function (tweet) {
 // Explanation:
 // The first element in prod [] array 12 is the product of all array's elements except the first element
 // The second element 20 is the product of all array's elements except the second element .
-function productArray(arr) {
-  return arr.map((v, idx) => arr.reduce((a, b) => a * b) / arr[idx]);
-}
-function productArray(numbers) {
-  return numbers.map((x) => numbers.reduce((a, b) => a * b) / x);
-}
+let productArray = (arr) => arr.map((v, idx) => arr.reduce((a, b) => a * b) / arr[idx])
+ productArray = (numbers) => numbers.map((x) => numbers.reduce((a, b) => a * b) / x)
 
 // CODE WAR KYU 7
 // Given an array of N integers, you have to find how many times you have to add up the smallest numbers in the array until their Sum becomes greater or equal to K.
@@ -752,31 +730,29 @@ function productArray(numbers) {
 // Then we add the next smallest number to it (3 + 3) , so the sum becomes 6 .
 // Now the result is greater or equal to 6 , Hence the output is (2) i.e (2) operations are required to do this .
 
-const minimumSteps = (numbers, value) => {
-  numbers.sort((a, b) => a - b);
-  let sum = 0;
-  let count = 0;
+let minimumSteps = (numbers, value) => {
+  numbers.sort((a, b) => a - b)
+  let sum = 0
+  let count = 0
   for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
-    count++;
+    sum += numbers[i]
+    count++
     if (sum >= value) {
-      return i;
+      return i
     }
   }
-};
-
-//ANOTHER SOLUTIONS
-function minimumSteps(numbers, value) {
-  return numbers.sort((a, b) => a - b).filter((e, i) => (value = value - e) > 0)
-    .length;
 }
 
-const minimumSteps = (numbers, value) => {
-  let sum = 0;
+// ANOTHER SOLUTIONS
+ minimumSteps = (numbers, value) => numbers.sort((a, b) => a - b).filter((e, i) => (value -= e) > 0)
+    .length
+
+ minimumSteps = (numbers, value) => {
+  let sum = 0
   return numbers
     .sort((a, b) => a - b)
-    .findIndex((number) => (sum += number) >= value);
-};
+    .findIndex((number) => (sum += number) >= value)
+}
 
 // CODE WAR KYU 7 Jumping Number (Special Numbers Series #4)
 // Jumping number is the number that All adjacent digits in it differ by 1.
@@ -799,46 +775,46 @@ const minimumSteps = (numbers, value) => {
 // jumpingNumber(79) ==> return "Not!!"
 // Explanation:
 // Adjacent digits don't differ by 1
-function jumpingNumber(n) {
-  const arr = n.toString().split("");
-  let str = "";
+let jumpingNumber = (n) => {
+  const arr = n.toString().split('')
+  let str = ''
   if (arr.length === 1) {
-    return "Jumping!!";
+    return 'Jumping!!'
   }
   for (let i = 0; i < arr.length; i++) {
     if (
-      Number(arr[i]) === Number(arr[i + 1]) + 1 ||
-      Number(arr[i]) === Number(arr[i - 1]) + 1 ||
-      Number(arr[i]) === Number(arr[i + 1]) - 1 ||
-      Number(arr[i]) === Number(arr[i - 1]) - 1
+      Number(arr[i]) === Number(arr[i + 1]) + 1
+      || Number(arr[i]) === Number(arr[i - 1]) + 1
+      || Number(arr[i]) === Number(arr[i + 1]) - 1
+      || Number(arr[i]) === Number(arr[i - 1]) - 1
     ) {
-      str += arr[i];
+      str += arr[i]
     }
   }
-  return Number(str) === n ? "Jumping!!" : "Not!!";
+  return Number(str) === n ? 'Jumping!!' : 'Not!!'
 }
-function jumpingNumber(n) {
-  const arr = n.toString().split("");
-  let str = "";
+jumpingNumber = (n) => {
+  const arr = n.toString().split('')
+  const str = ''
   if (arr.length === 1) {
-    return "Jumping!!";
+    return 'Jumping!!'
   }
   for (let i = 0; i < arr.length; i++) {
     if (Math.abs(arr[i] - arr[i + 1]) !== 1) {
-      return "Not!!";
+      return 'Not!!'
     }
   }
-  return "Jumping!!";
+  return 'Jumping!!'
 }
-//ANOTHER SOLUTIONS
-function jumpingNumber(n) {
-  let arr = n.toString().split("");
+// ANOTHER SOLUTIONS
+jumpingNumber = (n) => {
+  const arr = n.toString().split('')
   for (i = 0; i < arr.length - 1; i++) {
     if (Math.abs(arr[i] - arr[i + 1]) !== 1) {
-      return "Not!!";
+      return 'Not!!'
     }
   }
-  return "Jumping!!";
+  return 'Jumping!!'
 }
 // CODE WAR KYU 6 (REALLY DIFFICUL)
 // Give you two number m(a positive integer with 5 digits) and n(a positive odd integer >= 3), make a n*n matrix pattern using the digits of m:
@@ -859,11 +835,10 @@ function jumpingNumber(n) {
 // 4 1 3 1 5
 // 1 3 3 3 1
 // Note: The result is a multiline string; Each row separated by "\n"; Each digit separated by a space; All inputs are valid.
-function makeMatrix(m, n) {
-  const n1 = n - 1;
-  const digits = m.toString(10);
-  const digit = (x, y) =>
-    x === y || x === n1 - y
+let makeMatrix = (m, n) => {
+  const n1 = n - 1
+  const digits = m.toString(10)
+  const digit = (x, y) => (x === y || x === n1 - y
       ? 0
       : x > y && x < n1 - y
       ? 1
@@ -871,74 +846,69 @@ function makeMatrix(m, n) {
       ? 2
       : x < y && x < n1 - y
       ? 3
-      : 4;
+      : 4)
 
   return Array(n)
-    .fill("")
-    .map((_, y) =>
-      Array(n)
-        .fill("")
+    .fill('')
+    .map((_, y) => Array(n)
+        .fill('')
         .map((_, x) => digits[digit(x, y)])
-        .join(" ")
-    )
-    .join("\n");
+        .join(' '))
+    .join('\n')
 }
 
-function makeMatrix(m, n) {
-  var arr = [];
+ makeMatrix = (m, n) => {
+  const arr = []
   for (let i = 0; i < n; i++) {
-    var brr = [];
+    const brr = []
     for (let j = 0; j < n; j++) {
-      if (i == j) brr.push(parseInt(m / 10000));
-      else if (i + j == n - 1) brr.push(parseInt(m / 10000));
+      if (i == j) brr.push(parseInt(m / 10000))
+      else if (i + j == n - 1) brr.push(parseInt(m / 10000))
       else if (i > j) {
-        if (i + j < n) brr.push(parseInt((m / 10) % 10));
-        //LEFT
-        else brr.push(parseInt((m / 100) % 10)); //BOTTOM
+        if (i + j < n) brr.push(parseInt((m / 10) % 10))
+        // LEFT
+        else brr.push(parseInt((m / 100) % 10)) // BOTTOM
       } else {
-        if (i + j < n) brr.push(parseInt((m / 1000) % 10));
+        if (i + j < n) brr.push(parseInt((m / 1000) % 10))
         // TOP
-        else brr.push(parseInt(m % 10)); //RIGHT
+        else brr.push(parseInt(m % 10)) // RIGHT
       }
     }
-    arr.push(brr);
+    arr.push(brr)
   }
-  var s = "";
+  let s = ''
   arr.map((x) => {
-    s = s + "\n" + String(x).replace(/,/g, " ");
-  });
-  s = s.substring(1);
-  return s;
+    s = `${s }\n${ String(x).replace(/,/g, ' ')}`
+  })
+  s = s.substring(1)
+  return s
 }
 
-makeMatrix = (m, n) =>
-  [...Array(n)].map(
-    (_, i, a) =>
-      a.map(
-        (_, j) =>
-          (m + a)[
+makeMatrix = (m, n) => [...Array(n)].map(
+    (_, i, a) => a.map(
+        (_, j) => (m + a)[
             j - i && j - n ? (j < n ? (j < i ? 3 : 1) : j < i ? 2 : 4) : 0
           ],
-        --n
-      ).join` `
-  ).join`\n`;
+        --n,
+      ).join` `,
+  ).join`\n`
 
-function makeMatrix(m, n) {
-  const nums = m.toString().split("");
-  const line = [n];
-  let outstr = "";
+ makeMatrix = (m, n) => {
+  const nums = m.toString().split('')
+  const line = [n]
+  let outstr = ''
 
   for (i = 0; i < n; i++) {
-    line.fill(nums[3], 0, i);
-    line.fill(nums[4], n - i);
-    line[i] = nums[0];
-    line[n - 1 - i] = nums[0];
-    line.fill(nums[1], i + 1, n - 1 - i);
-    line.fill(nums[2], n - i, i);
-    outstr += line.join(" ") + "\n";
+    line.fill(nums[3], 0, i)
+    line.fill(nums[4], n - i)
+    line[i] = nums[0]
+    line[n - 1 - i] = nums[0]
+    line.fill(nums[1], i + 1, n - 1 - i)
+    line.fill(nums[2], n - i, i)
+    outstr += `${line.join(' ') }\n`
   }
 
-  return outstr.trim();
+  return outstr.trim()
 }
 
 // CODE WAR KYU 6
@@ -952,133 +922,121 @@ function makeMatrix(m, n) {
 // 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
 // 493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
 
-function digital_root(n) {
-  let sum = n
+let digital_root = (n) => {
+  const sum = n
     .toString()
-    .split("")
-    .reduce((a, b) => Number(a) + Number(b), 0);
+    .split('')
+    .reduce((a, b) => Number(a) + Number(b), 0)
   if (sum < 10) {
-    return sum;
+    return sum
   }
-  return digital_root(sum);
+  return digital_root(sum)
 }
 
-//ANOTHER SOLUTIONS
-function digital_root(n) {
-  return ((n - 1) % 9) + 1;
-}
+// ANOTHER SOLUTIONS
+  digital_root = (n) => ((n - 1) % 9) + 1
 
-function digital_root(n) {
-  return n > 0 ? 1 + ((parseInt(n) - 1) % 9) : 0;
-}
+ digital_root = (n) => (n > 0 ? 1 + ((parseInt(n) - 1) % 9) : 0)
 
 // CODE WAR KYU 6
 // An array is called zero-plentiful if it contains at least one 0 and every sequence of 0s is of length at least 4. Your task is to return the number of zero sequences if the given array is zero-plentiful else 0.
 
-function zeroPlentiful(arr) {
+let zeroPlentiful = (arr) => {
   if (arr.length > 1) {
-    let total = 0;
-    let count = 0;
+    let total = 0
+    let count = 0
     for (let i = 0; i < arr.length; i++) {
       if (arr[i - 1] !== 0 && arr[i] === 0 && arr[i + 1] !== 0) {
-        return 0;
-      } else {
-        if (arr[i] === 0) {
-          count++;
-        } else {
-          if (count >= 4) {
-            total++;
-            count = 0;
-          }
-        }
+        return 0
       }
+        if (arr[i] === 0) {
+          count++
+        } else if (count >= 4) {
+            total++
+            count = 0
+          }
     }
     if (count >= 4) {
-      total++;
+      total++
     }
-    return total;
+    return total
   }
-  return 0;
+  return 0
 }
-//ANOTHER SOLUTIONS
-zeroPlentiful = (a) =>
-  ((a) => (a.every((a) => a.length > 3) ? a.length : 0))(
-    a.join``.match(/0+/g) || []
-  );
+// ANOTHER SOLUTIONS
+zeroPlentiful = (a) => ((a) => (a.every((a) => a.length > 3) ? a.length : 0))(
+    a.join``.match(/0+/g) || [],
+  )
 
-function zeroPlentiful(arr) {
-  var sequences = arr
-    .map((x) => (!x ? x : ","))
-    .join("")
-    .split(",")
-    .filter((str) => str);
-  return sequences.every((str) => str.length >= 4) ? sequences.length : 0;
+ zeroPlentiful = (arr) => {
+  const sequences = arr
+    .map((x) => (!x ? x : ','))
+    .join('')
+    .split(',')
+    .filter((str) => str)
+  return sequences.every((str) => str.length >= 4) ? sequences.length : 0
 }
 
-function zeroPlentiful(arr) {
-  let count = 0;
-  let total = 0;
+ zeroPlentiful = (arr) => {
+  let count = 0
+  let total = 0
   for (const x of arr) {
     if (x === 0) {
       if (count++ === 3) {
-        total++;
+        total++
       }
-    } else {
-      if (count > 3) {
-        count = 0;
+    } else if (count > 3) {
+        count = 0
       } else if (count > 0) {
-        count = 0;
-        total = 0;
-        break;
+        count = 0
+        total = 0
+        break
       }
-    }
   }
-  return count > 0 && count < 4 ? 0 : total;
+  return count > 0 && count < 4 ? 0 : total
 }
 
-const getPrimes = (num) =>
-  Array(num - 1)
+ getPrimes = (num) => Array(num - 1)
     .fill()
     .map((e, i) => 2 + i)
-    .filter((e, i, a) => a.slice(0, i).every((x) => e % x !== 0));
+    .filter((e, i, a) => a.slice(0, i).every((x) => e % x !== 0))
 
 function gap(g, m, n) {
   let prime = [],
-    f;
-  result = [];
+    f
+  result = []
   for (let i = m; i <= n; i++) {
-    let checker = isPrime(i);
+    const checker = isPrime(i)
     if (checker) {
-      prime.push(i);
+      prime.push(i)
     }
   }
-  console.log(prime);
+  console.log(prime)
   for (let i = 0; i < prime.length; i++) {
     if (prime[i] === prime[i + 1] + g) {
-      result.push([prime[i], prime[i] + g]);
+      result.push([prime[i], prime[i] + g])
     }
   }
 
-  console.log(result);
+  console.log(result)
 }
-console.log(gap(4, 100, 110));
+console.log(gap(4, 100, 110))
 
 function isPrime(num) {
-  if (num < 2) return false;
-  for (var i = 2; i < num; i++) {
-    if (num % i == 0) return false;
+  if (num < 2) return false
+  for (let i = 2; i < num; i++) {
+    if (num % i == 0) return false
   }
-  return true;
+  return true
 }
-//CODE WAR KYU UNDEFINED
-//get prime and check prime
+// CODE WAR KYU UNDEFINED
+// get prime and check prime
 
-const getPrimes = (num) =>
-  Array(num - 1)
+const getPrimes = (num) => Array(num - 1)
     .fill()
     .map((e, i) => 2 + i)
-    .filter((e, i, a) => a.slice(0, i).every((x) => e % x !== 0));
-//CODE WAR KYU 5
+    .filter((e, i, a) => a.slice(0, i).every((x) => e % x !== 0))
+// CODE WAR KYU 5
 // The prime numbers are not regularly spaced. For example from 2 to 3 the gap is 1. From 3 to 5 the gap is 2. From 7 to 11 it is 4. Between 2 and 50 we have the following pairs of 2-gaps primes: 3-5, 5-7, 11-13, 17-19, 29-31, 41-43
 // A prime gap of length n is a run of n-1 consecutive composite numbers between two successive primes (see: http://mathworld.wolfram.com/PrimeGaps.html).
 // We will write a function gap with parameters:
@@ -1102,100 +1060,99 @@ function primeSieve(n, m) {
   let a = Array((n = Math.floor(n / 2))),
     t = (Math.sqrt(4 + 8 * n) - 2) / 4,
     u = 0,
-    r = [];
-  for (let i = 1; i < (n - 1) / 3; i++) a[1 + 3 * i] = true;
+    r = []
+  for (let i = 1; i < (n - 1) / 3; i++) a[1 + 3 * i] = true
   for (let i = 2; i <= t; i++) {
-    u = (n - i) / (1 + 2 * i);
-    if ((i % 3) - 1) for (let j = i; j < u; j++) a[i + j + 2 * i * j] = true;
+    u = (n - i) / (1 + 2 * i)
+    if ((i % 3) - 1) for (let j = i; j < u; j++) a[i + j + 2 * i * j] = true
   }
-  for (let i = 0; i < n; i++) !a[i] && r.push(i * 2 + 1);
-  return r.filter((num) => num > m - 1);
+  for (let i = 0; i < n; i++) !a[i] && r.push(i * 2 + 1)
+  return r.filter((num) => num > m - 1)
 }
-const gap = (g, m, n) => {
-  console.log(g, m, n);
-  const primes = primeSieve(n, m);
+ gap = (g, m, n) => {
+  console.log(g, m, n)
+  const primes = primeSieve(n, m)
   for (let i = 0; i < primes.length; i++) {
     if (primes[i] + g === primes[i + 1]) {
-      return [primes[i], primes[i + 1]];
+      return [primes[i], primes[i + 1]]
     }
   }
-  return null;
-};
-//ANOTHER SOLUTION (YOU NEED TO USE MORE ENERGY OF BRAIN)
-function gap(g, m, n) {
-  var lastPrime = 0;
-  var isPrime = function (x) {
-    for (var i = 2; i * i <= x; i++) {
-      if (x % i == 0) return false;
+  return null
+}
+// ANOTHER SOLUTION (YOU NEED TO USE MORE ENERGY OF BRAIN)
+ gap = (g, m, n) => {
+  let lastPrime = 0
+  const isPrime = function (x) {
+    for (let i = 2; i * i <= x; i++) {
+      if (x % i == 0) return false
     }
-    return true;
-  };
+    return true
+  }
 
-  for (var i = m; i <= n; i++)
-    if (isPrime(i)) {
-      if (i - lastPrime == g) return [lastPrime, i];
-      else lastPrime = i;
+  for (let i = m; i <= n; i++) {
+ if (isPrime(i)) {
+      if (i - lastPrime == g) return [lastPrime, i]
+      lastPrime = i
     }
-
-  return null;
 }
 
-function isPrime(n) {
-  if (isNaN(n) || !isFinite(n) || n % 1 || n < 2) return false;
-  var m = Math.sqrt(n);
-  for (var i = 2; i <= m; i++) if (n % i == 0) return false;
-  return true;
+  return null
 }
 
-function gap(g, m, n) {
-  let mx = 0;
+ isPrime = (n) => {
+  if (isNaN(n) || !isFinite(n) || n % 1 || n < 2) return false
+  const m = Math.sqrt(n)
+  for (let i = 2; i <= m; i++) if (n % i == 0) return false
+  return true
+}
+
+ gap = (g, m, n) => {
+  let mx = 0
   for (m, n; m < n; m++) {
     if (isPrime(m)) {
-      if (m - mx === g) return [mx, m];
-      mx = m;
+      if (m - mx === g) return [mx, m]
+      mx = m
     }
   }
-  return null;
+  return null
 }
 
 function primeSol(n) {
   if (n === 2) {
-    return true;
-  } else if (n < 2 || n % 2 === 0) {
-    return false;
-  } else {
-    for (let i = 3; i <= Math.sqrt(n); i += 2) {
-      if (n % i === 0) return false;
-    }
-    return true;
+    return true
+  } if (n < 2 || n % 2 === 0) {
+    return false
   }
+    for (let i = 3; i <= Math.sqrt(n); i += 2) {
+      if (n % i === 0) return false
+    }
+    return true
 }
 
 function gapSol(g, m, n) {
-  let res = [];
-  let i = m;
+  const res = []
+  let i = m
   while (i < n + 1) {
     if (primeSol(i)) {
-      res.push(i);
-      break;
+      res.push(i)
+      break
     }
-    i++;
+    i++
   }
   while (true) {
-    let j = i + 1;
+    let j = i + 1
     while (j < n + 1) {
       if (primeSol(j)) {
         if (j - i === g) {
-          res.push(j);
-          return res;
-        } else {
-          res[0] = j;
-          i = j;
+          res.push(j)
+          return res
         }
+          res[0] = j
+          i = j
       }
-      j++;
+      j++
     }
-    return null;
+    return null
   }
 }
 
@@ -1208,36 +1165,28 @@ function gapSol(g, m, n) {
 // "Success"  =>  ")())())"
 // "(( @"     =>  "))(("
 
-function duplicateEncode(word) {
-  let temp = [];
-  word = word.toLowerCase().split("");
+let duplicateEncode = (word) => {
+  const temp = []
+  word = word.toLowerCase().split('')
   word.map((v, i) => {
-    temp[i] = word.filter((e) => e === v).length > 1 ? ")" : "(";
-  });
-  return temp.join("");
+    temp[i] = word.filter((e) => e === v).length > 1 ? ')' : '('
+  })
+  return temp.join('')
 }
 
-//ANOTHER SOLUTIONS
-function duplicateEncode(word) {
-  return word
+// ANOTHER SOLUTIONS
+ duplicateEncode = (word) => word
     .toLowerCase()
-    .split("")
-    .map(function (a, i, w) {
-      return w.indexOf(a) == w.lastIndexOf(a) ? "(" : ")";
-    })
-    .join("");
-}
+    .split('')
+    .map((a, i, w) => (w.indexOf(a) == w.lastIndexOf(a) ? '(' : ')'))
+    .join('')
 
-function duplicateEncode(word) {
-  return word
+ duplicateEncode = (word) => word
     .toLowerCase()
-    .split("")
-    .map((v, i, arr) => {
-      return arr.filter((e) => e === v).length > 1 ? ")" : "(";
-    })
-    .join("");
-}
-//CODE WAR KYU 7
+    .split('')
+    .map((v, i, arr) => (arr.filter((e) => e === v).length > 1 ? ')' : '('))
+    .join('')
+// CODE WAR KYU 7
 // The odd and even numbers are fighting against each other!
 
 // You are given a list of positive integers. The odd numbers from the list will fight using their 1 bits from their binary representation, while the even numbers will fight using their 0 bits. If present in the list, number 0 will be neutral, hence not fight for either side.
@@ -1256,32 +1205,31 @@ function duplicateEncode(word) {
 // evens: 14 => 1110 => one 0
 // Result: odds win the battle with 4-1
 
-function bitsBattle(n) {
-  let odd = [],
-    even = [];
+let bitsBattle = (n) => {
+  const odd = [],
+    even = []
   n.forEach((v, i) => {
-    v % 2 === 0 ? even.push(v.toString(2)) : odd.push(v.toString(2));
-  });
-  let cOdd = (odd.join("").match(/1/g) || []).length;
-  let cEven = (even.join("").match(/0/g) || []).length;
-  return cOdd > cEven ? "odds win" : cOdd < cEven ? "evens win" : "tie";
+    v % 2 === 0 ? even.push(v.toString(2)) : odd.push(v.toString(2))
+  })
+  const cOdd = (odd.join('').match(/1/g) || []).length
+  const cEven = (even.join('').match(/0/g) || []).length
+  return cOdd > cEven ? 'odds win' : cOdd < cEven ? 'evens win' : 'tie'
 }
 
-//ANOTHER SOLUTIONS (clever)
-function bitsBattle(numbers) {
-  var r = [0, 0];
-  for (var n of numbers) r[n % 2] += n.toString(2).split(n % 2).length - 1;
-  return r[0] > r[1] ? "evens win" : r[1] > r[0] ? "odds win" : "tie";
+// ANOTHER SOLUTIONS (clever)
+bitsBattle = (numbers) => {
+  const r = [0, 0]
+  for (const n of numbers) r[n % 2] += n.toString(2).split(n % 2).length - 1
+  return r[0] > r[1] ? 'evens win' : r[1] > r[0] ? 'odds win' : 'tie'
 }
 
-const bitsBattle = (arr) => {
-  var score = arr.reduce(
-    (a, x) =>
-      a + (x & 1 ? +1 : -1) * (x && x.toString(2).split(x & 1).length - 1),
-    0
-  );
-  return score > 0 ? "odds win" : score < 0 ? "evens win" : "tie";
-};
+ bitsBattle = (arr) => {
+  const score = arr.reduce(
+    (a, x) => a + (x & 1 ? +1 : -1) * (x && x.toString(2).split(x & 1).length - 1),
+    0,
+  )
+  return score > 0 ? 'odds win' : score < 0 ? 'evens win' : 'tie'
+}
 
 // CODE WAR KYU 6 (World Bits War)
 // A number's strength is determined by the number of set bits (1s) in its binary representation. Negative integers work against their own side so their strength is negative. For example -5 = -101 has strength -2 and +5 = +101 has strength +2.
@@ -1291,94 +1239,84 @@ const bitsBattle = (arr) => {
 // Again, three possible outcomes: odds win, evens win and tie.
 
 // Examples:
-function bitsWar(n) {
-  let arrs = [[], []];
+let bitsWar = (n) => {
+  const arrs = [[], []]
   n.forEach((v) => {
-    v % 2 === 0 ? arrs[0].push(v.toString(2)) : arrs[1].push(v.toString(2));
-  });
+    v % 2 === 0 ? arrs[0].push(v.toString(2)) : arrs[1].push(v.toString(2))
+  })
   arrs.forEach((arr, i) => {
     arrs[i] = arr
-      .map((v) => {
-        return v.replace(/[0]/g, "");
-      })
-      .map((v) => {
-        return Number(v) < 0
+      .map((v) => v.replace(/[0]/g, ''))
+      .map((v) => (Number(v) < 0
           ? -(v.match(/1/g) || []).length
-          : (v.match(/1/g) || []).length;
-      })
-      .reduce((a, b) => a + b, 0);
-  });
+          : (v.match(/1/g) || []).length))
+      .reduce((a, b) => a + b, 0)
+  })
   return arrs[0] > arrs[1]
-    ? "evens win"
+    ? 'evens win'
     : arrs[0] < arrs[1]
-    ? "odds win"
-    : "tie";
+    ? 'odds win'
+    : 'tie'
 }
 
-//ANOTHER SOLUTIONS
-function bitsWar(numbers) {
-  const countSetBits = (int) =>
-    int
+// ANOTHER SOLUTIONS
+ bitsWar = (numbers) => {
+  const countSetBits = (int) => int
       .toString(2)
-      .split("")
-      .reduce((count, elem) => (count += elem === "1"), 0);
+      .split('')
+      .reduce((count, elem) => (count += elem === '1'), 0)
   const result = numbers.reduce(
-    (score, elem) =>
-      score + countSetBits(elem) * Math.sign(elem) * (elem % 2 === 0 ? 1 : -1),
-    0
-  );
-  if (result > 0) return "evens win";
-  else if (result === 0) return "tie";
-  else return "odds win";
+    (score, elem) => score + countSetBits(elem) * Math.sign(elem) * (elem % 2 === 0 ? 1 : -1),
+    0,
+  )
+  if (result > 0) return 'evens win'
+  if (result === 0) return 'tie'
+  return 'odds win'
 }
 
-function bitsWar(numbers) {
-  let count = (n) => n.toString(2).split("1").length - 1;
-  let score = [0, 0];
+ bitsWar = (numbers) => {
+  const count = (n) => n.toString(2).split('1').length - 1
+  const score = [0, 0]
 
-  for (var n of numbers)
-    if (n > 0) score[n % 2] += count(n);
-    else score[-n % 2] -= count(-n);
-
-  if (score[0] < score[1]) return "odds win";
-
-  if (score[1] < score[0]) return "evens win";
-
-  return "tie";
+  for (const n of numbers) {
+ if (n > 0) score[n % 2] += count(n)
+    else score[-n % 2] -= count(-n)
 }
 
-function bitsWar(num) {
-  let [odd, even] = [num.filter((i) => i & 1), num.filter((i) => !(i & 1))].map(
-    (i) =>
-      i
-        .map((i) =>
-          i.toString`2`.replace(/0/g, "").replace(/1+/g, (i) => i.length)
-        )
-        .reduce((sum, i) => sum + +i, 0)
-  );
-  return odd == even ? "tie" : `${odd > even ? "odds" : "evens"} win`;
+  if (score[0] < score[1]) return 'odds win'
+
+  if (score[1] < score[0]) return 'evens win'
+
+  return 'tie'
 }
 
-function findMult_3(num) {
-  let temp = [];
+ bitsWar = (num) => {
+  const [odd, even] = [num.filter((i) => i & 1), num.filter((i) => !(i & 1))].map(
+    (i) => i
+        .map((i) => i.toString`2`.replace(/0/g, '').replace(/1+/g, (i) => i.length))
+        .reduce((sum, i) => sum + +i, 0),
+  )
+  return odd == even ? 'tie' : `${odd > even ? 'odds' : 'evens'} win`
+}
+
+let findMult_3 = (num) => {
+  const temp = []
   for (let i = 3; i <= num; i++) {
     if (i % 3 === 0) {
-      temp.push(i);
+      temp.push(i)
     }
   }
-  temp.map((v) => {
-    return num
+  temp.map((v) => num
       .toString()
-      .split("")
+      .split('')
       .filter((e) => {
-        v.toString().includes(e);
-      });
-  });
-  console.log(temp);
-  return [temp.length, temp[temp.length - 1]];
+        v.toString().includes(e)
+      }))
+  console.log(temp)
+  return [temp.length, temp[temp.length - 1]]
 }
 
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // Balanced number is the number that * The sum of all digits to the left of the middle digit(s) and the sum of all digits to the right of the middle digit(s) are equal*.
 
 // Task
@@ -1394,90 +1332,86 @@ function findMult_3(num) {
 // Number passed is always Positive .
 
 // Return the result as String
-function balancedNum(number) {
-  let length = `${number}`.length;
-  if (length <= 2) return "Balanced";
-  let slice = length % 2 === 0 ? length / 2 - 1 : (length + 1) / 2 - 1;
-  let left = `${number}`
+let balancedNum = (number) => {
+  const { length } = `${number}`
+  if (length <= 2) return 'Balanced'
+  const slice = length % 2 === 0 ? length / 2 - 1 : (length + 1) / 2 - 1
+  const left = `${number}`
     .slice(0, slice)
-    .split("")
-    .reduce((a, b) => a + Number(b), 0);
-  let right = `${number}`
+    .split('')
+    .reduce((a, b) => a + Number(b), 0)
+  const right = `${number}`
     .slice(-slice)
-    .split("")
-    .reduce((a, b) => a + Number(b), 0);
-  return left === right ? "Balanced" : "Not Balanced";
+    .split('')
+    .reduce((a, b) => a + Number(b), 0)
+  return left === right ? 'Balanced' : 'Not Balanced'
 }
-//ANOTHER SOLUTIONS
-function balancedNum(number) {
-  let str = `${number}`,
+// ANOTHER SOLUTIONS
+ balancedNum = (number) => {
+  const str = `${number}`,
     len = (str.length - (str.length % 2 ? -1 : -2)) / 2,
-    sum = (digits) => [...digits].reduce((a, b) => a + +b, 0);
+    sum = (digits) => [...digits].reduce((a, b) => a + +b, 0)
 
   return sum(str.slice(0, len)) === sum(str.slice(-len))
-    ? "Balanced"
-    : "Not Balanced";
+    ? 'Balanced'
+    : 'Not Balanced'
 }
 
-function balancedNum(number) {
+ balancedNum = (number) => {
   let i,
-    result = 0;
-  number = number + "";
+    result = 0
+  number = `${number }`
   for (i = 0; i < number.length / 2 - 1; i++) {
-    result += +number[i] - +number[number.length - 1 - i];
+    result += +number[i] - +number[number.length - 1 - i]
   }
-  return result === 0 ? "Balanced" : "Not Balanced";
+  return result === 0 ? 'Balanced' : 'Not Balanced'
 }
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // You have to write a function f which takes in an octal number in string format and output its decimal representation in less than 15 characters.
-const f = (str) => {
-  let arr = str.toString().split("").reverse(),
-    total = 0;
+let f = (str) => {
+  let arr = str.toString().split('').reverse(),
+    total = 0
   for (let i = 0; i < arr.length; i++) {
-    total += Number(arr[i]) * 8 ** i;
+    total += Number(arr[i]) * 8 ** i
   }
-  return total;
-};
+  return total
+}
 
-const f = (s) => {
-  let a = s.split("").reverse(),
-    t = 0;
+f = (s) => {
+  let a = s.split('').reverse(),
+    t = 0
   for (let i = 0; i < a.length; i++) {
-    t += Number(a[i]) * 8 ** i;
+    t += Number(a[i]) * 8 ** i
   }
-  return t;
-};
+  return t
+}
 
-//ANOTHER SOLUTIONS
-f = (s) => "0o" + s - 0;
-f = (_) => +("0o" + _);
+// ANOTHER SOLUTIONS
+f = (s) => `0o${ s}` - 0
+f = (_) => +(`0o${ _}`)
 
-//CODE WAR KYU 8
+// CODE WAR KYU 8
 // Build a function that returns an array of integers from n to 1 where n>0.
 // Example : n=5 --> [5,4,3,2,1]
 
-const reverseSeq = (n) => {
-  let a = [];
+let reverseSeq = (n) => {
+  const a = []
   for (let i = n; i > 0; i--) {
-    a.push(i);
+    a.push(i)
   }
-  return a;
-};
+  return a
+}
 
-//ANOTHER SOLUTIONS
-const reverseSeq = (n) => {
-  return Array(n)
+// ANOTHER SOLUTIONS
+ reverseSeq = (n) => Array(n)
     .fill(0)
-    .map((e, i) => n - i);
-};
-const reverseSeq = (length) => Array.from({ length }, () => length--);
-const reverseSeq = (num) => {
-  return new Array(num)
+    .map((e, i) => n - i)
+ reverseSeq = (length) => Array.from({ length }, () => length--)
+ reverseSeq = (num) => new Array(num)
     .fill()
     .map((d, i) => i + 1)
-    .reverse();
-};
-const reverseSeq = (n) => [...Array(n)].map((_, i) => n - i);
+    .reverse()
+ reverseSeq = (n) => [...Array(n)].map((_, i) => n - i)
 
 // CODE WAR KYU 7
 // Your task is to determine how many files of the copy queue you will be able to save into your Hard Disk Drive. The files must be saved in the order they appear in the queue.
@@ -1493,28 +1427,27 @@ const reverseSeq = (n) => [...Array(n)].map((_, i) => n - i);
 // save([4,4,4,3,3], 11) -> 2
 // # 4+4 <= 11, but 4+4+4 > 11
 
-function save(sizes, hd) {
+let save = (sizes, hd) => {
   let total = 0,
-    count = 0;
+    count = 0
   for (let i = 0; i < sizes.length; i++) {
-    total += sizes[i];
+    total += sizes[i]
     if (total > hd) {
-      return count;
-    } else {
-      count++;
+      return count
     }
+      count++
   }
-  return count;
+  return count
 }
 
-//ANOTHER SOLUTIONS
-function save(sizes, hd) {
-  let i = -1;
+// ANOTHER SOLUTIONS
+  save = (sizes, hd) => {
+  let i = -1
   while (hd >= 0) {
-    hd -= sizes.shift();
-    i++;
+    hd -= sizes.shift()
+    i++
   }
-  return i;
+  return i
 }
 
 // CODE WAR KYU 8
@@ -1524,62 +1457,60 @@ function save(sizes, hd) {
 // current age of his son (years)
 // Сalculate how many years ago the father was twice as old as his son (or in how many years he will be twice as old).
 function twiceAsOld(dadYearsOld, sonYearsOld) {
-  return Math.abs(dadYearsOld - 2 * sonYearsOld);
+  return Math.abs(dadYearsOld - 2 * sonYearsOld)
 }
-function twiceAsOld(d, s) {
-  return Math.abs(d - 2 * s);
-}
-//CODE WAR KYU 6
+
+// CODE WAR KYU 6
 // Kingdoms Ep4: The Dancing Witch
-function figureOut(arr) {
+let figureOut = (arr) => {
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr[i].length; j++) {
-      let c = arr[i][j];
-      if (c === " ") continue;
+      const c = arr[i][j]
+      if (c === ' ') continue
       if (
-        arr[i + 1].indexOf(c) - arr[i].indexOf(c) >= 2 ||
-        arr[i].indexOf(c) - arr[i + 1].indexOf(c) >= 2 ||
-        c === arr[i + 1][j + 2 > arr[i].length - 1 ? j - 2 : j + 2] ||
-        c === arr[i + 1][j - 2 < 0 ? j + 2 : j - 2]
+        arr[i + 1].indexOf(c) - arr[i].indexOf(c) >= 2
+        || arr[i].indexOf(c) - arr[i + 1].indexOf(c) >= 2
+        || c === arr[i + 1][j + 2 > arr[i].length - 1 ? j - 2 : j + 2]
+        || c === arr[i + 1][j - 2 < 0 ? j + 2 : j - 2]
       ) {
-        return c;
+        return c
       }
     }
   }
-  return null;
+  return null
 }
-//REFACTOR
-function figureOut(arr) {
+// REFACTOR
+ figureOut = (arr) => {
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr[i].length; j++) {
-      let c = arr[i][j];
-      if (c === " ") continue;
+      const c = arr[i][j]
+      if (c === ' ') continue
       if (Math.abs(arr[i + 1].indexOf(c) - arr[i].indexOf(c)) > 1) {
-        return c;
+        return c
       }
     }
   }
-  return null;
+  return null
 }
-//ANOTHER SOLUTIONS
-function figureOut(arr) {
+// ANOTHER SOLUTIONS
+figureOut = (arr) => {
   for (let i = 0; i < arr.length - 1; i++) {
-    const [a, b] = [arr[i], arr[i + 1]];
+    const [a, b] = [arr[i], arr[i + 1]]
     for (const l of [...a]) {
-      if (l == " ") continue;
-      if (Math.abs(a.indexOf(l) - b.indexOf(l)) > 1) return l;
+      if (l == ' ') continue
+      if (Math.abs(a.indexOf(l) - b.indexOf(l)) > 1) return l
     }
   }
-  return null;
+  return null
 }
-function figureOut(arr) {
+ figureOut = (arr) => {
   for (let i = 1; i < arr.length; i++) {
     const w = [...arr[i]].find(
-      (x, j) => x !== " " && Math.abs(arr[i - 1].indexOf(x) - j) > 1
-    );
-    if (w) return w;
+      (x, j) => x !== ' ' && Math.abs(arr[i - 1].indexOf(x) - j) > 1,
+    )
+    if (w) return w
   }
-  return null;
+  return null
 }
 // CODE WAR KYU 7
 // In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
@@ -1589,29 +1520,23 @@ function figureOut(arr) {
 // highAndLow("1 2 3 4 5");  // return "5 1"
 // highAndLow("1 2 -3 4 5"); // return "5 -3"
 // highAndLow("1 9 3 4 -5"); // return "9 -5"
-function highAndLow(n) {
-  let arr = n.split(" ").map(Number);
-  return [Math.max(...arr), Math.min(...arr)].join(" ");
+const highAndLow = (n) => {
+  const arr = n.split(' ').map(Number)
+  return [Math.max(...arr), Math.min(...arr)].join(' ')
 }
 
 // CODE WAR KYU 7
 // Simple, given a string of words, return the length of the shortest word(s).
 
 // String will never be empty and you do not need to account for different data types.
-const findShort = (s) => {
-  return Math.min(...s.split(" ").map((v) => v.length));
-};
+let findShort = (s) => Math.min(...s.split(' ').map((v) => v.length))
 
-//ANOTHER SOLUTIONS
-function findShort(s) {
-  return Math.min.apply(
+// ANOTHER SOLUTIONS
+ findShort = (s) => Math.min.apply(
     null,
-    s.split(" ").map((w) => w.length)
-  );
-}
-function findShort(s) {
-  return Math.min(...s.split(" ").map((s) => s.length));
-}
+    s.split(' ').map((w) => w.length),
+  )
+findShort = (s) => Math.min(...s.split(' ').map((s) => s.length))
 // CODE WAR KYU 8
 // Given three integers a ,b ,c, return the largest number obtained after inserting the following operators and brackets: +, *, ()
 // In other words , try every combination of a,b,c with [*+()] , and return the Maximum Obtained
@@ -1623,19 +1548,17 @@ function findShort(s) {
 // 1 + 2 * 3 = 7
 // (1 + 2) * 3 = 9
 // So the maximum value that you can obtain is 9.
-function expressionMatter(a, b, c) {
-  let arr = [];
-  arr[0] = a * b * c;
-  arr[1] = (a + b) * c;
-  arr[2] = a * (b + c);
-  arr[3] = a + b + c;
-  return Math.max(...arr);
+let expressionMatter = (a, b, c) => {
+  const arr = []
+  arr[0] = a * b * c
+  arr[1] = (a + b) * c
+  arr[2] = a * (b + c)
+  arr[3] = a + b + c
+  return Math.max(...arr)
 }
-//ANOTHER SOLUTIONS
-function expressionMatter(a, b, c) {
-  return Math.max(a + b + c, a * b * c, (a + b) * c, a * (b + c));
-}
-//CODE WAR KYU 6
+// ANOTHER SOLUTIONS
+ expressionMatter = (a, b, c) => Math.max(a + b + c, a * b * c, (a + b) * c, a * (b + c))
+// CODE WAR KYU 6
 // Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities. "Same" means, here, that the elements in b are the elements in a squared, regardless of the order.
 
 // Examples
@@ -1648,33 +1571,33 @@ function expressionMatter(a, b, c) {
 // b = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
 // Invalid arrays
 
-function comp(a1, a2) {
+const comp = (a1, a2) => {
   if (a1 && a2) {
-    a2 = a2.map((v) => Math.sqrt(v)).sort();
-    return a1.sort().join() === a2.join();
+    a2 = a2.map((v) => Math.sqrt(v)).sort()
+    return a1.sort().join() === a2.join()
   }
-  return false;
+  return false
 }
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
 
 // Example
 // createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
-function createPhoneNumber(n) {
-  n = n.join("");
-  return `(${n.slice(0, 3)}) ${n.slice(3, 6)}-${n.slice(6, n.length)}`;
+ createPhoneNumber = (n) => {
+  n = n.join('')
+  return `(${n.slice(0, 3)}) ${n.slice(3, 6)}-${n.slice(6, n.length)}`
 }
 
-//ANOTHER SOLUTIONS
-function createPhoneNumber(numbers) {
-  let format = "(xxx) xxx-xxxx";
+// ANOTHER SOLUTIONS
+createPhoneNumber = (n) => {
+  let format = '(xxx) xxx-xxxx'
   for (let i = 0; i < numbers.length; i++) {
-    format = format.replace("x", numbers[i]);
+    format = format.replace('x', numbers[i])
   }
-  return format;
+  return format
 }
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Dear Coder,
 
 // We at [SomeLargeCompany] have decided to expand on the functionality of our online text editor.
@@ -1691,25 +1614,24 @@ function createPhoneNumber(numbers) {
 
 // the indicies are always in range and passed as a sorted array
 // note if the index array is empty, just return the initial phrase
-function insertAtIndexes(p, w, idxs) {
-  if (!p && !w && !idxs) return p;
-  p = p.split("");
+let insertAtIndexes = (p, w, idxs) => {
+  if (!p && !w && !idxs) return p
+  p = p.split('')
   for (let i = 0; i < idxs.length; i++) {
-    p.splice(i > 0 ? idxs[i] + i : idxs[i], 0, w);
+    p.splice(i > 0 ? idxs[i] + i : idxs[i], 0, w)
   }
-  return p.join("");
+  return p.join('')
 }
-//ANOTHER SOLUTIONS
-function insertAtIndexes(phrase, word, indexes) {
-  var c = 0;
-  for (var i = 0; i < indexes.length; i++) {
-    phrase =
-      phrase.slice(0, indexes[i] + c) + word + phrase.slice(indexes[i] + c);
-    c += word.length;
+// ANOTHER SOLUTIONS
+ insertAtIndexes = (phrase, word, indexes) => {
+  let c = 0
+  for (let i = 0; i < indexes.length; i++) {
+    phrase = phrase.slice(0, indexes[i] + c) + word + phrase.slice(indexes[i] + c)
+    c += word.length
   }
-  return phrase;
+  return phrase
 }
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // Given an array of digitals numbers, return a new array of length number containing the last even numbers from the original array (in the same order). The original array will be not empty and will contain at least "number" even numbers.
 
 // For example:
@@ -1718,22 +1640,21 @@ function insertAtIndexes(phrase, word, indexes) {
 // ([-22, 5, 3, 11, 26, -6, -7, -8, -9, -8, 26], 2) => [-8, 26]
 // ([6, -25, 3, 7, 5, 5, 7, -3, 23], 1) => [6]
 
-function evenNumbers(array, number) {
-  let temp = [];
-  array = array.reverse();
+let evenNumbers = (array, number) => {
+  const temp = []
+  array = array.reverse()
   for (let i = 0; i < array.length; i++) {
     if (array[i] % 2 === 0) {
-      temp.push(array[i]);
-      if (temp.length === number) return temp.reverse();
+      temp.push(array[i])
+      if (temp.length === number) return temp.reverse()
     }
   }
 }
 
-//ANOTHER SOLUTIONS
-const evenNumbers = (array, number) =>
-  array.filter((item) => item % 2 === 0).slice(-number);
+// ANOTHER SOLUTIONS
+ evenNumbers = (array, number) => array.filter((item) => item % 2 === 0).slice(-number)
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // You're working in a number zoo, and it seems that one of the numbers has gone missing!
 // Zoo workers have no idea what number is missing, and are too incompetent to figure it out, so they're hiring you to do it for them.
 // In case the zoo loses another number, they want your program to work regardless of how many numbers there are in total.
@@ -1744,44 +1665,40 @@ const evenNumbers = (array, number) =>
 // [1, 3, 4]  =>  2
 // [1, 2, 3]  =>  4
 // [4, 2, 3]  =>  1
-const findNumber = (arr) => {
-  if (arr.indexOf(1) === -1) return 1;
+let findNumber = (arr) => {
+  if (arr.indexOf(1) === -1) return 1
   for (let i = 1; i <= arr.length + 1; i++) {
     if (arr.indexOf(i) === -1) {
-      return i;
+      return i
     }
   }
-  return arr[0] + 1;
-};
+  return arr[0] + 1
+}
 
-let findNumber = (a) => {
-  let arr = a
+ findNumber = (a) => {
+  const arr = a
     .map((n, i) => (a.indexOf(i + 1) < 0 ? i + 1 : null))
-    .filter((f) => f !== null);
-  console.log(arr);
-  return arr[0] ? arr[0] : a.length + 1;
-};
+    .filter((f) => f !== null)
+  console.log(arr)
+  return arr[0] ? arr[0] : a.length + 1
+}
 
-function findNumber(a) {
+ findNumber = (a) => {
   let l = a.length,
-    total = Math.floor(((l + 1) * (l + 2)) / 2);
-  for (let i = 0; i < l; i++) total -= a[i];
-  return total;
+    total = Math.floor(((l + 1) * (l + 2)) / 2)
+  for (let i = 0; i < l; i++) total -= a[i]
+  return total
 }
-//ANOTHER SOLUTIONS
-function findNumber(array) {
-  return (
-    ((array.length + 2) * (array.length + 1)) / 2 -
-    array.reduce(function (l, r) {
-      return l + r;
-    }, 0)
-  );
+// ANOTHER SOLUTIONS
+ findNumber = (array) => (
+    ((array.length + 2) * (array.length + 1)) / 2
+    - array.reduce((l, r) => l + r, 0)
+  )
+findNumber = (array) => {
+  const n = array.length
+  return ((n + 2) * (n + 1)) / 2 - array.reduce((a, b) => a + b)
 }
-function findNumber(array) {
-  const n = array.length;
-  return ((n + 2) * (n + 1)) / 2 - array.reduce((a, b) => a + b);
-}
-//CODE WAR KYU 5
+// CODE WAR KYU 5
 // Given a certain number, how many multiples of three could you obtain with its digits?
 
 // Suposse that you have the number 362. The numbers that can be generated from it are:
@@ -1809,88 +1726,85 @@ function findNumber(array) {
 
 // find_mult_3(6063) == [25, 6630]
 // In Javascript findMult_3(). The function will receive only positive integers (num > 0), and you don't have to worry for validating the entries.
-function findMult_3(num) {
-  let s = new Set();
+ findMult_3 = (num) => {
+  const s = new Set();
   (function f(r, v) {
-    if (v && v != 0 && +v % 3 === 0) s.add(+v);
-    for (var i = 0; i < r.length; i++) {
-      f(r.slice(0, i) + r.slice(i + 1), v + r[i]);
+    if (v && v != 0 && +v % 3 === 0) s.add(+v)
+    for (let i = 0; i < r.length; i++) {
+      f(r.slice(0, i) + r.slice(i + 1), v + r[i])
     }
-  })(num.toString(), "");
-  return [s.size, Math.max(...s)];
+  }(num.toString(), ''))
+  return [s.size, Math.max(...s)]
 }
-function getAllPermutations(str) {
-  if (str.length === 1) return [str];
+const getAllPermutations = (str) => {
+  if (str.length === 1) return [str]
 
-  let results = [];
+  let results = []
   for (let i = 0; i < str.length; i++) {
-    const firstChar = str[i];
-    const charsLeft = str.substring(0, i) + str.substring(i + 1);
-    const innerPermutations = getAllPermutations(charsLeft);
+    const firstChar = str[i]
+    const charsLeft = str.substring(0, i) + str.substring(i + 1)
+    const innerPermutations = getAllPermutations(charsLeft)
     for (let j = 0; j < innerPermutations.length; j++) {
-      results.push(firstChar + innerPermutations[j]);
+      results.push(firstChar + innerPermutations[j])
     }
-    results = [...results, ...innerPermutations];
+    results = [...results, ...innerPermutations]
   }
-  return [...new Set(results)];
+  return [...new Set(results)]
 }
 
-const findMult_3 = (num) => {
+ findMult_3 = (num) => {
   const m = getAllPermutations(num.toString())
     .map(Number)
     .filter((n) => !(n % 3) && n)
-    .sort((a, b) => a - b);
-  const n = [...new Set(m)];
-  console.log(n);
-  return [n.length, n[n.length - 1]];
-};
+    .sort((a, b) => a - b)
+  const n = [...new Set(m)]
+  console.log(n)
+  return [n.length, n[n.length - 1]]
+}
 
-W = (Q, S, L, R) =>
-  L
+W = (Q, S, L, R) => (L
     ? Q.map((V, F) => W(Q.slice(0, F).concat(Q.slice(++F)), S + V, L - 1, R))
-    : S % 3 || R.add(+S);
+    : S % 3 || R.add(+S))
 findMult_3 = (Q, R) => (
-  (Q = [...("" + Q)]),
+  (Q = [...(`${ Q}`)]),
   (R = new Set()),
-  Q.map((V, F) => W(Q, "", ++F, R)),
+  Q.map((V, F) => W(Q, '', ++F, R)),
   R.delete(0),
   [R.size, Math.max(...R)]
-);
+)
 
 function gen(prefix, arr, set) {
-  if (arr.length == 0) return;
+  if (arr.length == 0) return
 
-  let n;
+  let n
   for (let i = 0; i < arr.length; ++i) {
-    set.add(+(prefix + arr[i]));
-    gen(prefix + arr[i], arr.slice(0, i).concat(arr.slice(i + 1)), set);
+    set.add(+(prefix + arr[i]))
+    gen(prefix + arr[i], arr.slice(0, i).concat(arr.slice(i + 1)), set)
   }
 }
 
-function findMult_3(num) {
-  let numbers = new Set();
-  gen("", ("" + num).split(""), numbers);
+ findMult_3 = (num) => {
+  const numbers = new Set()
+  gen('', (`${ num}`).split(''), numbers)
   let count = 0,
-    max = 0;
+    max = 0
   numbers.forEach((el) => {
     if (el % 3 == 0 && el != 0) {
-      max = el > max ? el : max;
-      ++count;
+      max = el > max ? el : max
+      ++count
     }
-  });
-  return [count, max];
+  })
+  return [count, max]
 }
-//CODE WAR KYU 8
+// CODE WAR KYU 8
 // I'm new to coding and now I want to get the sum of two arrays...actually the sum of all their elements. I'll appreciate for your help.
 
 // P.S. Each array includes only integer numbers. Output is a number too.
-const total = (arr) => arr.reduce((a, b) => a + b);
-const arrayPlusArray = (a1, a2) => total(a1) + total(a2);
-//ANOTHER SOLUTIONS
-function arrayPlusArray(arr1, arr2) {
-  return arr1.concat(arr2).reduce((acc, cur) => acc + cur);
-}
-//CODE WAR KYU 7
+const total = (arr) => arr.reduce((a, b) => a + b)
+let arrayPlusArray = (a1, a2) => total(a1) + total(a2)
+// ANOTHER SOLUTIONS
+ arrayPlusArray = (arr1, arr2) => arr1.concat(arr2).reduce((acc, cur) => acc + cur)
+// CODE WAR KYU 7
 // In this Kata, we will check if a string contains consecutive letters as they appear in the English alphabet and if each letter occurs only once.
 
 // Rules are: (1) the letters are adjacent in the English alphabet, and (2) each letter occurs only once.
@@ -1901,18 +1815,17 @@ function arrayPlusArray(arr1, arr2) {
 // solve("dabc") = True, because it contains a, b, c, d
 // solve("abbc") = False, because b does not occur once.
 // solve("v") = True
-const check = (s) =>
-  "abcdefghijklmnopqrstuvwxyz".includes([...s].sort().join(""));
+const check = (s) => 'abcdefghijklmnopqrstuvwxyz'.includes([...s].sort().join(''))
 
-//ANOTHER SOLUTIONS
+// ANOTHER SOLUTIONS
 function solve(s) {
-  let apb = "abcdefghijklmnopqrstuvwxyz";
-  s = s.split("").sort().join("");
+  const apb = 'abcdefghijklmnopqrstuvwxyz'
+  s = s.split('').sort().join('')
   return s.length === 1
     ? true
-    : s === apb.slice(apb.indexOf(s[0]), apb.indexOf(s[0]) + s.length);
+    : s === apb.slice(apb.indexOf(s[0]), apb.indexOf(s[0]) + s.length)
 }
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // Your team is writing a fancy new text editor and you've been tasked with implementing the line numbering.
 
 // Write a function which takes a list of strings and returns each line prepended by the correct number.
@@ -1924,15 +1837,13 @@ function solve(s) {
 // number([]) // => []
 // number(["a", "b", "c"]) // => ["1: a", "2: b", "3: c"]
 var number = function (array) {
-  return array.map((v, i) => `${i + 1}: ${v}`);
-};
+  return array.map((v, i) => `${i + 1}: ${v}`)
+}
 
 var number = function (array) {
-  return array.map(function (line, index) {
-    return index + 1 + ": " + line;
-  });
-};
-//CODE WAR KYU 6
+  return array.map((line, index) => `${index + 1 }: ${ line}`)
+}
+// CODE WAR KYU 6
 // Given an array of integers, find the one that appears an odd number of times.
 
 // There will always be only one integer that appears an odd number of times.
@@ -1944,13 +1855,13 @@ var number = function (array) {
 // [0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
 // [1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
 function findOdd(A) {
-  A = A.filter((v, i, arr) => arr.filter((s) => v === s).length % 2 !== 0);
-  return A[0];
+  A = A.filter((v, i, arr) => arr.filter((s) => v === s).length % 2 !== 0)
+  return A[0]
 }
-//ANOTHER SOLUTIONS
-const findOdd = (xs) => xs.reduce((a, b) => a ^ b);
+// ANOTHER SOLUTIONS
+ findOdd = (xs) => xs.reduce((a, b) => a ^ b)
 
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // In this Kata, you will be given a string that may have mixed uppercase and lowercase letters and your task is to convert that string to either lowercase only or uppercase only based on:
 
 // make as few changes as possible.
@@ -1961,54 +1872,44 @@ const findOdd = (xs) => xs.reduce((a, b) => a ^ b);
 // solve("CODe") = "CODE". Uppercase characters > lowecase. Change only the "e" to uppercase.
 // solve("coDE") = "code". Upper == lowercase. Change all to lowercase.
 
-const solve=(s)=>(s.match(/[A-Z]/g) || []).length <= (s.match(/[a-z]/g) || []).length 
-? s.toLowerCase() 
-: s.toUpperCase()
+solve = (s) => ((s.match(/[A-Z]/g) || []).length <= (s.match(/[a-z]/g) || []).length
+? s.toLowerCase()
+: s.toUpperCase())
 
-const solve=(s)=>
-(s.match(/[a-z]/g) || []).length >= s.length / 2
-? s.toLowerCase() 
-: s.toUpperCase()
-//ANOTHER SOLUTIONS
-const solve = s => s.replace(/[A-Z]/g,'').length < s.length/2 ? s.toUpperCase() : s.toLowerCase()
+solve = (s) => ((s.match(/[a-z]/g) || []).length >= s.length / 2
+? s.toLowerCase()
+: s.toUpperCase())
+// ANOTHER SOLUTIONS
+solve = (s) => (s.replace(/[A-Z]/g, '').length < s.length / 2 ? s.toUpperCase() : s.toLowerCase())
 
-function solve(s){
-  let lowerC = 0;
-  let upperC = 0;
-  for( let i = 0;i<s.length;i++){
-    if( s[i] == s[i].toUpperCase()){
-      upperC++;
-    }
-    else{
-      lowerC++;
+solve = (s) => {
+  let lowerC = 0
+  let upperC = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] == s[i].toUpperCase()) {
+      upperC++
+    } else {
+      lowerC++
     }
   }
   return lowerC >= upperC ? s.toLowerCase() : s.toUpperCase()
 }
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
 
 // Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"
-function spinWords(string){
-  string = string.split(" ");
-  return string.map(v=>{
-    return v.length >= 5 ? [...v].reverse().join("") : v
-  }).join(" ");
+ spinWords = (string) => {
+  string = string.split(' ')
+  return string.map((v) => (v.length >= 5 ? [...v].reverse().join('') : v)).join(' ')
 }
 
-//ANOTHER SOLUTIONS
-function spinWords(words){
-  return words.split(' ').map(w => w.length < 5 ? w : w.split('').reverse().join('')).join(' ');
-}
+// ANOTHER SOLUTIONS
+spinWords = (words) => words.split(' ').map((w) => (w.length < 5 ? w : w.split('').reverse().join(''))).join(' ')
 
-function spinWords(str){
-  return str.replace(/\w{5,}/g, function(w) {
-    return w.split('').reverse().join('');
-  });
-}
+ spinWords = (str) => str.replace(/\w{5,}/g, (w) => w.split('').reverse().join(''))
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Description:
 // For a given nonempty string s find a minimum substring t and the maximum number k, such that the entire string s is equal to t repeated k times. The input string consists of lowercase latin letters. Your function should return a tuple (in Python) (t, k) or an array (in Ruby and JavaScript) [t, k]
 
@@ -2031,61 +1932,61 @@ function spinWords(str){
 // because for this string "abcde" the minimum substring t, such that s is t repeated k times, is itself.
 
 // ALGORITHMS
-function f(s) {
-  for(let i = 1;i < s.length;i++){
-  if(s.substring(0,i).repeat(s.length / i) === s){
-    return [s.substring(0,i),s.length / i]
+f = (s) => {
+  for (let i = 1; i < s.length; i++) {
+  if (s.substring(0, i).repeat(s.length / i) === s) {
+    return [s.substring(0, i), s.length / i]
   }
   }
   return [s, 1]
 }
 
-//ANOTHER SOLUTIONS
-const f = (s)=>  {
-  var m = s.match(/^(.*?)\1+$/);
-  return m ? [m[1], s.length / m[1].length] : [s, 1];
+// ANOTHER SOLUTIONS
+ f = (s) => {
+  const m = s.match(/^(.*?)\1+$/)
+  return m ? [m[1], s.length / m[1].length] : [s, 1]
 }
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
 
 // For example:
 
 //  persistence(39) === 3 // because 3*9 = 27, 2*7 = 14, 1*4=4
 //                        // and 4 has only one digit
-                 
+
 //  persistence(999) === 4 // because 9*9*9 = 729, 7*2*9 = 126,
 //                         // 1*2*6 = 12, and finally 1*2 = 2
-                  
+
 //  persistence(4) === 0 // because 4 is already a one-digit number
-function persistence(n) {
-  n = n.toString().split("");
-  if(n.length === 1){
+ persistence = (n) => {
+  n = n.toString().split('')
+  if (n.length === 1) {
       return 0
     }
-  return 1 + persistence(n.reduce((a,b) => a * +(b)))
+  return 1 + persistence(n.reduce((a, b) => a * +(b)))
 }
-//ANOTHER SOLUTIONS
-function persistence(num) {
-  var times = 0;
-  
-  num = num.toString();
-  
+// ANOTHER SOLUTIONS
+persistence = (num) => {
+  let times = 0
+
+  num = num.toString()
+
   while (num.length > 1) {
-    times++;
-    num = num.split('').map(Number).reduce((a, b) => a * b).toString();
+    times++
+    num = num.split('').map(Number).reduce((a, b) => a * b).toString()
   }
-  
-  return times;
+
+  return times
 }
 
-function persistence(num) {
+persistence = (num) => {
   for (var i = 0; num > 9; i++) {
-    num = num.toString().split('').reduce((t, c) => c * t);
+    num = num.toString().split('').reduce((t, c) => c * t)
   }
-  return i;
+  return i
 }
-//CODE WAR KYU 8
+// CODE WAR KYU 8
 // Your task is to create functionisDivideBy (or is_divide_by) to check if an integer number is divisible by each out of two arguments.
 // A few cases:
 // (-12, 2, -6)  ->  true
@@ -2097,17 +1998,13 @@ function persistence(num) {
 // (4, 1, 4)     ->  true
 // (15, -5, 3)   ->  true
 
-const isDivideBy = (number, a, b) => number % a === 0 && number % b === 0
-//ANOTHER SOLUTIONS
-function isDivideBy(number, a, b) {
-  return [a, b].every(i => number % i === 0)
-}
+let isDivideBy = (number, a, b) => number % a === 0 && number % b === 0
+// ANOTHER SOLUTIONS
+ isDivideBy = (number, a, b) => [a, b].every((i) => number % i === 0)
 
-function isDivideBy(number, a, b) {
-  return (number%a + number%b) === 0
-}
+ isDivideBy = (number, a, b) => (number % a + number % b) === 0
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // The prime numbers are not regularly spaced. For example from 2 to 3 the step is 1. From 3 to 5 the step is 2. From 7 to 11 it is 4. Between 2 and 50 we have the following pairs of 2-steps primes:
 // 3, 5 - 5, 7, - 11, 13, - 17, 19, - 29, 31, - 41, 43
 // We will write a function step with parameters:
@@ -2129,40 +2026,40 @@ function isDivideBy(number, a, b) {
 // The idea of "step" is close to that of "gap" but it is not exactly the same. For those interested they can have a look at http://mathworld.wolfram.com/PrimeGaps.html.
 // A "gap" is more restrictive: there must be no primes in between (101-107 is a "step" but not a "gap". Next kata will be about "gaps":-).
 
-const isPrime = (num) =>{
-  if(num === 2) return true
+ isPrime = (num) => {
+  if (num === 2) return true
     for (let i = 2; i * i <= num; i++) {
-      if (num % i == 0) return false;
+      if (num % i == 0) return false
     }
-    return true;
-  };
-const step =(g, m, n) => {
-  let temp = [];
-  for (let i = m; i <= n; i++){
+    return true
+  }
+const step = (g, m, n) => {
+  const temp = []
+  for (let i = m; i <= n; i++) {
     if (isPrime(i)) {
-      if (temp.includes(i - g)) return [i - g, i];
-      else temp.push(i);
+      if (temp.includes(i - g)) return [i - g, i]
+      temp.push(i)
     }
   }
-  return null;
+  return null
 }
-//ANOTHER SOLUTIONS
-function isPrime(n) {
-  var r = Math.sqrt(n) | 0;
+// ANOTHER SOLUTIONS
+ isPrime = (n) => {
+  const r = Math.sqrt(n) | 0
   for (var i = 2; i <= r && n % i; i++);
-  return i > r;
+  return i > r
 }
 
-function step(g, m, n) {
-  for (var i = m; i <= n - g; i++) {
+ step = (g, m, n) => {
+  for (let i = m; i <= n - g; i++) {
     if (isPrime(i) && isPrime(i + g)) {
-      return [i, i + g];
-    };
+      return [i, i + g]
+    }
   }
-  
-  return null;
+
+  return null
 }
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // You are going to be given a word. Your job will be to make sure that each character in that word has the exact same number of occurrences. You will return true if it is valid, or false if it is not.
 
 // For this kata, capitals are considered the same as lowercase letters. Therefore: "A" == "a"
@@ -2173,40 +2070,37 @@ function step(g, m, n) {
 // "abcabc" is a valid word because "a" appears twice, "b" appears twice, and"c" appears twice.
 // "abcabcd" is NOT a valid word because "a" appears twice, "b" appears twice, "c" appears twice, but "d" only appears once!
 // "123abc!" is a valid word because all of the characters only appear once in the word.
-function validateWord(s){
-  s = s.toLowerCase().split("");
-  let arr = [];
-  for(let i = 0;i<s.length;i++){
-    let l = s.filter(v => v === s[i]).length;
-    if(arr.includes(l)) continue;   
-       arr.push(l);
+let validateWord = (s) => {
+  s = s.toLowerCase().split('')
+  const arr = []
+  for (let i = 0; i < s.length; i++) {
+    const l = s.filter((v) => v === s[i]).length
+    if (arr.includes(l)) continue
+       arr.push(l)
   }
   return arr.length === 1
 }
 O(N2)
-//ANOTHER SOLUTIONS
-function validateWord(s) {
-  var freq = {}
-  s.toLowerCase().split('').forEach(function(s) {
+// ANOTHER SOLUTIONS
+validateWord = (s) => {
+  const freq = {}
+  s.toLowerCase().split('').forEach((s) => {
     freq[s] ? freq[s]++ : freq[s] = 1
   })
   return new Set(Object.values(freq)).size == 1
 }
 
-function validateWord(s, c = s.toLowerCase())
-{
-  return c.length % new Set(c).size == 0
-}
+ validateWord = (s, c = s.toLowerCase()) => c.length % new Set(c).size == 0
 
-function validateWord(s){
-  var counts = {};
-  for(var c of s.toLowerCase()){
-    if(counts[c] === undefined){counts[c] = 0;}
-    counts[c]++;
+ validateWord = (s) => {
+  const counts = {}
+  for (const c of s.toLowerCase()) {
+    if (counts[c] === undefined) { counts[c] = 0 }
+    counts[c]++
   }
-  return Math.max(...Object.values(counts)) === Math.min(...Object.values(counts));
+  return Math.max(...Object.values(counts)) === Math.min(...Object.values(counts))
 }
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // You also notice that each letter is paired with the letter that it coincides with when the alphabet is reversed.
 
 // For example: "a" is encoded with "z", "b" with "y", "c" with "x", etc
@@ -2220,75 +2114,77 @@ function validateWord(s){
 // Create a function that will instantly decode any of these messages
 
 // You can assume no punctuation or capitals, only lower case letters, but remember spaces!
-function decode(message){
-  let a = 'abcdefghijklmnopqrstuvwxyz';
-  let b = a.split("").reverse().join("");
+let decode = (message) => {
+  const a = 'abcdefghijklmnopqrstuvwxyz'
+  const b = a.split('').reverse().join('')
   message = [...message]
-    .map((item)=> item = item === " " ? item : a[b.indexOf(item)]);
-  return message.join("")
+    .map((item) => item = item === ' ' ? item : a[b.indexOf(item)])
+  return message.join('')
 }
 
-//ANOTHER SOLUTIONS
-const decode = m => [...m].map(x=>x==" " ? x : String.fromCharCode(219-x.charCodeAt())).join("");
+// ANOTHER SOLUTIONS
+ decode = (m) => [...m].map((x) => (x == ' ' ? x : String.fromCharCode(219 - x.charCodeAt()))).join('')
 
-const decode = message =>  message.replace(/[a-z]/g, val => String.fromCharCode(219 - val.charCodeAt()));
+ decode = (message) => message.replace(/[a-z]/g, (val) => String.fromCharCode(219 - val.charCodeAt()))
 
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // Examples:
 
 // [a, b, c, d, e], [1, 2, 3, 4, 5] becomes  [a, 1, b, 2, c, 3, d, 4, e, 5]
 
 // [1, 2, 3], [a, b, c, d, e, f] becomes [1, a, 2, b, 3, c, d, e, f]
 
-function mergeArrays(a, b) {
-  let arr = [];
-  let l = Math.max(a.length,b.length);
-  for(let i = 0;i< l ;i++){
-    arr.push(a[i],b[i])
+let mergeArrays = (a, b) => {
+  const arr = []
+const l = Math.max(a.length, b.length)
+  for (let i = 0; i < l; i++) {
+    arr.push(a[i], b[i])
   }
-  return arr.filter(v => v !== undefined)
+  return arr.filter((v) => v !== undefined)
 }
 
-//ANOTHER SOLUTIONS
-function mergeArrays(a, b) {
-  var res = [];
-  let i=0; 
-  while ((i<a.length) || (i<b.length) ) {
-    if (i<a.length) res.push(a[i]); 
-    if (i<b.length) res.push(b[i]); 
-    i++;
+// ANOTHER SOLUTIONS
+ mergeArrays = (a, b) => {
+  const res = []
+  let i = 0
+  while ((i < a.length) || (i < b.length)) {
+    if (i < a.length) res.push(a[i])
+    if (i < b.length) res.push(b[i])
+    i++
   }
-  return res;
+  return res
 }
 
-const mergeArrays = (a, b) => a
+mergeArrays = (a, b) => a
   .reduce((arr, el, idx) => (b[idx] ? arr.push(el, b[idx]) : arr.push(el), arr), [])
-  .concat(b.slice(a.length));
-//OOP class object
+  .concat(b.slice(a.length))
+// OOP class object
 class Character {
   constructor(name, weapon) {
-    this.name = name;
-    this.weapon = weapon;
+    this.name = name
+    this.weapon = weapon
   }
+
   attack() {
-    return 'atack with ' + this.weapon
+    return `atack with ${ this.weapon}`
   }
 }
 
-class Queen extends Character { 
+class Queen extends Character {
   constructor(name, weapon, kind) {
-    super(name, weapon) 
-    this.kind = kind;
+    super(name, weapon)
+    this.kind = kind
   }
+
   attack() {
-    console.log(super.attack());
+    console.log(super.attack())
     return `I am the ${this.name} of ${this.kind}, now bow down to me! `
   }
 }
 
-const victoria = new Queen('Victoria', 'army', 'hearts');
+const victoria = new Queen('Victoria', 'army', 'hearts')
 victoria.attack()
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // Your task is to return the sum of Triangular Numbers up-to-and-including the nth Triangular Number.
 
 // Triangular Number: "any of the series of numbers (1, 3, 6, 10, 15, etc.) obtained by continued summation of the natural numbers 1, 2, 3, 4, 5, etc."
@@ -2302,48 +2198,45 @@ victoria.attack()
 // e.g. If 4 is given: 1 + 3 + 6 + 10 = 20.
 
 // Triangular Numbers cannot be negative so return 0 if a negative number is given.
-function sumTriangularNumbers(n) {
-  if(n < 0) return 0;
+let sumTriangularNumbers = (n) => {
+  if (n < 0) return 0
   let step = 1,
       last = 2,
-      sum = 1,total = 1;
-  while(step < n){
-    sum += last;
-    total += sum;
-    last++;
-    step++;
+      sum = 1,
+total = 1
+  while (step < n) {
+    sum += last
+    total += sum
+    last++
+    step++
   }
-  return total;
+  return total
 }
-//ANOTHER SOLUTIONS
-function sumTriangularNumbers(n) {
-  return n < 0 ? 0 : n * (n + 1) * (n + 2) / 6;
-}
+// ANOTHER SOLUTIONS
+ sumTriangularNumbers = (n) => (n < 0 ? 0 : n * (n + 1) * (n + 2) / 6)
 
-function sumTriangularNumbers(n) {
-  var sum = 0;  
-  for(var i = 1; i <= n; i++)
-  {
-  sum += (i*(i+1))/2;
+ sumTriangularNumbers = (n) => {
+  let sum = 0
+  for (let i = 1; i <= n; i++) {
+  sum += (i * (i + 1)) / 2
   }
-  return sum;
+  return sum
   }
-function sumTriangularNumbers(n) {
-    if  (n < 0){
-    return 0;
+ sumTriangularNumbers = (n) => {
+    if (n < 0) {
+    return 0
     }
-    else  {
-      return n*(n+1)/2 + sumTriangularNumbers(n-1);
-    }
+
+      return n * (n + 1) / 2 + sumTriangularNumbers(n - 1)
   }
-function sumTriangularNumbers(n) {
+ sumTriangularNumbers = (n) => {
     let sum = 0
-    for (let i=0, j=1; i<n; i++, j += i+1) {
+    for (let i = 0, j = 1; i < n; i++, j += i + 1) {
       sum += j
     }
     return sum
   }
-//CODE WAR KYU 7
+// CODE WAR KYU 7
 // Description:
 // Very simple, given a number, find its opposite.
 
@@ -2355,11 +2248,9 @@ function sumTriangularNumbers(n) {
 function opposite(n) {
   return n <= 0 ? Math.abs(n) : -n
 }
-function opposite(number) {
-  return -number;
-}
+opposite = (number) => -number
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Yesterday you found some shoes in your room. Each shoe is described by two values:
 
 // type indicates if it's a left or a right shoe;
@@ -2369,9 +2260,9 @@ function opposite(number) {
 // Example
 // For:
 
-// shoes = [[0, 21], 
-//          [1, 23], 
-//          [1, 21], 
+// shoes = [[0, 21],
+//          [1, 23],
+//          [1, 21],
 //          [0, 23]]
 //          ```
 // the output should be `true;`
@@ -2379,26 +2270,25 @@ function opposite(number) {
 //  For:
 // shoes = [[0, 21], [1, 23], [1, 21], [1, 23]] ``` the output should be false.
 function pairOfShoes(shoes) {
-  let copy = shoes.map(e=> `${e}`)
-  return shoes.every(s => copy.indexOf(`${[s[0] > 0 ? 0 : 1,s[1]]}`) >= 0)
+  const copy = shoes.map((e) => `${e}`)
+  return shoes.every((s) => copy.indexOf(`${[s[0] > 0 ? 0 : 1, s[1]]}`) >= 0)
 }
 
-//ANOTHER SOLUTIONS
-const pairOfShoes = shoes =>
-  Object.values(shoes.reduce((pre, val) => (pre[val[1]] = (pre[val[1]] || 0) + (val[0] || -1), pre), {})).every(val => !val);
+// ANOTHER SOLUTIONS
+ pairOfShoes = (shoes) => Object.values(shoes.reduce((pre, val) => (pre[val[1]] = (pre[val[1]] || 0) + (val[0] || -1), pre), {})).every((val) => !val)
 
-function pairOfShoes(shoes) {
-    var lefts = 0, rights = 0
-    for (var shoe of shoes)
+ pairOfShoes = (shoes) => {
+    let lefts = 0,
+rights = 0
+    for (const shoe of shoes) {
       shoe[0] === 0 ? lefts += shoe[1] : rights += shoe[1]
+}
     return lefts === rights
-  }//©
+  }// ©
 
-function pairOfShoes(shoes) {
-    return shoes.every(([a, b]) => shoes.some(([x, y]) => x == Math.abs(a - 1) && y == b))
-  }
+  pairOfShoes = (shoes) => shoes.every(([a, b]) => shoes.some(([x, y]) => x == Math.abs(a - 1) && y == b))
 
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Johnny is a farmer and he annually holds a beet farmers convention "Drop the beet".
 
 // Every year he takes photos of farmers handshaking. Johnny knows that no two farmers handshake more than once. He also knows that some of the possible handshake combinations may not happen.
@@ -2406,52 +2296,51 @@ function pairOfShoes(shoes) {
 // However, Johnny would like to know the minimal amount of people that participated this year just by counting all the handshakes.
 
 // Help Johnny by writing a function, that takes the amount of handshakes and returns the minimal amount of people needed to perform these handshakes (a pair of farmers handshake only once).
-function getParticipants(handshakes){
-  if(handshakes === 0) return 1
+function getParticipants(handshakes) {
+  if (handshakes === 0) return 1
   let oldTarget = 1,
       target = 2,
       step = 0,
       count = 1,
-      n = 1;
-  while(n < handshakes+1){
-    n++;
-    if(  n < target && n > oldTarget) continue;
-    else{
-      count++;
-      step++;
-      oldTarget = target;
-      target += step;
+      n = 1
+  while (n < handshakes + 1) {
+    n++
+    if (n < target && n > oldTarget) continue
+    else {
+      count++
+      step++
+      oldTarget = target
+      target += step
     }
   }
   return count
 }
 
-//ANOTHER SOLUTIONS (CLEVER)
-function getParticipants(h){
-  return Math.ceil((1+Math.sqrt(1+8*h))/2)}
-  const allHandshakes = number => (number * (number - 1)) / 2;
+// ANOTHER SOLUTIONS (CLEVER)
+ getParticipants = (h) => Math.ceil((1 + Math.sqrt(1 + 8 * h)) / 2)
+  const allHandshakes = (number) => (number * (number - 1)) / 2
 
-const getParticipants = (numberOfHandshakes) => {
-    let minimumParticipants = 1;
-    while (allHandshakes(minimumParticipants) < numberOfHandshakes) ++minimumParticipants;
-  
-    return minimumParticipants;
-  };
+  getParticipants = (h) => {
+    let minimumParticipants = 1
+    while (allHandshakes(minimumParticipants) < h) ++minimumParticipants
 
-function getParticipants(h){
-    for(var i=0,k=1;i<h;i+=k++){}
-    return k;
+    return minimumParticipants
   }
-function getParticipants(handshakes){
-    let p = 1;
-    let maxH = 0;
-    while (maxH < handshakes){
-      p++;
-      maxH += p-1;
+
+  getParticipants = (h) => {
+    for (var i = 0, k = 1; i < h; i += k++) {}
+    return k
+  }
+  getParticipants = (h) => {
+    let p = 1
+    let maxH = 0
+    while (maxH < h) {
+      p++
+      maxH += p - 1
     }
-    return p;
+    return p
   }
-//CODE WAR KYU 6
+// CODE WAR KYU 6
 // Define a function that takes one integer argument and returns logical value true or false depending on if the integer is a prime.
 
 // Per Wikipedia, a prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself.
@@ -2461,29 +2350,29 @@ function getParticipants(handshakes){
 // You can not assume that the integer will be only positive. You may be given negative numbers as well (or 0).
 // NOTE on performance: There are no fancy optimizations required, but still the most trivial solutions might time out. Numbers go up to 2^31 (or similar, depends on language version). Looping all the way up to n, or n/2, will be too slow.
 
-function isPrime(num) {
-  if(num < 2) return false
-    for (var i = 2; i * i <= num; i++) {
-      if (num % i == 0) return false;
+ isPrime = (num) => {
+  if (num < 2) return false
+    for (let i = 2; i * i <= num; i++) {
+      if (num % i == 0) return false
     }
-    return true;
-  };
-//O(n) O(1)
-//ANOTHER SOLUTIONS
-function isPrime(num) {
-  if (num < 2) return false;
-  const limit = Math.sqrt(num);
+    return true
+  }
+// O(n) O(1)
+// ANOTHER SOLUTIONS
+ isPrime = (num) => {
+  if (num < 2) return false
+  const limit = Math.sqrt(num)
   for (let i = 2; i <= limit; ++i) {
     if (num % i === 0) {
-      return false;
+      return false
     }
   }
-  return true;
+  return true
 }
-function isPrime(num) {
-  for(let i = 2; i <= Math.sqrt(num); i++) {
-    if(num % i === 0) {
-      return false;
+ isPrime = (num) => {
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false
     }
   }
   return num > 1
