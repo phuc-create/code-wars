@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unreachable-loop */
 /* eslint-disable no-restricted-globals */
@@ -2376,4 +2377,36 @@ function getParticipants(handshakes) {
     }
   }
   return num > 1
+}
+// CODE WAR KYU 5
+// The marketing team is spending way too much time typing in hashtags.
+// Let's help them with our own Hashtag Generator!
+
+// Here's the deal:
+
+// It must start with a hashtag (#).
+// All words must have their first letter capitalized.
+// If the final result is longer than 140 chars it must return false.
+// If the input or the result is an empty string it must return false.
+// Examples
+// " Hello there thanks for trying my Kata"  =>  "#HelloThereThanksForTryingMyKata"
+// "    Hello     World   "                  =>  "#HelloWorld"
+// ""                                        =>  false
+function generateHashtag(str) {
+  str = str.replace(/\s+/g, ' ').trim()
+  if (str.length === 0) return false
+  str = str.split(' ').map((v) => v[0].toUpperCase() + v.slice(1)).join('')
+  if (str.length >= 140) return false
+  return `#${str}`
+}
+// ANOTHER SOLUTIONS
+ generateHashtag = (str) => (str.length > 140 || str === '' ? false
+    : `#${ str.split(' ').map(capitalize).join('')}`)
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+ generateHashtag = (str) => {
+  var hashed = `#${ str.split(' ').map((v) => v.charAt(0).toUpperCase() + v.slice(1)).join('')}`
+  return hashed.length > 140 || str == '' ? false : hashed
 }
