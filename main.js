@@ -2410,3 +2410,51 @@ function capitalize(str) {
   var hashed = `#${ str.split(' ').map((v) => v.charAt(0).toUpperCase() + v.slice(1)).join('')}`
   return hashed.length > 140 || str == '' ? false : hashed
 }
+
+// CODE WAR KYU 6
+// Inspired by one of Uncle Bob's TDD Kata
+
+// Write a function that generates factors for a given number.
+
+// The function takes an integer on the standard input and returns a list of integers (ObjC: array of NSNumbers representing integers). That list contains the prime factors in numerical sequence.
+
+// Examples
+// 1  ==>  []
+// 3  ==>  [3]
+// 8  ==>  [2, 2, 2]
+// 9  ==>  [3, 3]
+// 12 ==>  [2, 2, 3]
+
+const prime_factors = (n) => {
+  let temp = []
+  for (let i = 2; i <= n; i++) {
+    while (n % i === 0) {
+      temp.push(i)
+      n /= i
+    }
+  }
+      return temp
+}
+
+// CODE WAR KYU 7
+// In a factory a printer prints labels for boxes. For one kind of boxes the printer has to use colors which, for the sake of simplicity, are named with letters from a to m.
+
+// The colors used by the printer are recorded in a control string. For example a "good" control string would be aaabbbbhaijjjm meaning that the printer used three times color a, four times color b, one time color h then one time color a...
+
+// Sometimes there are problems: lack of colors, technical malfunction and a "bad" control string is produced e.g. aaaxbbbbyyhwawiwjjjwwm with letters not from a to m.
+
+// You have to write a function printer_error which given a string will return the error rate of the printer as a string representing a rational whose numerator is the number of errors and the denominator the length of the control string. Don't reduce this fraction to a simpler expression.
+
+// The string has a length greater or equal to one and contains only letters from ato z.
+
+// Examples:
+// s="aaabbbbhaijjjm"
+// printer_error(s) => "0/14"
+
+// s="aaaxbbbbyyhwawiwjjjwwm"
+// printer_error(s) => "8/22"
+
+function printerError(s) {
+  let errs = (s.match(/[n-z]/g) || []).length
+  return `${errs}/${s.length}`
+}
