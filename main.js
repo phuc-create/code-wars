@@ -1442,7 +1442,7 @@ let save = (sizes, hd) => {
 }
 
 // ANOTHER SOLUTIONS
-  save = (sizes, hd) => {
+save = (sizes, hd) => {
   let i = -1
   while (hd >= 0) {
     hd -= sizes.shift()
@@ -1453,7 +1453,6 @@ let save = (sizes, hd) => {
 
 // CODE WAR KYU 8
 // Your function takes two arguments:
-
 // current father's age (years)
 // current age of his son (years)
 // Сalculate how many years ago the father was twice as old as his son (or in how many years he will be twice as old).
@@ -2487,3 +2486,36 @@ let trouble = (x, t) => {
 }
 // ANOTHER SOLUTIONS
  trouble = (x, t) => x.reduce((pre, val) => (val + pre[pre.length - 1] !== t ? [...pre, val] : pre), [])
+
+ // CODE WAR KYU 6
+//  Input >> Output Examples:
+// 1- numPrimorial (3) ==> return (30)
+// Explanation:
+// Since the passed number is (3) ,Then the primorial should obtained by multiplying 2 * 3 * 5 = 30 .
+
+// Mathematically written as , P3# = 30 .
+// 2- numPrimorial (5) ==> return (2310)
+// Explanation:
+// Since the passed number is (5) ,Then the primorial should obtained by multiplying 2 * 3 * 5 * 7 * 11 = 2310 .
+
+// Mathematically written as , P5# = 2310 .
+
+function checkPrime(number) {
+  if (number === 2) return true
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) return false
+  }
+  return true
+}
+
+function numPrimorial(n) {
+let arr = [],
+start = 2
+     while (arr.length < n) {
+      if (checkPrime(start)) {
+        arr.push(start)
+      }
+      start++
+    }
+  return arr.reduce((a, b) => a * b)
+}
