@@ -2519,3 +2519,36 @@ start = 2
     }
   return arr.reduce((a, b) => a * b)
 }
+// CODE WAR KYU 7
+// Description:
+// An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+
+// Example: (Input --> Output)
+
+// "Dermatoglyphics" --> true
+// "aba" --> false
+// "moOse" --> false (ignore letter case)
+function isIsogram(str) {
+  if (str.length < 0) return false
+  str = str.toLowerCase().split('')
+  for (let i = 0; i < str.length; i++) {
+    if (str.filter((v) => (v === str[i])).length > 1) return false
+  }
+  return true
+}
+// ANOTHER SOLUTIONS
+isIsogram = (str) => !/(\w).*\1/i.test(str)
+isIsogram = (str) => !/(.).*?\1/i.test(str)
+
+isIsogram = (str) => new Set(str.toUpperCase()).size == str.length
+
+isIsogram = (str) => !str.match(/([a-z]).*\1/i)
+// /
+// ([a-z]).*\1
+// /
+// 1st Capturing Group ([a-z])
+// Match a single character present in the list below [a-z]
+// a-z matches a single character in the range between a (index 97) and z (index 122) (case sensitive)
+// . matches any character (except for line terminators)
+// * matches the previous token between zero and unlimited times, as many times as possible, giving back as needed (greedy)
+// \1 matches the same text as most recently matched by the 1st capturing group
