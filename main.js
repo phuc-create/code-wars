@@ -2552,3 +2552,59 @@ isIsogram = (str) => !str.match(/([a-z]).*\1/i)
 // . matches any character (except for line terminators)
 // * matches the previous token between zero and unlimited times, as many times as possible, giving back as needed (greedy)
 // \1 matches the same text as most recently matched by the 1st capturing group
+
+// CODE WAR KYU 6
+// Pair of gloves
+// Winter is coming, you must prepare your ski holidays. The objective of this kata is to determine the number of pair of gloves you can constitute from the gloves you have in your drawer.
+
+// A pair of gloves is constituted of two gloves of the same color.
+
+// You are given an array containing the color of each glove.
+
+// You must return the number of pair you can constitute.
+
+// You must not change the input array.
+
+// Example :
+
+// let myGloves = ['red','green','red','blue','blue'];
+// numberOfPairs(myGloves) == 2;// red and blue
+
+// let redGloves = ['red','red','red','red','red','red'];
+// numberOfPairs(redGloves) == 3; // 3 red pairs
+function numberOfPairs(gloves) {
+  let totalGloves = 0
+  let checked = []
+  for (let i = 0; i < gloves.length; i++) {
+    if (!checked.includes(gloves[i])) {
+      let glovesAvailable = gloves.filter((v) => v === gloves[i]).length
+      if (glovesAvailable >= 2) {
+        if (glovesAvailable % 2 === 0) {
+          totalGloves += glovesAvailable / 2
+        } else {
+          totalGloves += (glovesAvailable - 1) / 2
+        }
+        checked.push(gloves[i])
+      }
+    }
+  }
+  return totalGloves
+}
+
+// ANOTHER SOLUTIONS
+numberOfPairs = (a) => [...new Set(a)].map((b) => a.join``.split(b).length - 1).reduce((a, b) => a + (b >> 1), 0)
+
+numberOfPairs = (gloves) => {
+  let counter = 0
+  let copyGloves = [...gloves].sort()
+  for (let i = 0; i < copyGloves.length; i++) {
+      if (copyGloves[i] === copyGloves[i + 1]) {
+          counter++
+          copyGloves.splice(i, 2)
+          i--
+      }
+  }
+  return counter
+}
+
+numberOfPairs = (gloves) => [...new Set(gloves)].reduce((acc, el) => acc + ~~(gloves.filter((x) => x === el).length / 2), 0)
