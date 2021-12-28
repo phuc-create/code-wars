@@ -2665,6 +2665,19 @@ function sumFracts(l) {
 }
 
 // ANOTHER SOLUTIONS
+sumFracts = (l) => {
+  if (!l.length) return null
+  let denom = l.reduce((a, c) => a * c[1], 1)
+  let num = l.reduce((a, c, i) => a + denom / c[1] * c[0], 0)
+  for (i = 2; i <= Math.sqrt(denom); i++) {
+    while (denom % i == 0 && num % i == 0) {
+      denom /= i
+      num /= i
+    }
+  }
+  return denom == 1 ? num : [num, denom]
+}
+
 const gcd = (a, b) => (b ? gcd(b, a % b) : a)
 
  sumFracts = (l) => {
