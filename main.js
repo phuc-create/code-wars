@@ -2608,3 +2608,92 @@ numberOfPairs = (gloves) => {
 }
 
 numberOfPairs = (gloves) => [...new Set(gloves)].reduce((acc, el) => acc + ~~(gloves.filter((x) => x === el).length / 2), 0)
+
+// CODE WAR KYU 6
+// Example:
+// [ [1, 2], [1, 3], [1, 4] ]  -->  [13, 12]
+// 1/2  +  1/3  +  1/4     =      13/12
+// Note
+// See sample tests for more examples and form of results.
+const calculateLCM = (arr) => {
+  // I copy from StackoverFlow :))
+  const gcd2 = (a, b) => {
+    // Greatest common divisor of 2 integers
+    if (!b) return b === 0 ? a : NaN
+    return gcd2(b, a % b)
+  }
+  // Least common multiple of 2 integers
+  const lcm2 = (a, b) => (a * b) / gcd2(a, b)
+
+  // Least common multiple of a list of integers
+  let n = 1
+  for (let i = 0; i < arr.length; ++i) {
+    n = lcm2(arr[i], n)
+  }
+  return n
+}
+
+function simplify(num1, num2) {
+  for (var i = 2; i < Math.sqrt(Math.max(num1, num2)); i++) {
+    if (num1 % i === 0 && num2 % i === 0) {
+      num1 /= i
+      num2 /= i
+    }
+  }
+  return num2 === 1 ? num1 : [num1, num2]
+}
+
+function sumFracts(l) {
+  if (!l.length) return null
+  let d = []
+  for (let i = 0; i < l.length; i++) {
+    d.push(l[i][1])
+  }
+  let der = d.every((v) => v === d[0]) ? d[0] : calculateLCM(d)
+  l = l
+    .map((sub, idx, arr) => (l[idx] = sub[0] * (der / sub[1])))
+    .reduce((a, b) => a + b, 0)
+  let simpLify = simplify(l, der)
+  let final = simplify(simpLify[0], simpLify[1])
+  return final[0] === undefined
+    ? simpLify[0] % simpLify[1] === 0
+      ? simpLify[0] / simpLify[1]
+      : simpLify
+    : final[0] % final[1] === 0
+    ? final[0] / final[1]
+    : final
+}
+
+// ANOTHER SOLUTIONS
+const gcd = (a, b) => (b ? gcd(b, a % b) : a)
+
+ sumFracts = (l) => {
+  if (!l.length) return null
+
+  var [n, d] = l.reduce(([a, x], [b, y]) => [a * y + b * x, x * y])
+  var g = gcd(n, d)
+
+  return g === d ? n / d : [n / g, d / g]
+}
+// EXPLANATION -CLARIFY
+// When we want to add rationals together, such as a/x + b/y, we need a common denominator. The simplest way to find a common denominator is to multiply the numerator and denominator of each rational by the denominator of the other rational. For example, a/x + b/y would become ay/xy + bx/xy which gets simplified to (ay + bx)/xy. Since we're multiplying the numerator and denominator of each rational by the same value, it's the same as multiplying each rational by 1 (ie. a/x * y/y = a/x * 1). This guarantees our result is the same before and after this operation.
+
+// The reduce statement you see in the solution is performing this kind of rational addition but for every term in the array of rationals. so a/x + b/y would become (ay + bx)/xy for the first two terms. Adding a third term, for example, would result in (ay + bx)/xy + c/z = (ayz + bxz + cxy)/xyz and so forth.
+
+// After the reduce statement, the value 'n' contains the numerator of the rational sum and 'd' contains the denominator of the rational sum. To reduce this rational, we simply need to find the greatest common divisor of 'n' and 'd' and divide both terms by that value. The solution for finding the GCD is based on the euclidean algorithm: https://en.wikipedia.org/wiki/Euclidean_algorithm#Implementations
+
+// Here's a full example using the following rationals: 1/2, 4/3, 7/2
+
+// Sum = 1/2 + 4/3 + 7/2
+// = (3 * 1 + 2 * 4) / (2 * 3) + 7/2
+// = 11/6 + 7/2
+// = (2 * 11 + 6 * 7) / (6 * 2)
+// = 64 / 12
+
+// The GCD of 64 and 12 is 4 so that gives us a solution of (64 / 4) / (12 / 4) = 16 / 3.
+
+// Lastly, you may be wondering what the condition in the return statement is for. The condition handles the case where the GCD is equal to the denominator. For example, if the sum was 64 / 4, then the greatest common divisor would be 4. This would lead to an answer of 16 / 1 which is technically correct but in the wrong form. In this case we just want the whole number without the 1 in the denominator which is why we return the whole number result of the division of n and d.
+
+// Hope that helps.
+
+// P.S. There is a risk of an integer overflow within the reduce statement if we have a large array of terms with big numerators and denominators. This can be avoided by dividing the numerators and denominators by the GCD within the reduce statement itself. Since this was a level 6 problem, I didn't feel that was necessary but it's still worth noting.
