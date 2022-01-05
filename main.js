@@ -2774,3 +2774,46 @@ sc = (screws) => {
      }
     return sum
   }
+// CODE WAR KYU 6
+// Description:
+// Your task, is to create NxN multiplication table, of size provided in parameter.
+
+// for example, when given size is 3:
+
+// 1 2 3
+// 2 4 6
+// 3 6 9
+// for given example, the return value should be: [[1,2,3],[2,4,6],[3,6,9]]
+
+multiplicationTable = function (size) {
+  let arrs = []
+  let step = 1
+  for (let i = 0, temp = [], step = 1, count = 1; i < size * size + size; i++) {
+      if (temp.length < size) {
+        temp.push(count)
+        count += step
+        continue
+      }
+        arrs.push(temp)
+        temp = []
+        step++
+        count = step
+  }
+  return arrs
+}
+// ANOTHER SOLUTIONS
+multiplicationTable = function (size) {
+  var result = []
+
+  for (var i = 0; i < size; i++) {
+    result[i] = []
+    for (var j = 0; j < size; j++) {
+      result[i][j] = (i + 1) * (j + 1)
+    }
+  }
+
+  return result
+}
+multiplicationTable = function (n) {
+  return Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i + 1) * (j + 1)))
+}
