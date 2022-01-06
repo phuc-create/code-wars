@@ -2912,4 +2912,4 @@ nbMonths = (myCar, newCar, perMonth, loss) => {
   }
   return [m, Math.round(w - newCar)]
 }
-// hi
+// hi hi
