@@ -2987,4 +2987,8 @@ balance = (book) => {
 
 //make it conflict
 //A side change
+<<<<<<< HEAD
 //Somthing change
+=======
+//Another Change
+>>>>>>> a16ec15 (D side changed)
