@@ -2986,3 +2986,5 @@ balance = (book) => {
 }
 
 //make it conflict
+//this is commit B side with name Sam Jr
+//This commit from A side
